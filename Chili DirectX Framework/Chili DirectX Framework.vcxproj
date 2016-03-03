@@ -83,21 +83,31 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="..\Assets\D3DGraphics.cpp" />
+    <ClCompile Include="..\Assets\Enemy.cpp" />
     <ClCompile Include="..\Assets\Game.cpp" />
     <ClCompile Include="..\Assets\Keyboard.cpp" />
+    <ClCompile Include="..\Assets\Laser.cpp" />
     <ClCompile Include="..\Assets\Mouse.cpp" />
+    <ClCompile Include="..\Assets\Observer.cpp" />
+    <ClCompile Include="..\Assets\Player.cpp" />
     <ClCompile Include="..\Assets\Sound.cpp" />
     <ClCompile Include="..\Assets\Timer.cpp" />
+    <ClCompile Include="..\Assets\Trigonometry.cpp" />
     <ClCompile Include="..\Assets\Windows.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\Assets\D3DGraphics.h" />
+    <ClInclude Include="..\Assets\Enemy.h" />
     <ClInclude Include="..\Assets\Game.h" />
     <ClInclude Include="..\Assets\Keyboard.h" />
+    <ClInclude Include="..\Assets\Laser.h" />
     <ClInclude Include="..\Assets\Mouse.h" />
+    <ClInclude Include="..\Assets\Observer.h" />
+    <ClInclude Include="..\Assets\Player.h" />
     <ClInclude Include="..\Assets\Resource.h" />
     <ClInclude Include="..\Assets\Sound.h" />
     <ClInclude Include="..\Assets\Timer.h" />
+    <ClInclude Include="..\Assets\Trigonometry.h" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="..\Assets\ChiliDirectXFramework.res" />
