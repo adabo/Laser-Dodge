@@ -48,5 +48,5 @@ void Game::Go()
 
 void Game::ComposeFrame()
 {
-    observer.Draw(gfx);
+    observer.Draw(gfx,mouse);
 }

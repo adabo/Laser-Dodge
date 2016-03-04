@@ -14,9 +14,10 @@ void Observer::Update(KeyboardClient &Kbd, MouseClient &Mouse, float Dt)
     
 }
 
-void Observer::Draw(D3DGraphics &Gfx)
+void Observer::Draw(D3DGraphics &Gfx, MouseClient &Mouse)
 {
-    player.Draw(Gfx);
+    player.DrawLaser(Gfx);
+    player.DrawPlayer(Gfx, Mouse);
     int size = enemy.size();
     for (int i_enemy = 0; i_enemy < size; ++i_enemy)
     {
