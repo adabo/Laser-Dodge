@@ -3,8 +3,8 @@
 
 Player::Player()
     :
-    width(80),
-    height(80),
+    width(20),
+    height(20),
     x(10),
     y(10)
 {}
@@ -23,6 +23,8 @@ void Player::SetLaserDirection(int MouseX, int MouseY)
     cos_x = trg.GetCosX(x, MouseX, hypotenuse);
     sin_y = trg.GetSinY(y, MouseY, hypotenuse);
     laser.push_back(Laser(10, 10, cos_x, sin_y));
+
+    aim_hypotenuse = hypotenuse;
 }
 
 void Player::Update(std::vector<Enemy> &enemy,
@@ -122,14 +124,21 @@ void Player::CheckCollision(std::vector<Enemy> &enemy)
     }
 }
 
+void Player::DrawPlayer(D3DGraphics &Gfx)
+{
+    // Gfx.DrawRectOutline(SCREENCENTERX - (width / 2), SCREENCENTERY - (height / 2),
+    //                     SCREENCENTERX + (width / 2), SCREENCENTERY + (height / 2),
+    //                     D3DCOLOR_XRGB(255, 255, 255));
+}
+
 void Player::Draw(D3DGraphics &Gfx)
 {
     // Maybe create an array of x,y coords before
     // for loop to give small performance boost?
-    for (int i = 0; i < laser.size(); ++i)
-    {
-        Gfx.PutPixel(laser[i].x, laser[i].y, 255, 255, 255);
-    }
+    // for (int i = 0; i < laser.size(); ++i)
+    // {
+    //     Gfx.PutPixel(laser[i].x, laser[i].y, 255, 255, 255);
+    // }
 }
 
 float Player::GetX()

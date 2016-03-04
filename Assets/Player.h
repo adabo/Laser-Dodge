@@ -1,4 +1,5 @@
 #pragma once
+#include "Common.h"
 #include "Keyboard.h"
 #include "Mouse.h"
 #include "D3DGraphics.h"
@@ -19,6 +20,7 @@ public:
         KeyboardClient &Kbd, MouseClient &Mouse, float Dt);
     void CheckCollision(std::vector<Enemy> &enemy);
     void Draw(D3DGraphics &Gfx);
+    void DrawPlayer(D3DGraphics &Gfx);
     float GetX();
     float GetY();
 public:
@@ -27,6 +29,7 @@ public:
 private:
     float speed;
     float x, y;
+    float aim_x, aim_y, aim_hypotenuse;
     std::vector<Laser> laser;
     Trigonometry trg;
 };

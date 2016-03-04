@@ -4,7 +4,7 @@ Laser::Laser(float X, float Y, float Cos_X, float Sin_Y)
     :
     width(3),
     height(10),
-    speed(500.0f)
+    speed(900.0f)
 {
     x = X;
     y = Y;
