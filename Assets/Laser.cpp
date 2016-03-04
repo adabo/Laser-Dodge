@@ -3,7 +3,8 @@
 Laser::Laser(float X, float Y)
     :
     width(3),
-    height(10)
+    height(10),
+    speed(500.0f)
 {
     x = X;
     y = Y;

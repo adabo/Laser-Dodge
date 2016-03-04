@@ -4,6 +4,7 @@
 #include "D3DGraphics.h"
 #include <vector>
 #include "Laser.h"
+#include "Trigonometry.h"
 
 class Enemy;
 
@@ -13,7 +14,7 @@ public:
     Player();
     ~Player();
     void Shoot();
-    void SetLaserDirection(Laser &MyLaser, int MouseX, int MouseY);
+    void SetLaserDirection(int MouseX, int MouseY);
     void Update(std::vector<Enemy> &enemy,
         KeyboardClient &Kbd, MouseClient &Mouse, float Dt);
     void CheckCollision(std::vector<Enemy> &enemy);
@@ -27,4 +28,5 @@ private:
     float speed;
     float x, y;
     std::vector<Laser> laser;
+    Trigonometry trg;
 };
