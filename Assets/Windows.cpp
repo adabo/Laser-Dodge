@@ -24,6 +24,34 @@
 #include "resource.h"
 #include "Mouse.h"
 
+#define VK_A 0x41 
+#define VK_B 0x42
+#define VK_C 0x43
+#define VK_D 0x44
+#define VK_E 0x45
+#define VK_F 0x46
+#define VK_G 0x47
+#define VK_H 0x48
+#define VK_I 0x49
+#define VK_J 0x4A
+#define VK_K 0x4B
+#define VK_L 0x4C
+#define VK_M 0x4D
+#define VK_N 0x4E
+#define VK_O 0x4F
+#define VK_P 0x50
+#define VK_Q 0x51
+#define VK_R 0x52
+#define VK_S 0x53
+#define VK_T 0x54
+#define VK_U 0x55
+#define VK_V 0x56
+#define VK_W 0x57
+#define VK_X 0x58
+#define VK_Y 0x59
+#define VK_Z 0x5A
+
+
 static KeyboardServer kServ;
 static MouseServer mServ;
 
@@ -57,6 +85,84 @@ LRESULT WINAPI MsgProc( HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam )
             case VK_RETURN:
                 kServ.OnEnterPressed();
                 break;
+            case VK_A:
+                kServ.OnAPressed();
+                break;
+            case VK_B:
+                kServ.OnBPressed();
+                break;
+            case VK_C:
+                kServ.OnCPressed();
+                break;
+            case VK_D:
+                kServ.OnDPressed();
+                break;
+            case VK_E:
+                kServ.OnEPressed();
+                break;
+            case VK_F:
+                kServ.OnFPressed();
+                break;
+            case VK_G:
+                kServ.OnGPressed();
+                break;
+            case VK_H:
+                kServ.OnHPressed();
+                break;
+            case VK_I:
+                kServ.OnIPressed();
+                break;
+            case VK_J:
+                kServ.OnJPressed();
+                break;
+            case VK_K:
+                kServ.OnKPressed();
+                break;
+            case VK_L:
+                kServ.OnLPressed();
+                break;
+            case VK_M:
+                kServ.OnMPressed();
+                break;
+            case VK_N:
+                kServ.OnNPressed();
+                break;
+            case VK_O:
+                kServ.OnOPressed();
+                break;
+            case VK_P:
+                kServ.OnPPressed();
+                break;
+            case VK_Q:
+                kServ.OnQPressed();
+                break;
+            case VK_R:
+                kServ.OnRPressed();
+                break;
+            case VK_S:
+                kServ.OnSPressed();
+                break;
+            case VK_T:
+                kServ.OnTPressed();
+                break;
+            case VK_U:
+                kServ.OnUPressed();
+                break;
+            case VK_V:
+                kServ.OnVPressed();
+                break;
+            case VK_W:
+                kServ.OnWPressed();
+                break;
+            case VK_X:
+                kServ.OnXPressed();
+                break;
+            case VK_Y:
+                kServ.OnYPressed();
+                break;
+            case VK_Z:
+                kServ.OnZPressed();
+                break;
             }
             break;
         case WM_KEYUP:
@@ -79,6 +185,84 @@ LRESULT WINAPI MsgProc( HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam )
                 break;
             case VK_RETURN:
                 kServ.OnEnterReleased();
+                break;
+            case VK_A:
+                kServ.OnAReleased();
+                break;
+            case VK_B:
+                kServ.OnBReleased();
+                break;
+            case VK_C:
+                kServ.OnCReleased();
+                break;
+            case VK_D:
+                kServ.OnDReleased();
+                break;
+            case VK_E:
+                kServ.OnEReleased();
+                break;
+            case VK_F:
+                kServ.OnFReleased();
+                break;
+            case VK_G:
+                kServ.OnGReleased();
+                break;
+            case VK_H:
+                kServ.OnHReleased();
+                break;
+            case VK_I:
+                kServ.OnIReleased();
+                break;
+            case VK_J:
+                kServ.OnJReleased();
+                break;
+            case VK_K:
+                kServ.OnKReleased();
+                break;
+            case VK_L:
+                kServ.OnLReleased();
+                break;
+            case VK_M:
+                kServ.OnMReleased();
+                break;
+            case VK_N:
+                kServ.OnNReleased();
+                break;
+            case VK_O:
+                kServ.OnOReleased();
+                break;
+            case VK_P:
+                kServ.OnPReleased();
+                break;
+            case VK_Q:
+                kServ.OnQReleased();
+                break;
+            case VK_R:
+                kServ.OnRReleased();
+                break;
+            case VK_S:
+                kServ.OnSReleased();
+                break;
+            case VK_T:
+                kServ.OnTReleased();
+                break;
+            case VK_U:
+                kServ.OnUReleased();
+                break;
+            case VK_V:
+                kServ.OnVReleased();
+                break;
+            case VK_W:
+                kServ.OnWReleased();
+                break;
+            case VK_X:
+                kServ.OnXReleased();
+                break;
+            case VK_Y:
+                kServ.OnYReleased();
+                break;
+            case VK_Z:
+                kServ.OnZReleased();
                 break;
             }
             break;

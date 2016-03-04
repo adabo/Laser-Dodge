@@ -7,7 +7,8 @@ Player::Player()
     height(20),
     x(SCREENCENTERX),
     y(SCREENCENTERY),
-    mouse_is_pressed(false)
+    mouse_is_pressed(false),
+    speed(100)
 {}
 Player::~Player() {}
 
@@ -31,8 +32,24 @@ void Player::SetLaserDirection(int MouseX, int MouseY)
 void Player::Update(std::vector<Enemy> &enemy,
     KeyboardClient &Kbd, MouseClient &Mouse, float Dt)
 {
-    // int mouse_x, mouse_y;
     float frame_step = speed * Dt;
+    if (Kbd.AIsPressed())
+    {
+        x -= frame_step;
+    }
+    if (Kbd.DIsPressed())
+    {
+        x += frame_step;
+    }
+    if (Kbd.WIsPressed())
+    {
+        y -= frame_step;
+    }
+    if (Kbd.SIsPressed())
+    {
+        y += frame_step;
+    }
+
     if (Mouse.IsInWindow())
     {
         if(Mouse.LeftIsPressed())
@@ -130,35 +147,37 @@ void Player::CheckCollision(std::vector<Enemy> &enemy)
 
 void Player::DrawPlayer(D3DGraphics &Gfx, MouseClient &Mouse)
 {
-     Gfx.DrawRectOutline(SCREENCENTERX - (width / 2), SCREENCENTERY - (height / 2),
-                         SCREENCENTERX + (width / 2), SCREENCENTERY + (height / 2),
+     Gfx.DrawRectOutline(x - (width / 2), y - (height / 2),
+                         x + (width / 2), y + (height / 2),
                          D3DCOLOR_XRGB(255, 255, 255));
      if (Mouse.IsInWindow())
      {
+         mouse_x = Mouse.GetMouseX();
+         mouse_y = Mouse.GetMouseY();
          if (mouse_y <= 291)
          {
             // draw along top edge
-            DrawAim(AIMTOP, Mouse.GetMouseX(), Gfx);
+            DrawAim(AIMTOP, mouse_x, Gfx);
          }
          else if (mouse_x >= 308)
          {
             // draw along right edge
-            DrawAim(AIMRIGHT, Mouse.GetMouseX(), Gfx);
+            DrawAim(AIMRIGHT, mouse_x, Gfx);
          }
          else if (mouse_y >= 308)
          {
             // draw along bottom edge
-            DrawAim(AIMBOTTOM, Mouse.GetMouseY(), Gfx);
+            DrawAim(AIMBOTTOM, mouse_y, Gfx);
          }
          else if (mouse_x <= 291)
          {
             // draw along left edge
-            DrawAim(AIMLEFT, Mouse.GetMouseY(), Gfx);
+            DrawAim(AIMLEFT, mouse_y, Gfx);
          }
      }
 }
 
-void Player::DrawAim(AIMSIDE AimDir, int MouseDir, D3DGraphics &Gfx)
+void Player::DrawAim(AIMSIDE AimDir, int MouseAxis, D3DGraphics &Gfx)
 {
     if (AimDir == AIMTOP)
     { 
@@ -166,18 +185,18 @@ void Player::DrawAim(AIMSIDE AimDir, int MouseDir, D3DGraphics &Gfx)
          //     top
          //  x   y     x   y
          // 391,291 - 408,291 
-        if (MouseDir < 391)
+        if (MouseAxis < x)
         {
-            MouseDir = 391;
+            MouseAxis = x;
         }
-        if (MouseDir > 408)
+        if (MouseAxis > x)
         {
-            MouseDir = 408;
+            MouseAxis = x;
         }
-        Gfx.PutPixel(MouseDir, 291, 255, 0, 0);
-        Gfx.PutPixel(MouseDir + 1, 291, 255, 0, 0);
-        Gfx.PutPixel(MouseDir, 291 + 1, 255, 0, 0);
-        Gfx.PutPixel(MouseDir + 1, 291 + 1, 255, 0, 0);
+        Gfx.PutPixel(MouseAxis, 291, 255, 0, 0);
+        Gfx.PutPixel(MouseAxis + 1, 291, 255, 0, 0);
+        Gfx.PutPixel(MouseAxis, 291 + 1, 255, 0, 0);
+        Gfx.PutPixel(MouseAxis + 1, 291 + 1, 255, 0, 0);
     }
     else if (AimDir == AIMRIGHT)
     { 
@@ -185,18 +204,18 @@ void Player::DrawAim(AIMSIDE AimDir, int MouseDir, D3DGraphics &Gfx)
          //     right
          //  x   y     x   y
          // 408,291 - 408,308
-        if (MouseDir < 291)
+        if (MouseAxis < y)
         {
-            MouseDir = 391;
+            MouseAxis = y;
         }
-        if (MouseDir > 308)
+        if (MouseAxis > y)
         {
-            MouseDir = 308;
+            MouseAxis = y;
         }
-        Gfx.PutPixel(408, MouseDir, 255, 0, 0);
-        Gfx.PutPixel(408 + 1, MouseDir, 255, 0, 0);
-        Gfx.PutPixel(408, MouseDir + 1, 255, 0, 0);
-        Gfx.PutPixel(408 + 1, MouseDir + 1, 255, 0, 0);
+        Gfx.PutPixel(x, MouseAxis, 255, 0, 0);
+        Gfx.PutPixel(x + 1, MouseAxis, 255, 0, 0);
+        Gfx.PutPixel(x, MouseAxis + 1, 255, 0, 0);
+        Gfx.PutPixel(x + 1, MouseAxis + 1, 255, 0, 0);
     }
     else if (AimDir == AIMBOTTOM)
     { 
@@ -204,18 +223,18 @@ void Player::DrawAim(AIMSIDE AimDir, int MouseDir, D3DGraphics &Gfx)
          //     bottom
          //  x   y     x   y
          // 408,308 - 391,308
-        if (MouseDir < 408)
+        if (MouseAxis < x)
         {
-            MouseDir = 408;
+            MouseAxis = x;
         }
-        if (MouseDir > 391)
+        if (MouseAxis > x)
         {
-            MouseDir = 391;
+            MouseAxis = x;
         }
-        Gfx.PutPixel(MouseDir, 308, 255, 0, 0);
-        Gfx.PutPixel(MouseDir + 1, 308, 255, 0, 0);
-        Gfx.PutPixel(MouseDir, 308 + 1, 255, 0, 0);
-        Gfx.PutPixel(MouseDir + 1, 308 + 1, 255, 0, 0);
+        Gfx.PutPixel(MouseAxis, y, 255, 0, 0);
+        Gfx.PutPixel(MouseAxis + 1, y, 255, 0, 0);
+        Gfx.PutPixel(MouseAxis, y + 1, 255, 0, 0);
+        Gfx.PutPixel(MouseAxis + 1, y + 1, 255, 0, 0);
     }
     else if (AimDir == AIMLEFT)
     { 
@@ -223,18 +242,18 @@ void Player::DrawAim(AIMSIDE AimDir, int MouseDir, D3DGraphics &Gfx)
          //     left
          //  x   y     x   y
          // 391,308 - 391,291
-        if (MouseDir < 291)
+        if (MouseAxis < y)
         {
-            MouseDir = 291;
+            MouseAxis = y;
         }
-        if (MouseDir > 308)
+        if (MouseAxis > y)
         {
-            MouseDir = 308;
+            MouseAxis = y;
         }
-        Gfx.PutPixel(391, MouseDir, 255, 0, 0);
-        Gfx.PutPixel(391 + 1, MouseDir, 255, 0, 0);
-        Gfx.PutPixel(391, MouseDir + 1, 255, 0, 0);
-        Gfx.PutPixel(391 + 1, MouseDir + 1, 255, 0, 0);
+        Gfx.PutPixel(x, MouseAxis, 255, 0, 0);
+        Gfx.PutPixel(x + 1, MouseAxis, 255, 0, 0);
+        Gfx.PutPixel(x, MouseAxis + 1, 255, 0, 0);
+        Gfx.PutPixel(x + 1, MouseAxis + 1, 255, 0, 0);
     }
 }
 

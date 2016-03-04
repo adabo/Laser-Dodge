@@ -85,7 +85,9 @@
     <ClCompile Include="..\Assets\D3DGraphics.cpp" />
     <ClCompile Include="..\Assets\Enemy.cpp" />
     <ClCompile Include="..\Assets\Game.cpp" />
+    <ClCompile Include="..\Assets\KClientMethods.cpp" />
     <ClCompile Include="..\Assets\Keyboard.cpp" />
+    <ClCompile Include="..\Assets\KServerMethods.cpp" />
     <ClCompile Include="..\Assets\Laser.cpp" />
     <ClCompile Include="..\Assets\Mouse.cpp" />
     <ClCompile Include="..\Assets\Observer.cpp" />
