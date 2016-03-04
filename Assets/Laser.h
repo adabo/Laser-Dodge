@@ -5,7 +5,7 @@
 class Laser
 {
 public:
-    Laser(float X, float Y);
+    Laser(float X, float Y, float Cos_X, float Sin_Y);
     ~Laser();
     void Shoot();
     void Update(float x, float y);
@@ -16,5 +16,5 @@ public:
     int width, height;
     float speed;
 public:
-    float x, y;
+    float x, y, cos_x, sin_y;
 };

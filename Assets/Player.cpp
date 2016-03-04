@@ -16,13 +16,13 @@ void Player::Shoot()
 void Player::SetLaserDirection(int MouseX, int MouseY)
 {
     float hypotenuse = 1.0f;
-    // float cos_x      = 0.0f;
-    // float sin_y      = 0.0f;
+    float cos_x      = 0.0f;
+    float sin_y      = 0.0f;
 
     hypotenuse = trg.GetHypotenuse(x, y, MouseX, MouseY);
     cos_x = trg.GetCosX(x, MouseX, hypotenuse);
     sin_y = trg.GetSinY(y, MouseY, hypotenuse);
-    laser.push_back(Laser(cos_x, sin_y));
+    laser.push_back(Laser(10, 10, cos_x, sin_y));
 }
 
 void Player::Update(std::vector<Enemy> &enemy,
@@ -54,8 +54,8 @@ void Player::Update(std::vector<Enemy> &enemy,
         int size = laser.size();
         for(int i = 0; i < size; ++i)
         {
-            laser[i].x += frame_step * cos_x;
-            laser[i].y += frame_step * sin_y;
+            laser[i].x += frame_step * laser[i].cos_x;
+            laser[i].y += frame_step * laser[i].sin_y;
         }
     }
     CheckCollision(enemy);

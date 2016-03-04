@@ -27,7 +27,6 @@ public:
 private:
     float speed;
     float x, y;
-    float cos_x, sin_y;
     std::vector<Laser> laser;
     Trigonometry trg;
 };

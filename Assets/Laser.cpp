@@ -1,6 +1,6 @@
 #include "Laser.h"
 
-Laser::Laser(float X, float Y)
+Laser::Laser(float X, float Y, float Cos_X, float Sin_Y)
     :
     width(3),
     height(10),
@@ -8,6 +8,8 @@ Laser::Laser(float X, float Y)
 {
     x = X;
     y = Y;
+    cos_x = Cos_X;
+    sin_y = Sin_Y;
 }
 
 Laser::~Laser() {}
