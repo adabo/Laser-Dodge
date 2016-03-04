@@ -1,6 +1,9 @@
 #pragma once
-#include "Player.h"
+#include "Laser.h"
 #include "D3DGraphics.h"
+#include <vector>
+
+class Player;
 
 class Enemy
 {
@@ -8,10 +11,17 @@ public:
     Enemy();
     ~Enemy();
     void Shoot();
-    void Update(float Player_X, float Player_Y);
+    void Update(Player &Player, float Dt);
     void Draw(D3DGraphics &Gfx);
+    // int GetHP()const;
     float GetX();
     float GetY();
+    //void SetHP(int Hp);
+public:
+    int width, height;
+    int hp;
 private:
+    float speed;
     float x, y;
+    std::vector<Laser> laser;
 };

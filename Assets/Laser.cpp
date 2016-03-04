@@ -1,6 +1,14 @@
 #include "Laser.h"
 
-Laser::Laser() {}
+Laser::Laser(float X, float Y)
+    :
+    width(3),
+    height(10)
+{
+    x = X;
+    y = Y;
+}
+
 Laser::~Laser() {}
 
 void Laser::Shoot()

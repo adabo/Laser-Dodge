@@ -24,6 +24,8 @@
 #include "Keyboard.h"
 #include "Mouse.h"
 #include "Sound.h"
+#include "Timer.h"
+#include "Observer.h"
 
 class Game
 {
@@ -38,4 +40,6 @@ private:
     KeyboardClient kbd;
     MouseClient mouse;
     DSound audio;
+    Timer timer;
+    Observer observer;
 };

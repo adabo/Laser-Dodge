@@ -5,13 +5,16 @@
 class Laser
 {
 public:
-    Laser();
+    Laser(float X, float Y);
     ~Laser();
     void Shoot();
     void Update(float x, float y);
     void Draw(D3DGraphics &Gfx);
     float GetX();
     float GetY();
-private:
+public:
+    int width, height;
+    float speed;
+public:
     float x, y;
 };
