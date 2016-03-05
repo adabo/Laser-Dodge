@@ -63,23 +63,19 @@ float Trigonometry::AdjacentFromOpposite(float opposite, float theta)
     // tan() wants radians. Convert theta
     // to radians inside function call
     theta = tan(theta * PI / 180);
-    //theta = theta * 180 / PI;
-    float adjacent = theta / opposite;
+    float adjacent = opposite / theta;
     return adjacent;
 }
 
 float Trigonometry::OppositeFromAdjacent(float adjacent, float theta)
 {
     theta = tan(theta * PI / 180);
-   // theta = theta * (180 / PI);
     float opposite = adjacent * theta;
     return opposite;
 }
 
 float Trigonometry::ThetaFromSin(float opposite, float hypotenuse)
 {
-    // h = 25.4951
-    // o = 25
     float sine = opposite / hypotenuse;
     float theta = asin(sine);
     theta = theta * (180 / PI);

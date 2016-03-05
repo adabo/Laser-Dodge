@@ -36,6 +36,17 @@ void Player::SetAimDirection(int MouseX, int MouseY)
     float adjacent   = 9.0f;
     float opposite   = 9.0f;
     float hypotenuse = 0.0f;
+
+    if (MouseY > y)
+    {
+        opposite = -opposite;
+        adjacent = -adjacent;
+    }
+    if (MouseX < x)
+    {
+        opposite = -opposite;
+        adjacent = -adjacent;
+    }
     
     hypotenuse  = trg.GetHypotenuse(x, y, MouseX, MouseY);
     theta       = trg.ThetaFromSin(y - MouseY, hypotenuse);
@@ -45,32 +56,32 @@ void Player::SetAimDirection(int MouseX, int MouseY)
     {
         aim_displacement = trg.AdjacentFromOpposite(opposite, theta);
         aim_side = AIMTOP;
-        if (aim_displacement > 10)
-            aim_displacement = aim_displacement;
     }
     // right
     else if (theta <= 45 && theta >= -45 && MouseX >= x)
     {
         aim_displacement = trg.OppositeFromAdjacent(adjacent, theta);
+        if (MouseY > y)
+        {
+            aim_displacement = -aim_displacement;
+        }
         aim_side = AIMRIGHT;
-        if (aim_displacement > 10)
-            aim_displacement = aim_displacement;
     }
     // bottom
     else if (theta <= -45 && theta >= -90)
     {
         aim_displacement = trg.AdjacentFromOpposite(opposite, theta);
         aim_side = AIMBOTTOM;
-        if (aim_displacement > 10)
-            aim_displacement = aim_displacement;
     }
     // left
     else if (theta >= -45 && theta <= 45 && MouseY <= x)
     {
         aim_displacement = trg.OppositeFromAdjacent(adjacent, theta);
+        if (MouseY > y)
+        {
+            aim_displacement = -aim_displacement;
+        }
         aim_side = AIMLEFT;
-        if (aim_displacement > 10)
-            aim_displacement = aim_displacement;
     }
 }
 
@@ -155,7 +166,6 @@ void Player::CheckCollision(std::vector<Enemy> &enemy)
                    // game.score++;
                }
                // Remove laser from memory
-               //laser.erase(laser.begin() + il);
                --i_laser;
                --il;
            }
@@ -168,25 +178,21 @@ void Player::CheckCollision(std::vector<Enemy> &enemy)
         {
             laser.erase(laser.begin() + il);
             --il;
-            // --i_laser;
         }
         else if (laser[il].x >= 789.0f)
         {
             laser.erase(laser.begin() + il);
             --il;
-            // --i_laser;
         }
         else if (laser[il].y <= 0.0f)
         {
             laser.erase(laser.begin() + il);
             --il;
-            // --i_laser;
         }
         else if (laser[il].y >= 589.0f)
         {
             laser.erase(laser.begin() + il);
             --il;
-             // --i_laser;
         }
     }
 }
@@ -198,128 +204,44 @@ void Player::DrawPlayer(D3DGraphics &Gfx, MouseClient &Mouse)
                          D3DCOLOR_XRGB(255, 255, 255));
      if (Mouse.IsInWindow())
      {
-/*         mouse_x = Mouse.GetMouseX();
-         mouse_y = Mouse.GetMouseY();
-         if (mouse_y <= 291)
-         {
-            // draw along top edge
-            DrawAim(AIMTOP, mouse_x, Gfx);
-         }
-         else if (mouse_x >= 308)
-         {
-            // draw along right edge
-            DrawAim(AIMRIGHT, mouse_x, Gfx);
-         }
-         else if (mouse_y >= 308)
-         {
-            // draw along bottom edge
-            DrawAim(AIMBOTTOM, mouse_y, Gfx);
-         }
-         else if (mouse_x <= 291)
-         {
-            // draw along left edge
-            DrawAim(AIMLEFT, mouse_y, Gfx);
-         }
-*/     
         DrawAim(Gfx);
      }
 }
 
-// void Player::DrawAim(AIMSIDE AimDir, int MouseAxis, D3DGraphics &Gfx)
 void Player::DrawAim(D3DGraphics &Gfx)
 {
-/*    if (AimDir == AIMTOP)
-    { 
-         // aim box clip
-         //     top
-         //  x   y     x   y
-         // 391,291 - 408,291 
-        if (MouseAxis < x)
-        {
-            MouseAxis = x;
-        }
-        if (MouseAxis > x)
-        {
-            MouseAxis = x;
-        }
-        Gfx.PutPixel(MouseAxis, 291, 255, 0, 0);
-        Gfx.PutPixel(MouseAxis + 1, 291, 255, 0, 0);
-        Gfx.PutPixel(MouseAxis, 291 + 1, 255, 0, 0);
-        Gfx.PutPixel(MouseAxis + 1, 291 + 1, 255, 0, 0);
-    }
-    else if (AimDir == AIMRIGHT)
-    { 
-         // aim box clip
-         //     right
-         //  x   y     x   y
-         // 408,291 - 408,308
-        if (MouseAxis < y)
-        {
-            MouseAxis = y;
-        }
-        if (MouseAxis > y)
-        {
-            MouseAxis = y;
-        }
-        Gfx.PutPixel(x, MouseAxis, 255, 0, 0);
-        Gfx.PutPixel(x + 1, MouseAxis, 255, 0, 0);
-        Gfx.PutPixel(x, MouseAxis + 1, 255, 0, 0);
-        Gfx.PutPixel(x + 1, MouseAxis + 1, 255, 0, 0);
-    }
-    else if (AimDir == AIMBOTTOM)
-    { 
-         // aim box clip
-         //     bottom
-         //  x   y     x   y
-         // 408,308 - 391,308
-        if (MouseAxis < x)
-        {
-            MouseAxis = x;
-        }
-        if (MouseAxis > x)
-        {
-            MouseAxis = x;
-        }
-        Gfx.PutPixel(MouseAxis, y, 255, 0, 0);
-        Gfx.PutPixel(MouseAxis + 1, y, 255, 0, 0);
-        Gfx.PutPixel(MouseAxis, y + 1, 255, 0, 0);
-        Gfx.PutPixel(MouseAxis + 1, y + 1, 255, 0, 0);
-    }
-    else if (AimDir == AIMLEFT)
-    { 
-         // aim box clip
-         //     left
-         //  x   y     x   y
-         // 391,308 - 391,291
-        if (MouseAxis < y)
-        {
-            MouseAxis = y;
-        }
-        if (MouseAxis > y)
-        {
-            MouseAxis = y;
-        }
-        Gfx.PutPixel(x + run, y + 9, 255, 0, 0);
-        Gfx.PutPixel(x + run + 1, y + 9, 255, 0, 0);
-        Gfx.PutPixel(x + run, y + 9 + 1, 255, 0, 0);
-        Gfx.PutPixel(x + run + 1, y + 9 + 1, 255, 0, 0);
-}*/
-        // Gfx.PutPixel(x + aim_displacement, y + 9, 255, 0, 0);
+
     if (aim_side == AIMTOP)
     {
-        Gfx.PutPixel(x + aim_displacement, y + 9, 255, 0, 0);
+        // Red
+        Gfx.PutPixel(x + aim_displacement, y - 9, 255, 100, 100);
+        Gfx.PutPixel(x + 1 + aim_displacement, y - 9, 255, 100, 100);
+        Gfx.PutPixel(x + aim_displacement, y + 1 - 9, 255, 100, 100);
+        Gfx.PutPixel(x + 1 + aim_displacement, y + 1 - 9, 255, 100, 100);
     }
     else if (aim_side == AIMRIGHT)
     {
-        Gfx.PutPixel(x + 8, y + aim_displacement, 255, 0, 0);
+        // Green
+        Gfx.PutPixel(x + 7, y + -aim_displacement, 255, 100, 100);
+        Gfx.PutPixel(x + 1 + 7, y + -aim_displacement, 255, 100, 100);
+        Gfx.PutPixel(x + 7, y + 1 + -aim_displacement, 255, 100, 100);
+        Gfx.PutPixel(x + 1 + 7, y + 1 + -aim_displacement, 255, 100, 100);
     }
     else if (aim_side == AIMBOTTOM)
     {
-        Gfx.PutPixel(x + aim_displacement, y + 8, 255, 0, 0);
+        // Blue
+        Gfx.PutPixel(x + aim_displacement, y + 7, 255, 100, 100);
+        Gfx.PutPixel(x + 1 + aim_displacement, y + 7, 255, 100, 100);
+        Gfx.PutPixel(x + aim_displacement, y + 1 + 7, 255, 100, 100);
+        Gfx.PutPixel(x + 1 + aim_displacement, y + 1 + 7, 255, 100, 100);
     }
     else if (aim_side == AIMLEFT)
     {
-        Gfx.PutPixel(x + 9, y + aim_displacement, 255, 0, 0);
+        // White
+        Gfx.PutPixel(x - 9, y + aim_displacement, 255, 100, 100);
+        Gfx.PutPixel(x + 1 - 9, y + aim_displacement, 255, 100, 100);
+        Gfx.PutPixel(x - 9, y + 1 + aim_displacement, 255, 100, 100);
+        Gfx.PutPixel(x + 1 - 9, y + 1 + aim_displacement, 255, 100, 100);
     }
 }
 
