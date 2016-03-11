@@ -16,6 +16,14 @@ public:
     // int GetHP()const;
     float GetX();
     float GetY();
+    bool  GetIsAlive();
+    
+public:
+    void SetCollision();
+    void SetEntityCollision();
+    void SetObjectCollision();
+    void SetScreenCollision();
+    void Get
     //void SetHP(int Hp);
 public:
     int width, height;

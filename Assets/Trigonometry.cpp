@@ -35,29 +35,6 @@ float Trigonometry::GetSinY(float start_y, float end_y, float hypotenuse)
     return sine;
 }
 
-float Trigonometry::GetRise(float theta, float hypotenuse)
-{
-    float rise = sin(theta) * hypotenuse;
-    return rise;
-}
-
-float Trigonometry::GetRun(float a = 0, float c = 0)
-{
-    float r;
-    bool neg_a = a < 0;
-    a *= a;
-    c *= c;
-    if (neg_a)
-    {
-        r = -sqrt(c - a);
-    }
-    else
-    {
-        r = sqrt(c - a);
-    }
-    return r;
-}
-
 float Trigonometry::AdjacentFromOpposite(float opposite, float theta)
 {
     // tan() wants radians. Convert theta
@@ -77,8 +54,8 @@ float Trigonometry::OppositeFromAdjacent(float adjacent, float theta)
 float Trigonometry::ThetaFromSin(float opposite, float hypotenuse)
 {
     float sine = opposite / hypotenuse;
-    float theta = asin(sine);
-    theta = theta * (180 / PI);
+    float theta = asin(sine) * 180 / PI;
+    //theta = theta * (180 / PI);
     return theta;
 }
 

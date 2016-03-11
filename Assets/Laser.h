@@ -15,6 +15,7 @@ public:
 public:
     int width, height;
     float speed;
+    float rate_of_fire;
 public:
     float x, y, cos_x, sin_y;
 };

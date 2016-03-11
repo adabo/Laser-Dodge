@@ -1,5 +1,6 @@
 #include "Player.h"
 #include "Enemy.h"
+#include <assert.h>
 
 Player::Player()
     :
@@ -8,7 +9,7 @@ Player::Player()
     x(SCREENCENTERX),
     y(SCREENCENTERY),
     mouse_is_pressed(false),
-    speed(100)
+    speed(145)
 {}
 Player::~Player() {}
 
@@ -17,25 +18,19 @@ void Player::Shoot()
 
 void Player::SetLaserDirection(int MouseX, int MouseY)
 {
-    float hypotenuse = 0.0f;
-    float cos_x      = 0.0f;
-    float sin_y      = 0.0f;
-    float theta      = 0.0f;
-    // float run        = 0.0f;
     float rise       = 9.0f;
-
-    hypotenuse = trg.GetHypotenuse(x, y, MouseX, MouseY);
-    cos_x = trg.GetCosX(x, MouseX, hypotenuse);
-    sin_y = trg.GetSinY(y, MouseY, hypotenuse);
+    float hypotenuse       = trg.GetHypotenuse(x, y, MouseX, MouseY);
+    float cos_x            = trg.GetCosX(x, MouseX, hypotenuse);
+    float sin_y            = trg.GetSinY(y, MouseY, hypotenuse);
     laser.push_back(Laser(x, y, cos_x, sin_y));
 }
 
 void Player::SetAimDirection(int MouseX, int MouseY)
 {
-    float theta      = 0.0f;
+    float hypotenuse  = trg.GetHypotenuse(x, y, MouseX, MouseY);
+    float theta       = trg.ThetaFromSin(y - MouseY, hypotenuse);
     float adjacent   = 9.0f;
     float opposite   = 9.0f;
-    float hypotenuse = 0.0f;
 
     if (MouseY > y)
     {
@@ -47,10 +42,12 @@ void Player::SetAimDirection(int MouseX, int MouseY)
         opposite = -opposite;
         adjacent = -adjacent;
     }
-    
-    hypotenuse  = trg.GetHypotenuse(x, y, MouseX, MouseY);
-    theta       = trg.ThetaFromSin(y - MouseY, hypotenuse);
 
+    //assert(theta < 44 && theta > 46);
+
+    if(theta > 44 && theta < 46)
+        theta = theta;
+    
     // top
     if (theta >= 45 && theta <= 90)
     {
@@ -197,15 +194,19 @@ void Player::CheckCollision(std::vector<Enemy> &enemy)
     }
 }
 
+// void Player::CheckPlayerCollision(){}
+// void Player::CheckLaserCollision(){}
+// void Player::CheckEnemyCollision(){}
+
 void Player::DrawPlayer(D3DGraphics &Gfx, MouseClient &Mouse)
 {
-     Gfx.DrawRectOutline(x - (width / 2), y - (height / 2),
-                         x + (width / 2), y + (height / 2),
-                         D3DCOLOR_XRGB(255, 255, 255));
-     if (Mouse.IsInWindow())
-     {
-        DrawAim(Gfx);
-     }
+    Gfx.DrawRectOutline(x - (width / 2), y - (height / 2),
+                     x + (width / 2), y + (height / 2),
+                     D3DCOLOR_XRGB(255, 255, 255));
+    if (Mouse.IsInWindow())
+    {
+    DrawAim(Gfx);
+    }
 }
 
 void Player::DrawAim(D3DGraphics &Gfx)
