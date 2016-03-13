@@ -57,6 +57,9 @@
     <ClCompile Include="..\Assets\KServerMethods.cpp">
       <Filter>Header Files</Filter>
     </ClCompile>
+    <ClCompile Include="..\Assets\Test_Design.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\Assets\D3DGraphics.h">
