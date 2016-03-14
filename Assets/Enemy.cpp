@@ -1,14 +1,14 @@
 #include "Enemy.h"
 
-Enemy::Enemy()
-    :
-    width(30),
-    height(30)
-{}
-Enemy::~Enemy() {}
-
-void Enemy::Shoot()
-{}
+Enemy::Enemy(int X, int Y)
+{
+    x        = X;
+    y        = Y;
+    is_alive = true;
+    hp       = 50.0f;
+    damage   = 5.0f;
+    shield   = 5.0f;
+}
 
 void Enemy::Update(Player &Player, float Dt)
 {
@@ -50,13 +50,3 @@ float Enemy::GetY()
 {
     return y;
 }
-
-// int Enemy::GetHP()const
-// {
-//     return hp;
-// }
-
-//void Enemy::SetHP(int Hp)
-//{
-//    hp = Hp;
-//}

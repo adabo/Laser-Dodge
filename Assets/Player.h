@@ -15,34 +15,20 @@ enum AIMSIDE
     AIMLEFT
 };
 
-class Enemy;
-
-class Player
+class Player : public Entity
 {
 public:
+    friend Physics;
     Player();
-    ~Player();
-    void Shoot();
-    void SetLaserDirection(int MouseX, int MouseY);
+    void Update(KeyboardClient &Kbd, MouseClient &Mouse, float Dt);
+    void UpdateLaser(x, y, cos_x, sin_y, float Frame_Step);
     void SetAimDirection(int MouseX, int MouseY);
-    void Update(std::vector<Enemy> &enemy,
-        KeyboardClient &Kbd, MouseClient &Mouse, float Dt);
-    void CheckCollision(std::vector<Enemy> &enemy);
-    void DrawLaser(D3DGraphics &Gfx);
-    void DrawPlayer(D3DGraphics &Gfx, MouseClient &Mouse);
-    // void DrawAim(AIMSIDE AimDir, int MouseDir, D3DGraphics &Gfx);
-    void DrawAim(D3DGraphics &Gfx);
-    float GetX();
-    float GetY();
-public:
-    int width, height;
-    bool mouse_is_pressed;
+    void Draw(D3DGraphics &Gfx);
 private:
+    std::vector<Laser> lasers;
     AIMSIDE aim_side;
     int mouse_x, mouse_y;
-    float speed;
-    float x, y;
     float aim_displacement; 
-    std::vector<Laser> laser;
     Trigonometry trg;
 };
+

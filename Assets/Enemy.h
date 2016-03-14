@@ -5,31 +5,22 @@
 
 class Player;
 
-class Enemy
+class Enemy : public Entity
 {
 public:
-    Enemy();
-    ~Enemy();
-    void Shoot();
+    friend Physics;
+    Enemy(int X, int Y)
+    {
+        x        = X;
+        y        = Y;
+        is_alive = true;
+        hp       = 50.0f;
+        damage   = 5.0f;
+        shield   = 5.0f;
+    }
     void Update(Player &Player, float Dt);
+    void Deploy();
     void Draw(D3DGraphics &Gfx);
-    // int GetHP()const;
     float GetX();
     float GetY();
-    bool  GetIsAlive();
-    
-public:
-    void SetCollision();
-    void SetEntityCollision();
-    void SetObjectCollision();
-    void SetScreenCollision();
-    void Get
-    //void SetHP(int Hp);
-public:
-    int width, height;
-    int hp;
-private:
-    float speed;
-    float x, y;
-    std::vector<Laser> laser;
 };
