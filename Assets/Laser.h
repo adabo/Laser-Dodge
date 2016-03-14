@@ -1,5 +1,7 @@
 #pragma once
+#include "Entity.h"
 #include "D3DGraphics.h"
+#include "Trigonometry.h"
 #include <vector>
 
 class Laser : public Entity
@@ -12,4 +14,5 @@ public:
 private:
     float cos_x, sin_y;
     std::vector<Laser> lasers;
+    Trigonometry trg;
 };

@@ -1,31 +1,27 @@
 #pragma once
+#include "ProjectileHandler.h"
 #include "Player.h"
 #include "Physics.h"
+#include "Spawner.h"
 #include "Entity.h"
 #include "Enemy.h"
+#include "Keyboard.h"
+#include "Mouse.h"
+#include "D3DGraphics.h"
 
 class GameManager
 {
-private:
-    GameManager()
-    {
-        entities.push_back(&player);
-        entities.push_back(&enemies);
-    }
-
-    void Update(KeyboardClient &Kbd, float Dt)
-    {
-        player.Update(Kbd, Mouse, Dt);
-        physics.Update(entities);
-        spawner.Update(entities);
-    }
-
-    void Draw()
+public:
+    GameManager();
+    void Update(KeyboardClient &Kbd, MouseClient &Mouse, float Dt);
+    void Draw(D3DGraphics &Gfx)
     {}
 private:
     Player player;
-    Enemy enemies;
-    std::vector<Entity*> entities;
+    ProjectileHandler projectile;
+    std::vector<Enemy> enemies;
+    std::vector<Laser> lasers;
+    std::vector<std::vector<Entity>> entities;
     Physics physics;
     Spawner spawner;
 };

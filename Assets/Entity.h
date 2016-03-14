@@ -1,12 +1,13 @@
 #pragma once
-#include "Physics.h"
+#include "Keyboard.h"
+#include "Mouse.h"
+
+class Physics;
 
 class Entity
 {
     friend Physics;
 public:
-    virtual void Update(KeyboardClient &Kbd, float Dt) = 0;
-    virtual void Update(float Dt) = 0;
     virtual void Draw(D3DGraphics &Gfx) = 0;
 protected:
     float x, y,

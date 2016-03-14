@@ -1,20 +1,22 @@
 #include "Physics.h"
 
-void Physics::Update(std::vector<Entity> &Entities)
+void Physics::Update(Player &ThisPlayer, std::vector<std::vector<Entity>> &Entities)
 {
-    CollisionCheck(Entities);
+    Physics::CollisionCheck(ThisPlayer, Entities);
 }
 
-void Physics::CollisionCheck(Player &ThisPlayer, Enemy &ThisEnemy, Laser &ThisLaser)
+void Physics::CollisionCheck(Player &ThisPlayer, std::vector<std::vector<Entity>> &Entities)
 {
     // Check player against enemies
-    for (auto &enemy : ThisEnemy.enemies)
+    for (auto &enemies : Entities)
     {
-       if ((int)ThisPlayer.x + ThisPlayer.width > enemy.x &&
-           (int)ThisPlayer.x <(int) enemy.x + enemy.width &&
-           (int)ThisPlayer.y + ThisPlayer.height > (int)enemy.y &&
-           (int)ThisPlayer.y < (int)enemy.y + enemy.height)
-       {}
-
+        for (auto &enemy : enemies)
+        {
+           if ((int)ThisPlayer.x + ThisPlayer.width > enemy.x &&
+               (int)ThisPlayer.x <(int) enemy.x + enemy.width &&
+               (int)ThisPlayer.y + ThisPlayer.height > (int)enemy.y &&
+               (int)ThisPlayer.y < (int)enemy.y + enemy.height)
+           {}
+        }
     }
 }

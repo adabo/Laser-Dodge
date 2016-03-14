@@ -1,52 +1,40 @@
 #include "Enemy.h"
 
-Enemy::Enemy(int X, int Y)
+Enemy::Enemy(int X, int Y, float Cos_X, float Sin_Y)
 {
     x        = X;
     y        = Y;
+    cos_x    = Cos_X;
+    sin_y    = Sin_Y;
     is_alive = true;
     hp       = 50.0f;
     damage   = 5.0f;
     shield   = 5.0f;
 }
-
-void Enemy::Update(Player &Player, float Dt)
+void Enemy::Update(Entity &ThisEntity, float Dt)
 {
-    float player_x = Player.GetX();
-    float player_y = Player.GetY();
-    float rise       = 9.0f;
-    float hypotenuse = trg.GetHypotenuse(x, y, player_x, player_y);
-    float cos_x      = trg.GetCosX(x, player_x, hypotenuse);
-    float sin_y      = trg.GetSinY(y, player_y, hypotenuse);
+    float rise; 
+    float hypotenuse; 
+    for (auto &enemy : ThisEnemy.enemies)
+    {
+        x          = ThisPlayer.x;
+        y          = ThisPlayer.y;
+        // rise    = 9.0f;
+        hypotenuse = trg.GetHypotenuse(x, y, enemy_x, enemy_y);
+        cos_x      = trg.GetCosX(x, enemy_x, hypotenuse);
+        sin_y      = trg.GetSinY(y, enemy_y, hypotenuse);
+    }
 }
 
 void Enemy::Deploy()
 {
-    for (int i_enemy = 0; i_enemy < enemy.size(); ++i_enemy)
-    {
-        if (enemy[i_enemy].is_dead)
-        {
-            enemy
-        }
-        x = rand() % (800 - width * 2) + width;
-        enemy.push_back(enemy(x, y, cos_x, sin_y));
-    }
+    x = rand() % (800 - width * 2) + width;
+    enemies.push_back(enemy(x, y, cos_x, sin_y));
 }
 
 void Enemy::Draw(D3DGraphics &Gfx)
 {
     // DrawFilledRect(int Left, int Top, int Right, int Bottom, D3DCOLOR Color)
-    x = this->x
-    
-    DrawFilledRect(x, y, x + width, y + height, D3DCOLOR_XRGB(0, 255, 0));
-}
-
-float Enemy::GetX()
-{
-    return x;
-}
-
-float Enemy::GetY()
-{
-    return y;
+    // x = this->x
+    Gfx.DrawFilledRect(x, y, x + width, y + height, D3DCOLOR_XRGB(0, 255, 0));
 }

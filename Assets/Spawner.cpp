@@ -1,16 +1,17 @@
 #include "Spawner.h"
 
-void Spawner::Update(std::vector<Entity> &Entities)
+void Spawner::Update(std::vector<std::vector<Entity>> &Entities)
 {
     CheckIsAlive(Entities)
 }
 
-void Spawner::CheckIsAlive(std::vector<Entity> &Entities)
+// Passing 2 vectors (Enemy, Laser) in one vector
+void Spawner::CheckIsAlive(std::vector<std::vector<Entity>> &Entities)
 {
     // Spawner doesn't care which entity it's
     // checking since the entities will hold
     // their own hp/dmg/shield
-    for (auto &entity : Entities)
+    for (auto &entity : Entities.entities)
     {
         if (entity.hp <= 0)
         {

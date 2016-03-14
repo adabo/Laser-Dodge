@@ -12,9 +12,10 @@ Player::Player()
     shield   = 1.0f;
 }
 
-void Player::Update(KeyboardClient &Kbd, MouseClient &Mouse, float Dt)
+void Player::Update(KeyboardClient &Kbd, MouseClient &Mouse,
+                    ProjectileHandler &Projectile, float Dt)
 {
-    float frame_step = speed * Dt;
+    float frame_step = velocity * Dt;
     if (Kbd.AIsPressed())
     {
         x -= frame_step;
@@ -43,7 +44,7 @@ void Player::Update(KeyboardClient &Kbd, MouseClient &Mouse, float Dt)
             {
                 mouse_is_pressed = true;
                 // Why do I need Shoot()?
-                laser.AddLaser(mouse_x, mouse_y);
+                Projectile.AddLaser(mouse_x, mouse_y, damage);
             }
         }
         else
@@ -51,8 +52,6 @@ void Player::Update(KeyboardClient &Kbd, MouseClient &Mouse, float Dt)
             mouse_is_pressed = false;
         }
     }
-
-    laser.Update(MouseX, MouseY, Dt);
 }
 
 void Player::SetAimDirection(int MouseX, int MouseY)
@@ -116,3 +115,4 @@ void Player::Draw(D3DGraphics &Gfx)
                         x + (width / 2), y + (height / 2),
                         D3DCOLOR_XRGB(255, 255, 255));
     }
+
