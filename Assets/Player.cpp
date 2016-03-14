@@ -55,25 +55,10 @@ void Player::Update(KeyboardClient &Kbd, MouseClient &Mouse, float Dt)
     laser.Update(MouseX, MouseY, Dt);
 }
 
-void Player::UpdateLaser(x, y, cos_x, sin_y, float Frame_Step)
-{
-    for (auto &laser : lasers)
-    {
-        Frame_Step = laser[0].speed * Dt;
-        int size = laser.size();
-        for(int i = 0; i < size; ++i)
-        {
-            laser[i].x += frame_step * laser[i].cos_x;
-            laser[i].y += frame_step * laser[i].sin_y;
-        }
-
-    }
-}
-
 void Player::SetAimDirection(int MouseX, int MouseY)
 {
-    float hypotenuse  = trg.GetHypotenuse(x, y, MouseX, MouseY);
-    float theta       = trg.ThetaFromSin(y - MouseY, hypotenuse);
+    float hypotenuse = trg.GetHypotenuse(x, y, MouseX, MouseY);
+    float theta      = trg.ThetaFromSin(y - MouseY, hypotenuse);
     float adjacent   = 9.0f;
     float opposite   = 9.0f;
 

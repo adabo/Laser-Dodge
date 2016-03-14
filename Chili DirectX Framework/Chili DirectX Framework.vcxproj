@@ -84,6 +84,7 @@
   <ItemGroup>
     <ClCompile Include="..\Assets\D3DGraphics.cpp" />
     <ClCompile Include="..\Assets\Enemy.cpp" />
+    <ClCompile Include="..\Assets\Entity.cpp" />
     <ClCompile Include="..\Assets\Game.cpp" />
     <ClCompile Include="..\Assets\KClientMethods.cpp" />
     <ClCompile Include="..\Assets\Keyboard.cpp" />
@@ -91,6 +92,7 @@
     <ClCompile Include="..\Assets\Laser.cpp" />
     <ClCompile Include="..\Assets\Mouse.cpp" />
     <ClCompile Include="..\Assets\Observer.cpp" />
+    <ClCompile Include="..\Assets\Physics.cpp" />
     <ClCompile Include="..\Assets\Player.cpp" />
     <ClCompile Include="..\Assets\Sound.cpp" />
     <ClCompile Include="..\Assets\Test_Design.cpp" />
@@ -101,11 +103,13 @@
   <ItemGroup>
     <ClInclude Include="..\Assets\D3DGraphics.h" />
     <ClInclude Include="..\Assets\Enemy.h" />
+    <ClInclude Include="..\Assets\Entity.h" />
     <ClInclude Include="..\Assets\Game.h" />
     <ClInclude Include="..\Assets\Keyboard.h" />
     <ClInclude Include="..\Assets\Laser.h" />
     <ClInclude Include="..\Assets\Mouse.h" />
     <ClInclude Include="..\Assets\Observer.h" />
+    <ClInclude Include="..\Assets\Physics.h" />
     <ClInclude Include="..\Assets\Player.h" />
     <ClInclude Include="..\Assets\Resource.h" />
     <ClInclude Include="..\Assets\Sound.h" />

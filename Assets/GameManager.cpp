@@ -1,17 +1,15 @@
 #include "GameManager.h"
 
-void GameManager::SpawnEntity()
+GameManager::GameManager()
 {
-    enemy.Spawn();
-    player.Spawn();
-    laser.Spawn();    
+    entities.push_back(&player);
+    entities.push_back(&enemies);
 }
-
-void GameManager::Update()
+void GameManager::Update(KeyboardClient &Kbd, float Dt)
 {
-    // Add entity tpyes here
-    
+    player.Update(Kbd, Mouse, Dt);
+    physics.Update(entities);
+    spawner.Update(entities);
 }
-
 void GameManager::Draw()
 {}

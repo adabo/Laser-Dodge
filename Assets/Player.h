@@ -4,6 +4,7 @@
 #include "Mouse.h"
 #include "D3DGraphics.h"
 #include <vector>
+#include "Entity.h"
 #include "Laser.h"
 #include "Trigonometry.h"
 
@@ -17,11 +18,11 @@ enum AIMSIDE
 
 class Player : public Entity
 {
-public:
     friend Physics;
+public:
     Player();
     void Update(KeyboardClient &Kbd, MouseClient &Mouse, float Dt);
-    void UpdateLaser(x, y, cos_x, sin_y, float Frame_Step);
+    void Update(float Dt) {}
     void SetAimDirection(int MouseX, int MouseY);
     void Draw(D3DGraphics &Gfx);
 private:
