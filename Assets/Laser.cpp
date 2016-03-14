@@ -11,7 +11,7 @@ Laser::Laser(float X, float Y, float Cos_X, float Sin_Y, float Damage)
     damage   = Damage;
 }
 
-void Laser::Update(float Dt) 
+void Laser::Update(std::vector<Laser> Lasers, float Dt) 
 {
     if(lasers.size())
     {
@@ -32,11 +32,4 @@ void Laser::Draw(D3DGraphics &Gfx)
     }
 }
 
-void Laser::AddLaser(int MouseX, int MouseY, float Damage)
-{
-    // float rise       = 9.0f;
-    float hypotenuse = trg.GetHypotenuse(x, y, MouseX, MouseY);
-    float cos_x      = trg.GetCosX(x, MouseX, hypotenuse);
-    float sin_y      = trg.GetSinY(y, MouseY, hypotenuse);
-    laser.push_back(Laser(x, y, cos_x, sin_y, Damage));
-}
+

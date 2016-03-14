@@ -8,7 +8,7 @@ class Entity
 {
     friend Physics;
 public:
-    virtual void Draw(D3DGraphics &Gfx) = 0;
+    //virtual void Draw(D3DGraphics &Gfx) = 0;
 protected:
     float x, y,
           velocity,

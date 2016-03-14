@@ -19,7 +19,9 @@ public:
 private:
     Player player;
     ProjectileHandler projectile;
+    Enemy enemy;
     std::vector<Enemy> enemies;
+    Laser laser;
     std::vector<Laser> lasers;
     std::vector<std::vector<Entity>> entities;
     Physics physics;

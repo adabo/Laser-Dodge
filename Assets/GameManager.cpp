@@ -8,12 +8,10 @@ GameManager::GameManager()
 }
 void GameManager::Update(KeyboardClient &Kbd, MouseClient &Mouse, float Dt)
 {
-    player.Update(Kbd, Mouse, Dt, );
-    for (auto &enemy : enemy)
-    {
-        enemy.Update(player,enemies);
-    }
-    physics.Update(entities);
+    player.Update(Kbd, Mouse, projectile, Dt);
+    enemy.Update(player, enemies, Dt);
+    laser.Update(lasers, Dt);
+    physics.Update(player, entities);
     spawner.Update(entities);
     projectile.Update();
 }

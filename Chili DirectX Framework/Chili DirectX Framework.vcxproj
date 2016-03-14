@@ -95,6 +95,7 @@
     <ClCompile Include="..\Assets\Observer.cpp" />
     <ClCompile Include="..\Assets\Physics.cpp" />
     <ClCompile Include="..\Assets\Player.cpp" />
+    <ClCompile Include="..\Assets\ProjectileHandler.cpp" />
     <ClCompile Include="..\Assets\Sound.cpp" />
     <ClCompile Include="..\Assets\Test_Design.cpp" />
     <ClCompile Include="..\Assets\Timer.cpp" />
@@ -113,6 +114,7 @@
     <ClInclude Include="..\Assets\Observer.h" />
     <ClInclude Include="..\Assets\Physics.h" />
     <ClInclude Include="..\Assets\Player.h" />
+    <ClInclude Include="..\Assets\ProjectileHandler.h" />
     <ClInclude Include="..\Assets\Resource.h" />
     <ClInclude Include="..\Assets\Sound.h" />
     <ClInclude Include="..\Assets\Timer.h" />

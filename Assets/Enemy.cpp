@@ -12,7 +12,7 @@ Enemy::Enemy(int X, int Y, float Cos_X, float Sin_Y)
     shield   = 5.0f;
 }
 
-void Enemy::Update(Player &ThisPlayer, std::vector<std::vector<Enemy>> Enemies, float Dt)
+void Enemy::Update(Player &ThisPlayer, std::vector<Enemy> &Enemies, float Dt)
 {
     float rise; 
     float hypotenuse; 

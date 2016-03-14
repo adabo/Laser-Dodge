@@ -13,10 +13,11 @@ class Enemy : public Entity
 {
 public:
     Enemy(int X, int Y, float Cos_X, float Sin_Y);
-    void Update(Entity &ThisEntity, float Dt); 
-    void Deploy();
+    void Update(Player &ThisPlayer, std::vector<Enemy> &Enemies, float Dt);
+    //void Deploy();
     void Draw(D3DGraphics &Gfx);
 private:
+    float cos_x, sin_y;
     Trigonometry trg;
     std::vector<Enemy> enemies;
 };
