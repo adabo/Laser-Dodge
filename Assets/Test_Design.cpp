@@ -1,3 +1,4 @@
+#include "Trigonometry.h"
 #include "Keyboard.h"
 #include "D3DGraphics.h"
 
@@ -47,26 +48,50 @@ public:
 class Laser : public Entity
 {
 public:
-    Laser::Laser(float X, float Y, float Cos_X, float Sin_Y, float Damage)
-    {
-        x        = X;
-        y        = Y;
-        velocity = 900;
-        cos_x    = Cos_X;
-        sin_y    = Sin_Y;
-        is_alive = true;
-        damage   = Damage;
-    }
+    Laser(float X, float Y, float Cos_X, float Sin_Y, float Damage)
+    :   x        (X)
+        y        (Y)
+        velocity (900)
+        cos_x    (Cos_X)
+        sin_y    (Sin_Y)
+        is_alive (true)
+        damage   (Damage)
+    {}
 
-    void Update()
+    void Update(float Dt)
     {
-        /*Update code here*/
+        if(lasers.size() != 0)
+        {
+            // Temporary use 0 to get global laser speed
+            // since all lasers carry same speed
+            frame_step = velocity * Dt;
+            for (auto &laser : lasers)
+            {
+                lasers.x += frame_step * lasers.cos_x;
+                lasers.y += frame_step * lasers.sin_y;
+            }
+        }
     }
 
     void Draw()
     {
-        /*Draw code here*/
+        for (auto &laser : lasers)
+        {
+            Gfx.PutPixel(laser.x, laser.y, 255, 255, 255);
+        }
     }
+
+    void AddLaser(int MouseX, int MouseY)
+    {
+        float rise       = 9.0f;
+        float hypotenuse       = trg.GetHypotenuse(x, y, MouseX, MouseY);
+        float cos_x            = trg.GetCosX(x, MouseX, hypotenuse);
+        float sin_y            = trg.GetSinY(y, MouseY, hypotenuse);
+        laser.push_back(Laser(x, y, cos_x, sin_y));
+    }
+private:
+    float cos_x, sin_y;
+    std::vector<Laser> lasers;
 };
 
 class Player : public Entity
@@ -116,30 +141,16 @@ public:
                 {
                     mouse_is_pressed = true;
                     // Why do I need Shoot()?
-                    SetLaserDirection(mouse_x, mouse_y);
+                    laser.AddLaser(mouse_x, mouse_y);
                 }
             }
             else
             {
                 mouse_is_pressed = false;
             }
-
-            if(laser.size() != 0)
-            {
-                // Temporary use 0 to get global laser speed
-                // since all lasers carry same speed
-                frame_step = laser[0].speed * Dt;
-                int size = laser.size();
-                for(int i = 0; i < size; ++i)
-                {
-                    laser[i].x += frame_step * laser[i].cos_x;
-                    laser[i].y += frame_step * laser[i].sin_y;
-                    UpdateLaser
-                }
-            }
         }
 
-        UpdateLaser(Dt);
+        laser.Update(MouseX, MouseY, Dt);
     }
 
     void UpdateLaser(x, y, cos_x, sin_y, float Frame_Step)
@@ -157,23 +168,89 @@ public:
         }
     }
 
+    void SetAimDirection(int MouseX, int MouseY)
+    {
+        float hypotenuse  = trg.GetHypotenuse(x, y, MouseX, MouseY);
+        float theta       = trg.ThetaFromSin(y - MouseY, hypotenuse);
+        float adjacent   = 9.0f;
+        float opposite   = 9.0f;
+
+        if (MouseY > y)
+        {
+            opposite = -opposite;
+            adjacent = -adjacent;
+        }
+        if (MouseX < x)
+        {
+            opposite = -opposite;
+            adjacent = -adjacent;
+        }
+
+        if(theta > 44 && theta < 46)
+            theta = theta;
+        
+        // top
+        if (theta >= 45 && theta <= 90)
+        {
+            aim_displacement = trg.AdjacentFromOpposite(opposite, theta);
+            aim_side = AIMTOP;
+        }
+        // right
+        else if (theta <= 45 && theta >= -45 && MouseX >= x)
+        {
+            aim_displacement = trg.OppositeFromAdjacent(adjacent, theta);
+            if (MouseY > y)
+            {
+                aim_displacement = -aim_displacement;
+            }
+            aim_side = AIMRIGHT;
+        }
+        // bottom
+        else if (theta <= -45 && theta >= -90)
+        {
+            aim_displacement = trg.AdjacentFromOpposite(opposite, theta);
+            aim_side = AIMBOTTOM;
+        }
+        // left
+        else if (theta >= -45 && theta <= 45 && MouseY <= x)
+        {
+            aim_displacement = trg.OppositeFromAdjacent(adjacent, theta);
+            if (MouseY > y)
+            {
+                aim_displacement = -aim_displacement;
+            }
+            aim_side = AIMLEFT;
+        }
+    }
+
     void Draw(D3DGraphics &Gfx)
     {
-        /*Draw code here*/
+        Gfx.DrawRectOutline(x - (width / 2), y - (height / 2),
+                            x + (width / 2), y + (height / 2),
+                            D3DCOLOR_XRGB(255, 255, 255));
     }
 private:
     std::vector<Laser> lasers;
+    AIMSIDE aim_side;
+    int mouse_x, mouse_y;
+    float aim_displacement; 
+    Trigonometry trg;
 };
 
 class Spawner
 {
 public:
-    void CheckIsAlive()
+    void Update(std::vector<Entity> &Entities)
+    {
+        CheckIsAlive(Entities)
+    }
+
+    void CheckIsAlive(std::vector<Entity> &Entities)
     {
         // Spawner doesn't care which entity it's
         // checking since the entities will hold
         // their own hp/dmg/shield
-        for (auto &entity : entities)
+        for (auto &entity : Entities)
         {
             if (entity.hp <= 0)
             {
@@ -189,16 +266,14 @@ public:
             ThisPlayer.is_alive = true;
         }
     }
-private:
-    std::vector<Entity
 };
 
 class Physics
 {
 public:
-    Update(Player &ThisPlayer, Enemy &ThisEnemy, Laser &ThisLaser)
+    Update(std::vector<Entity> &Entities)
     {
-        CollisionCheck(ThisPlayer, ThisEnemy, ThisLaser);
+        CollisionCheck(Entities);
     }
 
     CollisionCheck(Player &ThisPlayer, Enemy &ThisEnemy, Laser &ThisLaser)
@@ -219,15 +294,25 @@ public:
 class GameManager
 {
 private:
-    void Update()
-    {}
-    void Spawn()
-    {}
-    void Draw()
+    GameManager()
     {
-
+        entities.push_back(&player);
+        entities.push_back(&enemies);
     }
+
+    void Update(KeyboardClient &Kbd, float Dt)
+    {
+        player.Update(Kbd, Mouse, Dt);
+        physics.Update(entities);
+        spawner.Update(entities);
+    }
+
+    void Draw()
+    {}
 private:
     Player player;
+    Enemy enemies;
+    std::vector<Entity*> entities;
+    Physics physics;
     Spawner spawner;
 };
