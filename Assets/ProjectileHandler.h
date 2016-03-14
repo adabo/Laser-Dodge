@@ -4,7 +4,9 @@
 class ProjectileHandler
 {
 public:
-    AddProjectile(int X, int Y, float Damage);
+    void Update();
+    void AddProjectile(int X, int Y, float Damage);
+    void DelProjectile(); 
 private:
     std::vector<Laser> lasers;
 };

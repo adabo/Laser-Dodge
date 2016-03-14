@@ -11,11 +11,12 @@ Enemy::Enemy(int X, int Y, float Cos_X, float Sin_Y)
     damage   = 5.0f;
     shield   = 5.0f;
 }
-void Enemy::Update(Entity &ThisEntity, float Dt)
+
+void Enemy::Update(Player &ThisPlayer, std::vector<std::vector<Enemy>> Enemies, float Dt)
 {
     float rise; 
     float hypotenuse; 
-    for (auto &enemy : ThisEnemy.enemies)
+    for (auto &enemy : Enemies)
     {
         x          = ThisPlayer.x;
         y          = ThisPlayer.y;
@@ -24,12 +25,6 @@ void Enemy::Update(Entity &ThisEntity, float Dt)
         cos_x      = trg.GetCosX(x, enemy_x, hypotenuse);
         sin_y      = trg.GetSinY(y, enemy_y, hypotenuse);
     }
-}
-
-void Enemy::Deploy()
-{
-    x = rand() % (800 - width * 2) + width;
-    enemies.push_back(enemy(x, y, cos_x, sin_y));
 }
 
 void Enemy::Draw(D3DGraphics &Gfx)

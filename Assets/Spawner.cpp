@@ -20,6 +20,12 @@ void Spawner::CheckIsAlive(std::vector<std::vector<Entity>> &Entities)
     }
 }
 
+void Spawner::AddEnemy(std::vector<Enemy> &Enemies)
+{
+    x = rand() % (800 - width * 2) + width;
+    Enemies.push_back(enemy(x, y, cos_x, sin_y));
+}
+
 void Spawner::SetPlayerAlive(Player &ThisPlayer)
 {
     if (!ThisPlayer.is_alive)

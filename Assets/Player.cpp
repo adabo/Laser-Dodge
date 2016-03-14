@@ -44,7 +44,7 @@ void Player::Update(KeyboardClient &Kbd, MouseClient &Mouse,
             {
                 mouse_is_pressed = true;
                 // Why do I need Shoot()?
-                Projectile.AddLaser(mouse_x, mouse_y, damage);
+                Projectile.AddProjectile(mouse_x, mouse_y, damage);
             }
         }
         else

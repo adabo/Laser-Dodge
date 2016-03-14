@@ -26,6 +26,7 @@ public:
     void SetAimDirection(int MouseX, int MouseY);
     void Draw(D3DGraphics &Gfx);
 private:
+    bool mouse_is_pressed;
     ProjectileHandler projectile;
     AIMSIDE aim_side;
     int mouse_x, mouse_y;

@@ -9,10 +9,13 @@ GameManager::GameManager()
 void GameManager::Update(KeyboardClient &Kbd, MouseClient &Mouse, float Dt)
 {
     player.Update(Kbd, Mouse, Dt, );
-    for (auto & entity : entities.)
-    enemy.Update(player);
+    for (auto &enemy : enemy)
+    {
+        enemy.Update(player,enemies);
+    }
     physics.Update(entities);
     spawner.Update(entities);
+    projectile.Update();
 }
 void GameManager::Draw(D3DGraphics &Gfx)
 {}

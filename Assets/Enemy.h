@@ -5,6 +5,7 @@
 #include <vector>
 #include "Player.h"
 #include "Physics.h"
+#include "Trigonometry.h"
 
 class Player;
 
@@ -16,5 +17,6 @@ public:
     void Deploy();
     void Draw(D3DGraphics &Gfx);
 private:
+    Trigonometry trg;
     std::vector<Enemy> enemies;
 };
