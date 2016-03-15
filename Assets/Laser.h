@@ -6,6 +6,7 @@
 
 class Laser : public Entity
 {
+    friend class ProjectileHandler;
 public:
     Laser();
     Laser(float X, float Y, float Cos_X, float Sin_Y, float Damage);
