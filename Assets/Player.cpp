@@ -13,7 +13,7 @@ Player::Player()
 }
 
 void Player::Update(KeyboardClient &Kbd, MouseClient &Mouse,
-                    ProjectileHandler &Projectile, float Dt)
+                    ProjectileHandler &Projectile, std::vector<Laser> &Lasers, float Dt)
 {
     float frame_step = velocity * Dt;
     if (Kbd.AIsPressed())
@@ -44,7 +44,7 @@ void Player::Update(KeyboardClient &Kbd, MouseClient &Mouse,
             {
                 mouse_is_pressed = true;
                 // Why do I need Shoot()?
-                Projectile.AddProjectile(x, y, mouse_x, mouse_y, damage);
+                Projectile.AddProjectile(Lasers, x, y, mouse_x, mouse_y, damage);
             }
         }
         else

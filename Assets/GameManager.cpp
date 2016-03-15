@@ -8,11 +8,11 @@ GameManager::GameManager()
 }
 void GameManager::Update(KeyboardClient &Kbd, MouseClient &Mouse, float Dt)
 {
-    player.Update(Kbd, Mouse, projectile, Dt);
+    player.Update(Kbd, Mouse, projectile, lasers, Dt);
     enemy.Update(player, enemies, Dt);
     laser.Update(lasers, Dt);
     physics.Update(player, enemies, lasers);
-    spawner.Update(player, entities, lasers);
+    spawner.Update(player, enemies, lasers);
     projectile.Update(lasers);
 }
 void GameManager::Draw(D3DGraphics &Gfx)

@@ -22,7 +22,7 @@ class Player : public Entity
 public:
     Player();
     void Update(KeyboardClient &Kbd, MouseClient &Mouse,
-                ProjectileHandler &Projectile, float Dt);
+                    ProjectileHandler &Projectile, std::vector<Laser> &Lasers, float Dt);
     void SetAimDirection(int MouseX, int MouseY);
     void Draw(D3DGraphics &Gfx);
     float GetX();

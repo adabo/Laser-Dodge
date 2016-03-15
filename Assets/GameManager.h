@@ -14,8 +14,7 @@ class GameManager
 public:
     GameManager();
     void Update(KeyboardClient &Kbd, MouseClient &Mouse, float Dt);
-    void Draw(D3DGraphics &Gfx)
-    {}
+    void Draw(D3DGraphics &Gfx);
 private:
     Player player;
     ProjectileHandler projectile;
