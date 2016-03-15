@@ -10,6 +10,7 @@ Player::Player()
     hp       = 50.0f;
     damage   = 1.0f;
     shield   = 1.0f;
+    velocity = 100;
 }
 
 void Player::Update(KeyboardClient &Kbd, MouseClient &Mouse,
