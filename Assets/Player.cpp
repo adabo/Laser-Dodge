@@ -8,7 +8,7 @@ Player::Player()
     x        = 400;
     y        = 300;
     hp       = 50.0f;
-    damage   = 1.0f;
+    damage   = 15.0f;
     shield   = 1.0f;
     velocity = 100;
 }

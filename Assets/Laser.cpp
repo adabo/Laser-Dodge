@@ -11,6 +11,8 @@ Laser::Laser(float X, float Y, float Cos_X, float Sin_Y, float Damage)
     is_alive = true;
     damage   = Damage;
     hp       = 1.0f;
+    width    = 1;
+    height   = 1;
     //velocity = 100;
 }
 
