@@ -22,9 +22,6 @@ void Physics::CollisionCheck(Player &ThisPlayer, std::vector<Enemy> &Enemies,
            Enemies.erase(Enemies.begin() + i);
        }
     }
-    // int p = 0;
-    //if (Lasers.size() >= 3)
-    // for (auto &laser : Lasers)
     if (Lasers.size())
     {
         for (int i = Lasers.size() - 1; i >= 0; --i)

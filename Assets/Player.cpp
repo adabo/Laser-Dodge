@@ -112,9 +112,10 @@ void Player::SetAimDirection(int MouseX, int MouseY)
 
 void Player::Draw(D3DGraphics &Gfx)
 {
-    Gfx.DrawRectOutline(x - (width / 2), y - (height / 2),
-                        x + (width / 2), y + (height / 2),
-                        D3DCOLOR_XRGB(255, 255, 255));
+    Gfx.DrawRectOutline(x, y, x + width, y + height, D3DCOLOR_XRGB(255, 255, 255));
+    // Gfx.DrawRectOutline(x - (width / 2), y - (height / 2),
+    //                     x + (width / 2), y + (height / 2),
+    //                     D3DCOLOR_XRGB(255, 255, 255));
 }
 
 

@@ -13,13 +13,14 @@ Enemy::Enemy(int X, int Y, float Cos_X, float Sin_Y)
     hp       = 50.0f;
     damage   = 5.0f;
     shield   = 5.0f;
+    velocity = 100.0f;
 }
 
 void Enemy::Update(Player &ThisPlayer, std::vector<Enemy> &Enemies, float Dt)
 {
     if(Enemies.size())
     {
-        float frame_step = 200 * Dt;
+        float frame_step = 100.0f * Dt;
         for (auto &enemy : Enemies)
         {
             enemy.x += frame_step * enemy.cos_x;
