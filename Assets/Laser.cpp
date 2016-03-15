@@ -1,5 +1,6 @@
 #include "Laser.h"
 
+Laser::Laser(){}
 Laser::Laser(float X, float Y, float Cos_X, float Sin_Y, float Damage)
 {
     x        = X;
@@ -13,23 +14,41 @@ Laser::Laser(float X, float Y, float Cos_X, float Sin_Y, float Damage)
 
 void Laser::Update(std::vector<Laser> Lasers, float Dt) 
 {
-    if(lasers.size())
+    if(Lasers.size())
     {
         float frame_step = velocity * Dt;
-        for (auto &laser : lasers)
+        for (auto &laser : Lasers)
         {
-            lasers.x += frame_step * lasers.cos_x;
-            lasers.y += frame_step * lasers.sin_y;
+            laser.x += frame_step * laser.cos_x;
+            laser.y += frame_step * laser.sin_y;
         }
     }
 }
 
-void Laser::Draw(D3DGraphics &Gfx)
+void Laser::Draw(std::vector<Laser> &Lasers, D3DGraphics &Gfx)
 {
-    for (auto &laser : lasers)
+    for (auto &laser : Lasers)
     {
         Gfx.PutPixel(laser.x, laser.y, 255, 255, 255);
     }
 }
 
+float Laser::GetX()
+{
+    return x;
+}
 
+float Laser::GetY()
+{
+    return y; 
+}
+
+int Laser::GetWidth()
+{
+    return width; 
+}
+
+int Laser::GetHeight()
+{
+    return height; 
+}

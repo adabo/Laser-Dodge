@@ -25,6 +25,10 @@ public:
                 ProjectileHandler &Projectile, float Dt);
     void SetAimDirection(int MouseX, int MouseY);
     void Draw(D3DGraphics &Gfx);
+    float GetX();
+    float GetY();
+    int   GetWidth();
+    int   GetHeight();
 private:
     bool mouse_is_pressed;
     ProjectileHandler projectile;

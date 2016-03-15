@@ -1,5 +1,6 @@
 #include "Enemy.h"
 
+Enemy::Enemy(){}
 Enemy::Enemy(int X, int Y, float Cos_X, float Sin_Y)
 {
     x        = X;
@@ -18,18 +19,37 @@ void Enemy::Update(Player &ThisPlayer, std::vector<Enemy> &Enemies, float Dt)
     float hypotenuse; 
     for (auto &enemy : Enemies)
     {
-        x          = ThisPlayer.x;
-        y          = ThisPlayer.y;
-        // rise    = 9.0f;
-        hypotenuse = trg.GetHypotenuse(x, y, enemy_x, enemy_y);
-        cos_x      = trg.GetCosX(x, enemy_x, hypotenuse);
-        sin_y      = trg.GetSinY(y, enemy_y, hypotenuse);
+        hypotenuse = trg.GetHypotenuse(enemy.x, enemy.y, ThisPlayer.GetX(), ThisPlayer.GetY());
+        cos_x      = trg.GetCosX(enemy.x, ThisPlayer.GetX(), hypotenuse);
+        sin_y      = trg.GetSinY(enemy.y, ThisPlayer.GetY(), hypotenuse);
     }
 }
 
-void Enemy::Draw(D3DGraphics &Gfx)
+void Enemy::Draw(std::vector<Enemy> &Enemies, D3DGraphics &Gfx)
 {
-    // DrawFilledRect(int Left, int Top, int Right, int Bottom, D3DCOLOR Color)
-    // x = this->x
-    Gfx.DrawFilledRect(x, y, x + width, y + height, D3DCOLOR_XRGB(0, 255, 0));
+    for (auto &enemy : Enemies)
+    {
+        Gfx.DrawFilledRect(enemy.x, enemy.y, enemy.x + enemy.width,
+                           enemy.y + enemy.height, D3DCOLOR_XRGB(0, 255, 0));
+    }
+}
+
+float Enemy::GetX()
+{
+    return x;
+}
+
+float Enemy::GetY()
+{
+    return y; 
+}
+
+int Enemy::GetWidth()
+{
+    return width; 
+}
+
+int Enemy::GetHeight()
+{
+    return height; 
 }

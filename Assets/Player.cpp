@@ -114,5 +114,25 @@ void Player::Draw(D3DGraphics &Gfx)
     Gfx.DrawRectOutline(x - (width / 2), y - (height / 2),
                         x + (width / 2), y + (height / 2),
                         D3DCOLOR_XRGB(255, 255, 255));
-    }
+}
 
+
+float Player::GetX()
+{
+    return x;
+}
+
+float Player::GetY()
+{
+    return y;
+}
+
+int Player::GetWidth()
+{
+    return width;
+}
+
+int Player::GetHeight()
+{
+    return height;
+}

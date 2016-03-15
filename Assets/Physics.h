@@ -1,3 +1,4 @@
+#pragma once
 #include "Player.h"
 #include "Enemy.h"
 #include "Laser.h"
@@ -7,6 +8,8 @@
 class Physics
 {
 public:
-    void Update(Player &ThisPlayer, std::vector<std::vector<Entity>> &Entities);
-    void CollisionCheck(Player &ThisPlayer, std::vector<std::vector<Entity>> &Entities);
+    void Update(Player &ThisPlayer, std::vector<Enemy> &Enemies,
+                std::vector<Laser> &Lasers);
+    void CollisionCheck(Player &ThisPlayer, std::vector<Enemy> &Enemies,
+                        std::vector<Laser> &Lasers);
 };
