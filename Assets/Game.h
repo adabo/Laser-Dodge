@@ -25,7 +25,7 @@
 #include "Mouse.h"
 #include "Sound.h"
 #include "Timer.h"
-#include "Observer.h"
+#include "GameManager.h"
 
 class Game
 {
@@ -41,5 +41,5 @@ private:
     MouseClient mouse;
     DSound audio;
     Timer timer;
-    Observer observer;
+    GameManager mgr;
 };

@@ -1,21 +1,23 @@
 #pragma once
+#include "Entity.h"
 #include "D3DGraphics.h"
+#include "Trigonometry.h"
 #include <vector>
 
-class Laser
+class Laser : public Entity
 {
+    friend class ProjectileHandler;
 public:
-    Laser(float X, float Y, float Cos_X, float Sin_Y);
-    ~Laser();
-    void Shoot();
-    void Update(float x, float y);
-    void Draw(D3DGraphics &Gfx);
+    Laser();
+    Laser(float X, float Y, float Cos_X, float Sin_Y, float Damage);
+    void Update(std::vector<Laser> Lasers, float Dt);
+    void Draw(std::vector<Laser> &Lasers, D3DGraphics &Gfx);
+    // void AddLaser(int MouseX, int MouseY);
     float GetX();
     float GetY();
-public:
-    int width, height;
-    float speed;
-    float rate_of_fire;
-public:
-    float x, y, cos_x, sin_y;
+    int GetWidth();
+    int GetHeight();
+private:
+    float cos_x, sin_y;
+    Trigonometry trg;
 };

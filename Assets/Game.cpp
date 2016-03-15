@@ -39,7 +39,7 @@ void Game::Go()
     float dt = timer.GetTimeMilli() * 0.001f;
     timer.StartWatch();
 
-    observer.Update(kbd, mouse, dt);
+    mgr.Update(kbd, mouse, dt);
 
     gfx.BeginFrame();
     ComposeFrame();
@@ -48,5 +48,5 @@ void Game::Go()
 
 void Game::ComposeFrame()
 {
-    observer.Draw(gfx,mouse);
+    mgr.Draw(gfx);
 }

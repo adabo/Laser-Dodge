@@ -1,44 +1,39 @@
 #include "Enemy.h"
 
-Enemy::Enemy()
-    :
-    width(30),
-    height(30)
-{}
-Enemy::~Enemy() {}
-
-void Enemy::Shoot()
-{}
-
-void Enemy::Update(Player &Player, float Dt)
+Enemy::Enemy(){}
+Enemy::Enemy(int X, int Y, float Cos_X, float Sin_Y)
 {
-    float player_x = Player.GetX();
-    float player_y = Player.GetY();
-    float rise       = 9.0f;
-    float hypotenuse = trg.GetHypotenuse(x, y, player_x, player_y);
-    float cos_x      = trg.GetCosX(x, player_x, hypotenuse);
-    float sin_y      = trg.GetSinY(y, player_y, hypotenuse);
+    x        = X;
+    y        = Y;
+    width    = 30;
+    height   = 30;
+    cos_x    = Cos_X;
+    sin_y    = Sin_Y;
+    is_alive = true;
+    hp       = 50.0f;
+    damage   = 5.0f;
+    shield   = 5.0f;
 }
 
-void Enemy::Deploy()
+void Enemy::Update(Player &ThisPlayer, std::vector<Enemy> &Enemies, float Dt)
 {
-    for (int i_enemy = 0; i_enemy < enemy.size(); ++i_enemy)
+    float rise; 
+    float hypotenuse; 
+    for (auto &enemy : Enemies)
     {
-        if (enemy[i_enemy].is_dead)
-        {
-            enemy
-        }
-        x = rand() % (800 - width * 2) + width;
-        enemy.push_back(enemy(x, y, cos_x, sin_y));
+        hypotenuse = trg.GetHypotenuse(enemy.x, enemy.y, ThisPlayer.GetX(), ThisPlayer.GetY());
+        cos_x      = trg.GetCosX(enemy.x, ThisPlayer.GetX(), hypotenuse);
+        sin_y      = trg.GetSinY(enemy.y, ThisPlayer.GetY(), hypotenuse);
     }
 }
 
-void Enemy::Draw(D3DGraphics &Gfx)
+void Enemy::Draw(std::vector<Enemy> &Enemies, D3DGraphics &Gfx)
 {
-    // DrawFilledRect(int Left, int Top, int Right, int Bottom, D3DCOLOR Color)
-    x = this->x
-    
-    DrawFilledRect(x, y, x + width, y + height, D3DCOLOR_XRGB(0, 255, 0));
+    for (auto &enemy : Enemies)
+    {
+        Gfx.DrawFilledRect(enemy.x, enemy.y, enemy.x + enemy.width,
+                           enemy.y + enemy.height, D3DCOLOR_XRGB(0, 255, 0));
+    }
 }
 
 float Enemy::GetX()
@@ -48,15 +43,15 @@ float Enemy::GetX()
 
 float Enemy::GetY()
 {
-    return y;
+    return y; 
 }
 
-// int Enemy::GetHP()const
-// {
-//     return hp;
-// }
+int Enemy::GetWidth()
+{
+    return width; 
+}
 
-//void Enemy::SetHP(int Hp)
-//{
-//    hp = Hp;
-//}
+int Enemy::GetHeight()
+{
+    return height; 
+}
