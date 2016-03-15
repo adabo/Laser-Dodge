@@ -17,13 +17,14 @@ Enemy::Enemy(int X, int Y, float Cos_X, float Sin_Y)
 
 void Enemy::Update(Player &ThisPlayer, std::vector<Enemy> &Enemies, float Dt)
 {
-    float rise; 
-    float hypotenuse; 
-    for (auto &enemy : Enemies)
+    if(Enemies.size())
     {
-        hypotenuse = trg.GetHypotenuse(enemy.x, enemy.y, ThisPlayer.GetX(), ThisPlayer.GetY());
-        cos_x      = trg.GetCosX(enemy.x, ThisPlayer.GetX(), hypotenuse);
-        sin_y      = trg.GetSinY(enemy.y, ThisPlayer.GetY(), hypotenuse);
+        float frame_step = 200 * Dt;
+        for (auto &enemy : Enemies)
+        {
+            enemy.x += frame_step * enemy.cos_x;
+            enemy.y += frame_step * enemy.sin_y;
+        }
     }
 }
 

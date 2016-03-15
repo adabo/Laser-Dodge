@@ -2,6 +2,7 @@
 
 GameManager::GameManager()
 {
+    srand((unsigned int)time(NULL));
     // entities.push_back(player);
     // entities.push_back(enemies);
     // entities.push_back(lasers);

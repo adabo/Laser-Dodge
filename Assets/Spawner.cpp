@@ -3,7 +3,13 @@
 void Spawner::Update(Player &ThisPlayer, std::vector<Enemy> &Enemies,
                      std::vector<Laser> &Lasers)
 {
+    // Check if enemies are dead
     CheckIsAlive(ThisPlayer, Enemies, Lasers);
+    // Then add them if necessary
+    if (Enemies.size() <= 0)
+    {
+        AddEnemy(ThisPlayer, Enemies);
+    }
 }
 
 void Spawner::CheckIsAlive(Player &ThisPlayer, std::vector<Enemy> &Enemies,
@@ -12,11 +18,13 @@ void Spawner::CheckIsAlive(Player &ThisPlayer, std::vector<Enemy> &Enemies,
     // Spawner doesn't care which entity it's
     // checking since the entities will hold
     // their own hp/dmg/shield
-    for (auto &enemy : Enemies)
+    for (int i = Enemies.size() - 1; i >= 0; --i)
     {
-        if (enemy.hp <= 0)
+        if (Enemies[i].hp <= 0)
         {
-            enemy.is_alive = false;
+            // Enemies[i].is_alive = false;
+            Enemies.erase(Enemies.begin() + i);
+            AddEnemy(ThisPlayer, Enemies);
         }
     }
     for (auto &laser : Lasers)

@@ -10,13 +10,17 @@ void Physics::CollisionCheck(Player &ThisPlayer, std::vector<Enemy> &Enemies,
                              std::vector<Laser> &Lasers)
 {
     // Check player against enemies
-    for (auto &enemy : Enemies)
+    for (int i = Enemies.size() - 1; i >= 0; --i)
     {
-       if ((int)ThisPlayer.GetX() + ThisPlayer.GetWidth() > enemy.GetX() &&
-           (int)ThisPlayer.GetX() <(int) enemy.GetX() + enemy.GetWidth() &&
-           (int)ThisPlayer.GetY() + ThisPlayer.GetHeight() > (int)enemy.GetY() &&
-           (int)ThisPlayer.GetY() < (int)enemy.GetY() + enemy.GetHeight())
-       {}
+       if ((int)ThisPlayer.GetX() + ThisPlayer.GetWidth() > Enemies[i].GetX() &&
+           (int)ThisPlayer.GetX() <(int) Enemies[i].GetX() + Enemies[i].GetWidth() &&
+           (int)ThisPlayer.GetY() + ThisPlayer.GetHeight() > (int)Enemies[i].GetY() &&
+           (int)ThisPlayer.GetY() < (int)Enemies[i].GetY() + Enemies[i].GetHeight() ||
+           ((int)Enemies[i].x <= 0 || (int)Enemies[i].x >= 798 - Enemies[i].GetWidth() ||
+            (int)Enemies[i].y <= 1 || (int)Enemies[i].y >=589 - Enemies[i].GetHeight()))
+       {
+           Enemies.erase(Enemies.begin() + i);
+       }
     }
     // int p = 0;
     //if (Lasers.size() >= 3)
@@ -38,14 +42,3 @@ void Physics::CollisionCheck(Player &ThisPlayer, std::vector<Enemy> &Enemies,
         }
     }
 }
-
-// int i = 0;
-// for (auto &laser : Lasers)
-// {
-//     if (laser.x >= SCREENWIDTH || laser.x <= 0 ||
-//         laser.y >= SCREENHEIGHT || laser.y <= 0)
-//     {
-//         Lasers.erase(Lasers.begin() + i);
-//         ++i
-//     }
-// }
