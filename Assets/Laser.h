@@ -12,10 +12,10 @@ public:
     void Update(std::vector<Laser> Lasers, float Dt);
     void Draw(std::vector<Laser> &Lasers, D3DGraphics &Gfx);
     // void AddLaser(int MouseX, int MouseY);
-    void GetX();
-    void GetY();
-    void GetWidth();
-    void GetHeight();
+    float GetX();
+    float GetY();
+    int GetWidth();
+    int GetHeight();
 private:
     float cos_x, sin_y;
     Trigonometry trg;
