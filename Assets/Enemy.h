@@ -1,6 +1,6 @@
 #pragma once
 #include "Entity.h"
-#include "Laser.h"
+// #include "Laser.h"
 #include "D3DGraphics.h"
 #include <vector>
 #include "Player.h"

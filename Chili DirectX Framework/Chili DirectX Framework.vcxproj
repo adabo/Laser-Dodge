@@ -97,7 +97,6 @@
     <ClCompile Include="..\Assets\Player.cpp" />
     <ClCompile Include="..\Assets\ProjectileHandler.cpp" />
     <ClCompile Include="..\Assets\Sound.cpp" />
-    <ClCompile Include="..\Assets\Test_Design.cpp" />
     <ClCompile Include="..\Assets\Timer.cpp" />
     <ClCompile Include="..\Assets\Trigonometry.cpp" />
     <ClCompile Include="..\Assets\Windows.cpp" />

@@ -48,9 +48,6 @@
     <ClCompile Include="..\Assets\Trigonometry.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\Assets\Test_Design.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="..\Assets\Entity.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>

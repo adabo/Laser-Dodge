@@ -11,7 +11,7 @@ public:
     Laser(float X, float Y, float Cos_X, float Sin_Y, float Damage);
     void Update(std::vector<Laser> Lasers, float Dt);
     void Draw(std::vector<Laser> &Lasers, D3DGraphics &Gfx);
-    void AddLaser(int MouseX, int MouseY);
+    // void AddLaser(int MouseX, int MouseY);
     void GetX();
     void GetY();
     void GetWidth();
