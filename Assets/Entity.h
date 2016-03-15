@@ -1,10 +1,12 @@
 #pragma once
 
 class Physics;
+class Spawner;
 
 class Entity
 {
-    friend Physics;
+    friend class Physics;
+    friend class Spawner;
 public:
     //virtual void Draw(D3DGraphics &Gfx) = 0;
 protected:

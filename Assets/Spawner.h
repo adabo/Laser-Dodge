@@ -2,13 +2,18 @@
 #include <vector>
 #include "Entity.h"
 #include "Player.h"
+#include "Enemy.h"
+#include "Trigonometry.h"
 
 class Spawner
 {
 public:
     void Update(Player &ThisPlayer, std::vector<Enemy> &Enemies,
                      std::vector<Laser> &Lasers);
-    void CheckIsAlive(std::vector<std::vector<Entity>> &Entities);
+    void CheckIsAlive(Player &ThisPlayer, std::vector<Enemy> &Enemies,
+                      std::vector<Laser> &Lasers);
     void SetPlayerAlive(Player &ThisPlayer);
-    void AddEnemy(std::vector<Enemy> &Enemies);
+    void AddEnemy(Player &ThisPlayer, std::vector<Enemy> &Enemies);
+private:
+    Trigonometry trg;
 };

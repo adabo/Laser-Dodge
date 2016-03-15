@@ -5,6 +5,8 @@ Enemy::Enemy(int X, int Y, float Cos_X, float Sin_Y)
 {
     x        = X;
     y        = Y;
+    width    = 30;
+    height   = 30;
     cos_x    = Cos_X;
     sin_y    = Sin_Y;
     is_alive = true;
