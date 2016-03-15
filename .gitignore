@@ -14,7 +14,7 @@
 *.pdb
 *.res
 *.sample
-#*.sdf
+*.sdf
 *.tlog
 *.xml
 *.sublime-project
