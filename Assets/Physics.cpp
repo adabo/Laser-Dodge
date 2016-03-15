@@ -38,9 +38,9 @@ void Physics::CollisionCheck(Player &ThisPlayer, std::vector<Enemy> &Enemies,
             }
         }
         // Need to loop through 2 vectors: Each laser against each enemy.
-        for (int i = Lasers.size() - 1; i >= 0; --i)
+        for (auto &enemy : Enemies)
         {
-            for (auto enemy : Enemies)
+            for (int i = Lasers.size() - 1; i >= 0; --i)
             {
                 if ((int)Lasers[i].GetX() + Lasers[i].GetWidth() > (int)enemy.GetX() &&
                    (int)Lasers[i].GetX() < (int) enemy.GetX() + enemy.GetWidth() &&

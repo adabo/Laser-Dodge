@@ -5,7 +5,7 @@ Laser::Laser(float X, float Y, float Cos_X, float Sin_Y, float Damage)
 {
     x        = X;
     y        = Y;
-    velocity = 900.0f;
+    velocity = 600;
     cos_x    = Cos_X;
     sin_y    = Sin_Y;
     is_alive = true;
@@ -20,7 +20,7 @@ void Laser::Update(std::vector<Laser> &Lasers, float Dt)
 {
     if(Lasers.size())
     {
-        float frame_step = 900.0f * Dt;
+        float frame_step = 600.0f * Dt;
         for (auto &laser : Lasers)
         {
             laser.x += frame_step * laser.cos_x;
