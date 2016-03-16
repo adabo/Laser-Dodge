@@ -25,6 +25,9 @@
 #include <stdio.h>
 #include "Bitmap.h"
 
+UINT D3DGraphics::scrWidth = 800;
+UINT D3DGraphics::scrHeight = 600;
+
 D3DGraphics::D3DGraphics( HWND hWnd )
 {
     HRESULT result;
@@ -185,4 +188,75 @@ void D3DGraphics::DrawCircle( int centerX,int centerY,int radius,int r,int g,int
         PutPixel( centerX + y,centerY - x,r,g,b );
         PutPixel( centerX - y,centerY - x,r,g,b );
     }
+}
+
+void D3DGraphics::DrawLine(int StartX, int StartY, int EndX, int EndY,
+    D3DCOLOR Color)
+{
+    StartX = max(0, min(scrWidth, StartX));
+    EndX = max(0, min(scrWidth, EndX));
+    StartY = max(0, min(scrHeight, StartY));
+    EndY = max(0, min(scrHeight, EndY));
+
+    int dx = EndX - StartX;
+    int dy = EndY - StartY;
+
+    if (dy == 0 && dx == 0)
+    {
+        PutPixel(StartX, StartY, Color);
+    }
+    else if (abs(dy) > abs(dx))
+    {
+        if (dy < 0)
+        {
+            int temp = StartX;
+            StartX = EndX;
+            EndX = temp;
+            temp = StartY;
+            StartY = EndY;
+            EndY = temp;
+        }
+        float m = (float)dx / (float)dy;
+        float b = StartX - m*StartY;
+        for (int y = StartY; y <= EndY; y = y + 1)
+        {
+            int x = (int)(m*y + b + 0.5f);
+            PutPixel(x, y, Color);
+        }
+    }
+    else
+    {
+        if (dx < 0)
+        {
+            int temp = StartX;
+            StartX = EndX;
+            EndX = temp;
+            temp = StartY;
+            StartY = EndY;
+            EndY = temp;
+        }
+        float m = (float)dy / (float)dx;
+        float b = StartY - m*StartX;
+        for (int x = StartX; x <= EndX; x = x + 1)
+        {
+            int y = (int)(m*x + b + 0.5f);
+            PutPixel(x, y, Color);
+        }
+    }
+}
+
+void D3DGraphics::DrawFilledRect(int Left, int Top, int Right, int Bottom, D3DCOLOR Color)
+{
+    for (int y = Top; y < Bottom; ++y)
+    {
+        DrawLine(Left, y, Right, y, Color);
+    }
+}
+
+void D3DGraphics::DrawRectOutline(int Left, int Top, int Right, int Bottom, D3DCOLOR Color)
+{
+    DrawLine(Left, Top, Right, Top, Color);       // Top line
+    DrawLine(Left, Bottom, Right, Bottom, Color); // Bottom line
+    DrawLine(Left, Top, Left, Bottom, Color);     // Left line
+    DrawLine(Right, Top, Right, Bottom, Color);   // Right line
 }

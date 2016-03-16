@@ -19,7 +19,6 @@
  *  along with The Chili DirectX Framework.  If not, see <http://www.gnu.org/licenses/>.  *
  ******************************************************************************************/
 #pragma once
-
 #include <d3d9.h>
 
 class D3DGraphics
@@ -34,6 +33,10 @@ public:
     void DrawDisc( int cx,int cy,int r,int rd,int g,int b );
     void BeginFrame();
     void EndFrame();
+    void DrawLine(int StartX, int StartY, int EndX, int EndY, D3DCOLOR Color);
+    void DrawFilledRect(int Left, int Top, int Right, int Bottom, D3DCOLOR Color);
+    void DrawRectOutline(int Left, int Top, int Right, int Bottom, D3DCOLOR Color);
+    static UINT scrWidth, scrHeight;
 private:
     IDirect3D9*         pDirect3D;
     IDirect3DDevice9*   pDevice;
