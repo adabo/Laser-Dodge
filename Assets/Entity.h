@@ -7,6 +7,7 @@ class Entity
 {
     friend class Physics;
     friend class Spawner;
+    friend class GameManager;
 public:
     //virtual void Draw(D3DGraphics &Gfx) = 0;
 protected:

@@ -30,6 +30,10 @@ public:
     int   GetWidth();
     int   GetHeight();
 private:
+    float col_dec;
+    int col_r;
+    int col_g;
+    int col_b;
     bool mouse_is_pressed;
     ProjectileHandler projectile;
     AIMSIDE aim_side;

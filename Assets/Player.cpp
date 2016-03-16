@@ -7,10 +7,14 @@ Player::Player()
     height   = 20;
     x        = 400;
     y        = 300;
-    hp       = 50.0f;
+    hp       = 88.0f;
     damage   = 15.0f;
     shield   = 1.0f;
     velocity = 100;
+    col_dec  = 255 / (hp / 15);
+    col_r    = 255;
+    col_g    = 255;
+    col_b    = 255;
 }
 
 void Player::Update(KeyboardClient &Kbd, MouseClient &Mouse,
@@ -44,8 +48,8 @@ void Player::Update(KeyboardClient &Kbd, MouseClient &Mouse,
             if(!mouse_is_pressed)
             {
                 mouse_is_pressed = true;
-                // Why do I need Shoot()?
-                Projectile.AddProjectile(Lasers, x, y, mouse_x, mouse_y, damage);
+                // Does player need to Shoot()?
+                Projectile.AddProjectile(Lasers, x + (width / 2), y + (height / 2), mouse_x, mouse_y, damage);
             }
         }
         else
@@ -112,7 +116,8 @@ void Player::SetAimDirection(int MouseX, int MouseY)
 
 void Player::Draw(D3DGraphics &Gfx)
 {
-    Gfx.DrawRectOutline(x, y, x + width, y + height, D3DCOLOR_XRGB(255, 255, 255));
+    // static int hp_color = 17;
+    Gfx.DrawRectOutline(x, y, x + width, y + height, D3DCOLOR_XRGB(col_r, col_g, col_b));
     // Gfx.DrawRectOutline(x - (width / 2), y - (height / 2),
     //                     x + (width / 2), y + (height / 2),
     //                     D3DCOLOR_XRGB(255, 255, 255));

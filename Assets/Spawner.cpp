@@ -34,20 +34,26 @@ void Spawner::CheckIsAlive(Player &ThisPlayer, std::vector<Enemy> &Enemies,
             laser.is_alive = false;
         }
     }
+    if (ThisPlayer.hp <= 0)
+    {
+        ThisPlayer.is_alive = false;
+    }
 }
 
 void Spawner::AddEnemy(Player &ThisPlayer, std::vector<Enemy> &Enemies)
 {
+    static float velocity_increase = 0.0f;
+    velocity_increase += 4.0f;
     // I should not be hard coding these values especially
     // the height and width. Need to find a more elegant solution
     float x = rand() % (800 - 30 * 2) + 30;
-    float y = rand() % (400 - 30 * 2) + 30;
+    float y = rand() % (600 - 30 * 2) + 30;
 
     float hypotenuse = trg.GetHypotenuse(x, y,ThisPlayer.GetX(), ThisPlayer.GetY());
     float cos_x      = trg.GetCosX(x, ThisPlayer.GetX(), hypotenuse);
     float sin_y      = trg.GetSinY(y, ThisPlayer.GetY(), hypotenuse);
 
-    Enemies.push_back(Enemy(x, y, cos_x, sin_y));
+    Enemies.push_back(Enemy(x, y, cos_x, sin_y, velocity_increase));
 }
 
 void Spawner::SetPlayerAlive(Player &ThisPlayer)

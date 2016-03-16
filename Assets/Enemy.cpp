@@ -1,7 +1,7 @@
 #include "Enemy.h"
 
 Enemy::Enemy(){}
-Enemy::Enemy(int X, int Y, float Cos_X, float Sin_Y)
+Enemy::Enemy(int X, int Y, float Cos_X, float Sin_Y, float VelocityIncrease)
 {
     x        = X;
     y        = Y;
@@ -11,18 +11,18 @@ Enemy::Enemy(int X, int Y, float Cos_X, float Sin_Y)
     sin_y    = Sin_Y;
     is_alive = true;
     hp       = 50.0f;
-    damage   = 5.0f;
+    damage   = 15.0f;
     shield   = 5.0f;
-    velocity = 100.0f;
+    velocity = 100.0f + VelocityIncrease;
 }
 
 void Enemy::Update(Player &ThisPlayer, std::vector<Enemy> &Enemies, float Dt)
 {
     if(Enemies.size())
     {
-        float frame_step = 100.0f * Dt;
         for (auto &enemy : Enemies)
         {
+            float frame_step = enemy.velocity * Dt;
             enemy.x += frame_step * enemy.cos_x;
             enemy.y += frame_step * enemy.sin_y;
         }
