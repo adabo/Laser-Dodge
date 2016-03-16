@@ -93,7 +93,7 @@ void D3DGraphics::BeginFrame()
 {
     HRESULT result;
 
-    result = pDevice->Clear( 0,NULL,D3DCLEAR_TARGET,D3DCOLOR_XRGB(255,255,255),0.0f,0 );
+    result = pDevice->Clear( 0,NULL,D3DCLEAR_TARGET,D3DCOLOR_XRGB(0,0,0),0.0f,0 );
     assert( !FAILED( result ) );
 
     result = pBackBuffer->LockRect( &backRect,NULL,NULL );

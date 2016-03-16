@@ -35,10 +35,16 @@ Game::~Game() {}
 
 void Game::Go()
 {
+    timer.StopWatch();
+    float dt = timer.GetTimeMilli() * 0.001f;
+    timer.StartWatch();
+    mgr.Update(kbd, mouse, dt);
     gfx.BeginFrame();
     ComposeFrame();
     gfx.EndFrame();
 }
 
 void Game::ComposeFrame()
-{}
+{
+    mgr.Draw(gfx);
+}

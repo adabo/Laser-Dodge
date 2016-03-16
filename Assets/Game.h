@@ -25,6 +25,7 @@
 #include "Mouse.h"
 #include "Sound.h"
 #include "Timer.h"
+#include "GameManager.h"
 
 class Game
 {
@@ -40,4 +41,6 @@ private:
     KeyboardClient kbd;
     MouseClient mouse;
     DSound audio;
+    Timer timer;
+    GameManager mgr;
 };
