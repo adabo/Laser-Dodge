@@ -1,7 +1,7 @@
 /****************************************************************************************** 
- *  Chili DirectX Framework Version 11.12.17                                              * 
+ *  Chili DirectX Framework Version 12.04.24                                              * 
  *  Game.cpp                                                                              *
- *  Copyright 2011 PlanetChili.net                                                        *
+ *  Copyright 2012 PlanetChili.net                                                        *
  *                                                                                        *
  *  This file is part of The Chili DirectX Framework.                                     *
  *                                                                                        *
@@ -19,34 +19,26 @@
  *  along with The Chili DirectX Framework.  If not, see <http://www.gnu.org/licenses/>.  *
  ******************************************************************************************/
 #include "Game.h"
+#include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
-#include <math.h>
+#include <float.h>
 
 Game::Game( HWND hWnd,const KeyboardServer& kServer,const MouseServer& mServer )
 :   gfx( hWnd ),
-    kbd( kServer ),
     audio( hWnd ),
+    kbd( kServer ),
     mouse( mServer )
 {}
 
-Game::~Game()
-{}
+Game::~Game() {}
 
 void Game::Go()
 {
-    timer.StopWatch();
-    float dt = timer.GetTimeMilli() * 0.001f;
-    timer.StartWatch();
-
-    mgr.Update(kbd, mouse, dt);
-
     gfx.BeginFrame();
     ComposeFrame();
     gfx.EndFrame();
 }
 
 void Game::ComposeFrame()
-{
-    mgr.Draw(gfx);
-}
+{}
