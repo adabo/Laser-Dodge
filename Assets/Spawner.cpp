@@ -50,8 +50,8 @@ void Spawner::AddEnemy(Player &ThisPlayer, std::vector<Enemy> &Enemies)
     velocity_increase += 4.0f;
     // I should not be hard coding these values especially
     // the height and width. Need to find a more elegant solution
-    float x = rand() % (800 - 30 * 2) + 30;
-    float y = rand() % (600 - 30 * 2) + 30;
+    float x = (float)(rand() % (800 - 30 * 2) + 30);
+    float y = (float)(rand() % (600 - 30 * 2) + 30);
 
     float hypotenuse = trg.GetHypotenuse(x, y,ThisPlayer.GetX(), ThisPlayer.GetY());
     float cos_x      = trg.GetCosX(x, ThisPlayer.GetX(), hypotenuse);

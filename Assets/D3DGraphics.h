@@ -36,7 +36,7 @@ public:
     void DrawLine(int StartX, int StartY, int EndX, int EndY, D3DCOLOR Color);
     void DrawFilledRect(int Left, int Top, int Right, int Bottom, D3DCOLOR Color);
     void DrawRectOutline(int Left, int Top, int Right, int Bottom, D3DCOLOR Color);
-    static UINT scrWidth, scrHeight;
+    static int scrWidth, scrHeight;
 private:
     IDirect3D9*         pDirect3D;
     IDirect3DDevice9*   pDevice;

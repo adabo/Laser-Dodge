@@ -37,7 +37,7 @@ void Laser::Draw(std::vector<Laser> &Lasers, D3DGraphics &Gfx)
     }
     for (auto &laser : Lasers)
     {
-        Gfx.PutPixel(laser.x, laser.y, 255, 255, 255);
+        Gfx.PutPixel((int)laser.x, (int)laser.y, 255, 255, 255);
     }
 }
 

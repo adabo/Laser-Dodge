@@ -1,8 +1,9 @@
+#ifdef _MSC_VER
+#define _CRT_SECURE_NO_WARNINGS
+#endif
 #include "Bitmap.h"
 #include <stdio.h>
 #include <assert.h>
-
-
 
 void Bitmap::LoadBmp( const char* file_name, D3DCOLOR* surface)
 {

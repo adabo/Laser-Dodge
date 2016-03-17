@@ -17,7 +17,7 @@ float Trigonometry::GetHypotenuse(float start_x, float start_y,
 {
     float x_sqr      = (start_x - end_x) * (start_x - end_x);
     float y_sqr      = (start_y - end_y) * (start_y - end_y);
-    float hypotenuse = sqrt(x_sqr + y_sqr); 
+    float hypotenuse = (float)sqrt(x_sqr + y_sqr); 
     return hypotenuse;
 }
 
@@ -39,14 +39,14 @@ float Trigonometry::AdjacentFromOpposite(float opposite, float theta)
 {
     // tan() wants radians. Convert theta
     // to radians inside function call
-    theta = tan(theta * PI / 180);
+    theta = (float)tan(theta * PI / 180);
     float adjacent = opposite / theta;
     return adjacent;
 }
 
 float Trigonometry::OppositeFromAdjacent(float adjacent, float theta)
 {
-    theta = tan(theta * PI / 180);
+    theta = (float)tan(theta * PI / 180);
     float opposite = adjacent * theta;
     return opposite;
 }
@@ -54,7 +54,7 @@ float Trigonometry::OppositeFromAdjacent(float adjacent, float theta)
 float Trigonometry::ThetaFromSin(float opposite, float hypotenuse)
 {
     float sine = opposite / hypotenuse;
-    float theta = asin(sine) * 180 / PI;
+    float theta = (float)asin(sine) * 180 / (float)PI;
     //theta = theta * (180 / PI);
     return theta;
 }
@@ -68,12 +68,12 @@ float Trigonometry::GetTan(float start_x, float end_x,
 
 float Trigonometry::GetSinFromHypotenuse(float hypotenuse, float theta)
 {
-    float sine = sin(theta) * hypotenuse;
+    float sine = (float)sin(theta) * hypotenuse;
     return sine;
 }
 
 float Trigonometry::GetCosFromHypotenuse(float hypotenuse, float theta)
 {
-    float cosine = cos(theta) * hypotenuse;
+    float cosine = (float)cos(theta) * hypotenuse;
     return cosine;
 }

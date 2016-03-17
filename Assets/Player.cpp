@@ -49,7 +49,7 @@ void Player::Update(KeyboardClient &Kbd, MouseClient &Mouse,
             {
                 mouse_is_pressed = true;
                 // Does player need to Shoot()?
-                Projectile.AddProjectile(Lasers, x + (width / 2), y + (height / 2), mouse_x, mouse_y, damage);
+                Projectile.AddProjectile(Lasers, x + (float)(width / 2), y + (float)(height / 2), (float)mouse_x, (float)mouse_y, damage);
             }
         }
         else
@@ -61,7 +61,7 @@ void Player::Update(KeyboardClient &Kbd, MouseClient &Mouse,
 
 void Player::SetAimDirection(int MouseX, int MouseY)
 {
-    float hypotenuse = trg.GetHypotenuse(x, y, MouseX, MouseY);
+    float hypotenuse = trg.GetHypotenuse(x, y, (float)MouseX, (float)MouseY);
     float theta      = trg.ThetaFromSin(y - MouseY, hypotenuse);
     float adjacent   = 9.0f;
     float opposite   = 9.0f;
@@ -117,7 +117,7 @@ void Player::SetAimDirection(int MouseX, int MouseY)
 void Player::Draw(D3DGraphics &Gfx)
 {
     // static int hp_color = 17;
-    Gfx.DrawRectOutline(x, y, x + width, y + height, D3DCOLOR_XRGB(col_r, col_g, col_b));
+    Gfx.DrawRectOutline((int)x, (int)y, (int)x + width, (int)y + height, D3DCOLOR_XRGB(col_r, col_g, col_b));
     // Gfx.DrawRectOutline(x - (width / 2), y - (height / 2),
     //                     x + (width / 2), y + (height / 2),
     //                     D3DCOLOR_XRGB(255, 255, 255));

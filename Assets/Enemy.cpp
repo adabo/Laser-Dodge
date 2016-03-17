@@ -1,7 +1,7 @@
 #include "Enemy.h"
 
 Enemy::Enemy(){}
-Enemy::Enemy(int X, int Y, float Cos_X, float Sin_Y, float VelocityIncrease)
+Enemy::Enemy(float X, float Y, float Cos_X, float Sin_Y, float VelocityIncrease)
 {
     x        = X;
     y        = Y;
@@ -33,8 +33,8 @@ void Enemy::Draw(std::vector<Enemy> &Enemies, D3DGraphics &Gfx)
 {
     for (auto &enemy : Enemies)
     {
-        Gfx.DrawFilledRect(enemy.x, enemy.y, enemy.x + enemy.width,
-                           enemy.y + enemy.height, D3DCOLOR_XRGB(0, 255, 0));
+        Gfx.DrawFilledRect((int)enemy.x, (int)enemy.y, (int)enemy.x + enemy.width,
+                           (int)enemy.y + enemy.height, D3DCOLOR_XRGB(0, 255, 0));
     }
 }
 

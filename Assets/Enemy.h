@@ -13,7 +13,7 @@ class Enemy : public Entity
 {
 public:
     Enemy();
-    Enemy(int X, int Y, float Cos_X, float Sin_Y, float VelocityIncrease);
+    Enemy(float X, float Y, float Cos_X, float Sin_Y, float VelocityIncrease);
     void Update(Player &ThisPlayer, std::vector<Enemy> &Enemies, float Dt);
     //void Deploy();
     void Draw(std::vector<Enemy> &Enemy, D3DGraphics &Gfx);

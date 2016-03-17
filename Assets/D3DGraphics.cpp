@@ -25,8 +25,8 @@
 #include <stdio.h>
 #include "Bitmap.h"
 
-UINT D3DGraphics::scrWidth = 800;
-UINT D3DGraphics::scrHeight = 600;
+int D3DGraphics::scrWidth = 800;
+int D3DGraphics::scrHeight = 600;
 
 D3DGraphics::D3DGraphics( HWND hWnd )
 {

@@ -61,8 +61,8 @@ void Physics::CollisionDieByEntity(Player &ThisPlayer, std::vector<Enemy> &Enemi
             // it subtracts evenly no matter what the enemy damage is.
             // 255 / 15(enemy damage) = 17.
             // ThisPlayer.col_r -= ThisPlayer.col_dec;
-            ThisPlayer.col_g -= ThisPlayer.col_dec;
-            ThisPlayer.col_b -= ThisPlayer.col_dec;
+            ThisPlayer.col_g -= (int)ThisPlayer.col_dec;
+            ThisPlayer.col_b -= (int)ThisPlayer.col_dec;
             Enemies[i].is_alive = false;
         }
     }
@@ -74,19 +74,19 @@ void Physics::CollisionClampToScreen(Entity &ThisEntity)
     // instead of just dying.
     if (EntityClipScreen(ThisEntity, TOP))
     {
-        ThisEntity.y = 1;
+        ThisEntity.y = 1.0f;
     }
     if (EntityClipScreen(ThisEntity, BOTTOM))
     {
-        ThisEntity.y = 598 - ThisEntity.height;
+        ThisEntity.y = (float)(598 - ThisEntity.height);
     }
     if (EntityClipScreen(ThisEntity, LEFT))
     {
-        ThisEntity.x = 1;
+        ThisEntity.x = 1.0f;
     }
     if (EntityClipScreen(ThisEntity, RIGHT))
     {
-        ThisEntity.x = 798 - ThisEntity.width;
+        ThisEntity.x = (float)(798 - ThisEntity.width);
     }
 }
 
@@ -119,6 +119,9 @@ bool Physics::EntityClipScreen(Entity &ThisEntity, Side ThisSide)
         break;
         case RIGHT:
             return ((int)ThisEntity.x >= 798 - ThisEntity.height);
+        break;
+        default:
+            return false;
         break;
     }
 }
