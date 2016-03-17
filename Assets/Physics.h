@@ -17,10 +17,10 @@ public:
                 std::vector<Laser> &Lasers);
     void CollisionDieByScreen(Player &ThisPlayer, std::vector<Enemy> &Enemies,
                               std::vector<Laser> &Lasers);
-    void Physics::CollisionDieByEntity(Player &ThisPlayer, std::vector<Enemy> &Enemies,
+    void CollisionDieByEntity(Player &ThisPlayer, std::vector<Enemy> &Enemies,
                                        std::vector<Laser> &Lasers);
     void CollisionClampToScreen(Entity &ThisEntity);
-    void EntityDieByScreen(Entity &ThisEntity);
+    void EntityDieByScreen(Player &ThisPlayer, Entity &ThisEntity, Entity *PEntity, Laser *PLaser = 0);
     bool EntityClipScreen(Entity &ThisEntity, Side ThisSide);
     bool EntityHitsScreen(Entity &ThisEntity);
 };

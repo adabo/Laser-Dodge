@@ -7,6 +7,7 @@
 class Laser : public Entity
 {
     friend class ProjectileHandler;
+    friend class Physics;
 public:
     Laser();
     Laser(float X, float Y, float Cos_X, float Sin_Y, float Damage);
@@ -20,4 +21,5 @@ public:
 private:
     float cos_x, sin_y;
     Trigonometry trg;
+    Laser *p_laser;
 };

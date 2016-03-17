@@ -1,8 +1,10 @@
 #include "GameManager.h"
 
 GameManager::GameManager()
+    : p_lasers(&lasers)
 {
     srand((unsigned int)time(NULL));
+    
     // entities.push_back(player);
     // entities.push_back(enemies);
     // entities.push_back(lasers);
@@ -27,5 +29,5 @@ void GameManager::Draw(D3DGraphics &Gfx)
         enemy.Draw(enemies, Gfx);
         laser.Draw(lasers, Gfx);
     }
-    score.Draw(Gfx, score.i_score);
+    score.Draw(player, Gfx, score.i_score);
 }

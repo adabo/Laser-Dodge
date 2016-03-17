@@ -13,6 +13,8 @@ Laser::Laser(float X, float Y, float Cos_X, float Sin_Y, float Damage)
     hp       = 1.0f;
     width    = 1;
     height   = 1;
+    p_entity = this;
+    p_laser = this;
     //velocity = 100;
 }
 

@@ -18,7 +18,8 @@ enum AIMSIDE
 
 class Player : public Entity
 {
-    friend Physics;
+    friend class Physics;
+    friend class Score;
 public:
     Player();
     void Update(KeyboardClient &Kbd, MouseClient &Mouse,
@@ -40,4 +41,5 @@ private:
     int mouse_x, mouse_y;
     float aim_displacement; 
     Trigonometry trg;
+    int targets_missed;
 };

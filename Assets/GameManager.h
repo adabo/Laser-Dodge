@@ -20,10 +20,13 @@ public:
 private:
     Player player;
     ProjectileHandler projectile;
+    // Create one object to handle the vector
     Enemy enemy;
     std::vector<Enemy> enemies;
+    // Create one object to handle the vector
     Laser laser;
     std::vector<Laser> lasers;
+    std::vector<Laser> *p_lasers = &lasers;
     std::vector<std::vector<Entity>> entities;
     Physics physics;
     Spawner spawner;

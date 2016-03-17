@@ -16,8 +16,12 @@ Score::Score()
 void Score::Update()
 {}
 
-void Score::Draw(D3DGraphics &Gfx, int Score)
+void Score::Draw(Player &ThisPlayer, D3DGraphics &Gfx, int Score)
 {
+    // Draw scoref
     sprintf(s_score, "Score: %d", Score);
-    fixedSys.DrawString(s_score, 400, 400, &fixedSys, D3DCOLOR_XRGB(100, 100, 100), Gfx);
+    fixedSys.DrawString(s_score, 10, 562, &fixedSys, D3DCOLOR_XRGB(100, 100, 100), Gfx);
+    // Draw missed targets
+    sprintf(missed, "Targets missed: %d", ThisPlayer.targets_missed);
+    fixedSys.DrawString(missed, 10, 534, &fixedSys, D3DCOLOR_XRGB(100, 100, 100), Gfx);
 }

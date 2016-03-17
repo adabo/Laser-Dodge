@@ -13,11 +13,15 @@ void Physics::CollisionDieByScreen(Player &ThisPlayer, std::vector<Enemy> &Enemi
 {
     for (auto &enemy : Enemies)
     {
-        EntityDieByScreen(enemy);
+        EntityDieByScreen(ThisPlayer, enemy, &enemy);
     }
     for (auto &laser : Lasers)
     {
-        EntityDieByScreen(laser);
+        // Pass pointer to laser object to test if the Entity
+        // type is Laser and not other inherited Entity. The
+        // This test is to log all missed targets from the player
+        // and then use to create percentage.
+        EntityDieByScreen(ThisPlayer, laser, &laser, laser.p_laser);
     }
     // EntityDieByScreen(ThisPlayer);
 }
@@ -90,10 +94,15 @@ void Physics::CollisionClampToScreen(Entity &ThisEntity)
     }
 }
 
-void Physics::EntityDieByScreen(Entity &ThisEntity)
+void Physics::EntityDieByScreen(Player &ThisPlayer, Entity &ThisEntity, Entity *PEntity, Laser *PLaser)
 {
     if (EntityHitsScreen(ThisEntity))
     {
+        if (ThisEntity.p_entity == PEntity)
+        {
+            /*Player missed targets*/
+            ThisPlayer.targets_missed += 1;
+        }
         ThisEntity.is_alive = false;
     }
 }
