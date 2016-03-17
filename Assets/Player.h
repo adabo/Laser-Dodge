@@ -41,5 +41,6 @@ private:
     int mouse_x, mouse_y;
     float aim_displacement; 
     Trigonometry trg;
+    int shots_missed;
     int targets_missed;
 };

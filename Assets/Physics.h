@@ -5,6 +5,7 @@
 // #include "Entity.h"
 #include <vector>
 
+//class GameManager;
 enum Side
 {
     LEFT, RIGHT, TOP, BOTTOM
@@ -13,14 +14,13 @@ enum Side
 class Physics
 {
 public:
-    void Update(Player &ThisPlayer, std::vector<Enemy> &Enemies,
-                std::vector<Laser> &Lasers);
-    void CollisionDieByScreen(Player &ThisPlayer, std::vector<Enemy> &Enemies,
-                              std::vector<Laser> &Lasers);
-    void CollisionDieByEntity(Player &ThisPlayer, std::vector<Enemy> &Enemies,
-                                       std::vector<Laser> &Lasers);
-    void CollisionClampToScreen(Entity &ThisEntity);
-    void EntityDieByScreen(Player &ThisPlayer, Entity &ThisEntity, Entity *PEntity, Laser *PLaser = 0);
-    bool EntityClipScreen(Entity &ThisEntity, Side ThisSide);
+
+    void Update(GameManager &Mgr);
+    void CollisionDieByScreen(GameManager &Mgr);
+    void CollisionDieByEntity(GameManager &Mgr);
+    void CollisionClampToScreen(GameManager &Mgr);
+    void ClampThisEntity(Entity &ThisEntity);
+    void EntityDieByScreen(Entity &ThisEntity, Player &ThisPlayer, Laser *PLaser = 0);
     bool EntityHitsScreen(Entity &ThisEntity);
+    bool EntityClipScreen(Entity &ThisEntity, Side ThisSide);
 };

@@ -17,7 +17,7 @@ void GameManager::Update(KeyboardClient &Kbd, MouseClient &Mouse, float Dt)
     }
     enemy.Update(player, enemies, Dt);
     laser.Update(lasers, Dt);
-    physics.Update(player, enemies, lasers);
+    physics.Update(*this);
     spawner.Update(player, enemies, lasers, score.i_score);
     projectile.Update(lasers);
 }

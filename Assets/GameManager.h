@@ -13,6 +13,7 @@
 
 class GameManager
 {
+    friend class Physics;
 public:
     GameManager();
     void Update(KeyboardClient &Kbd, MouseClient &Mouse, float Dt);
