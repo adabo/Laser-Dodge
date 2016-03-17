@@ -1,10 +1,10 @@
 #include "Spawner.h"
 
 void Spawner::Update(Player &ThisPlayer, std::vector<Enemy> &Enemies,
-                     std::vector<Laser> &Lasers)
+                     std::vector<Laser> &Lasers, int &ThisScore)
 {
     // Check if enemies are dead
-    CheckIsAlive(ThisPlayer, Enemies, Lasers);
+    CheckIsAlive(ThisPlayer, Enemies, Lasers, ThisScore);
     // Then add them if necessary
     if (Enemies.size() <= 0)
     {
@@ -13,7 +13,7 @@ void Spawner::Update(Player &ThisPlayer, std::vector<Enemy> &Enemies,
 }
 
 void Spawner::CheckIsAlive(Player &ThisPlayer, std::vector<Enemy> &Enemies,
-                     std::vector<Laser> &Lasers)
+                     std::vector<Laser> &Lasers, int &ThisScore)
 {
     // Spawner doesn't care which entity it's
     // checking since the entities will hold
@@ -22,6 +22,11 @@ void Spawner::CheckIsAlive(Player &ThisPlayer, std::vector<Enemy> &Enemies,
     {
         if (Enemies[i].hp <= 0 || !Enemies[i].is_alive)
         {
+            // This is redundant. Fix this Abel. Seriously :P
+            if (Enemies[i].hp <= 0)
+            {
+                ThisScore += 1;
+            }
             Enemies.erase(Enemies.begin() + i);
             AddEnemy(ThisPlayer, Enemies);
         }

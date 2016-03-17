@@ -82,9 +82,11 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="..\Assets\Bitmap.cpp" />
     <ClCompile Include="..\Assets\D3DGraphics.cpp" />
     <ClCompile Include="..\Assets\Enemy.cpp" />
     <ClCompile Include="..\Assets\Entity.cpp" />
+    <ClCompile Include="..\Assets\Font.cpp" />
     <ClCompile Include="..\Assets\Game.cpp" />
     <ClCompile Include="..\Assets\GameManager.cpp" />
     <ClCompile Include="..\Assets\KClientMethods.cpp" />
@@ -96,6 +98,7 @@
     <ClCompile Include="..\Assets\Physics.cpp" />
     <ClCompile Include="..\Assets\Player.cpp" />
     <ClCompile Include="..\Assets\ProjectileHandler.cpp" />
+    <ClCompile Include="..\Assets\Score.cpp" />
     <ClCompile Include="..\Assets\Sound.cpp" />
     <ClCompile Include="..\Assets\Spawner.cpp" />
     <ClCompile Include="..\Assets\Timer.cpp" />
@@ -103,9 +106,11 @@
     <ClCompile Include="..\Assets\Windows.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="..\Assets\Bitmap.h" />
     <ClInclude Include="..\Assets\D3DGraphics.h" />
     <ClInclude Include="..\Assets\Enemy.h" />
     <ClInclude Include="..\Assets\Entity.h" />
+    <ClInclude Include="..\Assets\Font.h" />
     <ClInclude Include="..\Assets\Game.h" />
     <ClInclude Include="..\Assets\GameManager.h" />
     <ClInclude Include="..\Assets\Keyboard.h" />
@@ -116,6 +121,7 @@
     <ClInclude Include="..\Assets\Player.h" />
     <ClInclude Include="..\Assets\ProjectileHandler.h" />
     <ClInclude Include="..\Assets\Resource.h" />
+    <ClInclude Include="..\Assets\Score.h" />
     <ClInclude Include="..\Assets\Sound.h" />
     <ClInclude Include="..\Assets\Spawner.h" />
     <ClInclude Include="..\Assets\Timer.h" />

@@ -260,3 +260,4 @@ void D3DGraphics::DrawRectOutline(int Left, int Top, int Right, int Bottom, D3DC
     DrawLine(Left, Top, Left, Bottom, Color);     // Left line
     DrawLine(Right, Top, Right, Bottom, Color);   // Right line
 }
+

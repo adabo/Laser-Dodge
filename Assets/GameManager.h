@@ -9,6 +9,7 @@
 #include "Keyboard.h"
 #include "Mouse.h"
 #include "D3DGraphics.h"
+#include "Score.h"
 
 class GameManager
 {
@@ -26,4 +27,5 @@ private:
     std::vector<std::vector<Entity>> entities;
     Physics physics;
     Spawner spawner;
+    Score score;
 };
