@@ -9,7 +9,7 @@ GameManager::GameManager()
 }
 void GameManager::Update(KeyboardClient &Kbd, MouseClient &Mouse, float Dt)
 {
-    if (player.is_alive);
+    if (player.is_alive)
     {
         player.Update(Kbd, Mouse, projectile, lasers, Dt);
     }
@@ -26,6 +26,6 @@ void GameManager::Draw(D3DGraphics &Gfx)
         player.Draw(Gfx);
         enemy.Draw(enemies, Gfx);
         laser.Draw(lasers, Gfx);
-        score.Draw(Gfx, score.i_score);
     }
+    score.Draw(Gfx, score.i_score);
 }
