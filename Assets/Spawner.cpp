@@ -20,18 +20,17 @@ void Spawner::CheckIsAlive(Player &ThisPlayer, std::vector<Enemy> &Enemies,
     // their own hp/dmg/shield
     for (int i = Enemies.size() - 1; i >= 0; --i)
     {
-        if (Enemies[i].hp <= 0)
+        if (Enemies[i].hp <= 0 || !Enemies[i].is_alive)
         {
-            // Enemies[i].is_alive = false;
             Enemies.erase(Enemies.begin() + i);
             AddEnemy(ThisPlayer, Enemies);
         }
     }
-    for (auto &laser : Lasers)
+    for (int i = Lasers.size() - 1; i >= 0; --i)
     {
-        if (laser.hp <= 0)
+        if (Lasers[i].hp <= 0 || !Lasers[i].is_alive)
         {
-            laser.is_alive = false;
+            Lasers.erase(Lasers.begin() + i);
         }
     }
     if (ThisPlayer.hp <= 0)

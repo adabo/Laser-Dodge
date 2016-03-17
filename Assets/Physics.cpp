@@ -1,16 +1,11 @@
 #include "Physics.h"
 
-enum Side
-{
-    LEFT, RIGHT, TOP, BOTTOM
-};
-
 void Physics::Update(Player &ThisPlayer, std::vector<Enemy> &Enemies,
                      std::vector<Laser> &Lasers)
 {
-    CollisionDieByScreen(Player, Enemies, Lasers);
-    CollisionDieByEntity(Player, Enemies, Lasers);
-    CollisionClampToScreen(Player, Enemies, Lasers);
+    CollisionDieByScreen(ThisPlayer, Enemies, Lasers);
+    CollisionDieByEntity(ThisPlayer, Enemies, Lasers);
+    CollisionClampToScreen(ThisPlayer);
 }
 
 void Physics::CollisionDieByScreen(Player &ThisPlayer, std::vector<Enemy> &Enemies,
@@ -24,7 +19,7 @@ void Physics::CollisionDieByScreen(Player &ThisPlayer, std::vector<Enemy> &Enemi
     {
         EntityDieByScreen(laser);
     }
-    EntityDieByScreen(ThisPlayer);
+    // EntityDieByScreen(ThisPlayer);
 }
 
 void Physics::CollisionDieByEntity(Player &ThisPlayer, std::vector<Enemy> &Enemies,
@@ -41,15 +36,13 @@ void Physics::CollisionDieByEntity(Player &ThisPlayer, std::vector<Enemy> &Enemi
         {
             for (int i = Lasers.size() - 1; i >= 0; --i)
             {
-                if ((int)Lasers[i].GetX() + Lasers[i].GetWidth() > (int)enemy.GetX() &&
-                   (int)Lasers[i].GetX() < (int) enemy.GetX() + enemy.GetWidth() &&
-                   (int)Lasers[i].GetY() + Lasers[i].GetHeight() > (int)enemy.GetY() &&
-                   (int)Lasers[i].GetY() < (int)enemy.GetY() + enemy.GetHeight())
+                if ((int)Lasers[i].GetX() + Lasers[i].width > (int)enemy.GetX() &&
+                   (int)Lasers[i].GetX() < (int) enemy.GetX() + enemy.width &&
+                   (int)Lasers[i].GetY() + Lasers[i].height > (int)enemy.GetY() &&
+                   (int)Lasers[i].GetY() < (int)enemy.GetY() + enemy.height)
                 {
-                    // Try adding lasers to erase in array
-                    // then delete them outside this for loop
                     enemy.hp -= Lasers[i].damage;
-                    Lasers.erase(Lasers.begin() + i);
+                    Lasers[i].is_alive = false;    
                 }
             }
         }
@@ -58,31 +51,46 @@ void Physics::CollisionDieByEntity(Player &ThisPlayer, std::vector<Enemy> &Enemi
     // Enemy and player collide
     for (int i = Enemies.size() - 1; i >= 0; --i)
     {
-        if ((int)ThisPlayer.GetX() + ThisPlayer.GetWidth() > Enemies[i].GetX() &&
-           (int)ThisPlayer.GetX() <(int) Enemies[i].GetX() + Enemies[i].GetWidth() &&
-           (int)ThisPlayer.GetY() + ThisPlayer.GetHeight() > (int)Enemies[i].GetY() &&
-           (int)ThisPlayer.GetY() < (int)Enemies[i].GetY() + Enemies[i].GetHeight())
+        if ((int)ThisPlayer.GetX() + ThisPlayer.width > Enemies[i].GetX() &&
+           (int)ThisPlayer.GetX() <(int) Enemies[i].GetX() + Enemies[i].width &&
+           (int)ThisPlayer.GetY() + ThisPlayer.height > (int)Enemies[i].GetY() &&
+           (int)ThisPlayer.GetY() < (int)Enemies[i].GetY() + Enemies[i].height)
         {
             ThisPlayer.hp -= Enemies[i].damage;
             // Make hp_color a value that is dynamic so that
             // it subtracts evenly no matter what the enemy damage is.
             // 255 / 15(enemy damage) = 17.
-            //ThisPlayer.col_r -= ThisPlayer.col_dec;
+            // ThisPlayer.col_r -= ThisPlayer.col_dec;
             ThisPlayer.col_g -= ThisPlayer.col_dec;
             ThisPlayer.col_b -= ThisPlayer.col_dec;
-            Enemies.erase(Enemies.begin() + i);
+            Enemies[i].is_alive = false;
         }
     }
 }
 
-void Physics::CollisionClampToScreen()
+void Physics::CollisionClampToScreen(Entity &ThisEntity)
 {
     // Todo: Add enemy laser clamps
     // instead of just dying.
-    EntityClipScreen(Player);
+    if (EntityClipScreen(ThisEntity, TOP))
+    {
+        ThisEntity.y = 1;
+    }
+    if (EntityClipScreen(ThisEntity, BOTTOM))
+    {
+        ThisEntity.y = 598 - ThisEntity.height;
+    }
+    if (EntityClipScreen(ThisEntity, LEFT))
+    {
+        ThisEntity.x = 1;
+    }
+    if (EntityClipScreen(ThisEntity, RIGHT))
+    {
+        ThisEntity.x = 798 - ThisEntity.width;
+    }
 }
 
-void Physics::EntityDieByScreen(std::vector<Entity> &ThisEntity)
+void Physics::EntityDieByScreen(Entity &ThisEntity)
 {
     if (EntityHitsScreen(ThisEntity))
     {
@@ -90,30 +98,10 @@ void Physics::EntityDieByScreen(std::vector<Entity> &ThisEntity)
     }
 }
 
-void Physics::EntityClipScreen(Entity &ThisEntity)
-{
-    if (EntityClipScreen(ThisPlayer, TOP))
-    {
-        ThisEntity.y = 1;
-    }
-    if (EntityClipScreen(ThisPlayer, BOTTOM))
-    {
-        ThisEntity.y = 599 - ThisPlayer.height
-    }
-    if (EntityClipScreen(ThisPlayer, LEFT))
-    {
-        ThisEntity.x = 1;
-    }
-    if (EntityClipScreen(ThisPlayer, RIGHT))
-    {
-        ThisEntity.x = 799 - ThisPlayer.GetWidth
-    }
-}
-
 bool Physics::EntityHitsScreen(Entity &ThisEntity)
 {
-    return ((int)ThisEntity.x <= 0 || (int)ThisEntity.x >= 798 - ThisEntity.GetWidth() ||
-            (int)ThisEntity.y <= 1 || (int)ThisEntity.y >= 589 - ThisEntity.GetHeight()));
+    return ((int)ThisEntity.x <= 0 || (int)ThisEntity.x >= 798 - ThisEntity.width ||
+            (int)ThisEntity.y <= 1 || (int)ThisEntity.y >= 589 - ThisEntity.height);
 }
 
 bool Physics::EntityClipScreen(Entity &ThisEntity, Side ThisSide)
@@ -121,16 +109,16 @@ bool Physics::EntityClipScreen(Entity &ThisEntity, Side ThisSide)
     switch(ThisSide)
     {
         case TOP:
-            return ((int)ThisEntity.x <= 0);
+            return ((int)ThisEntity.y <= 0);
         break;
         case BOTTOM:
-            return ((int)ThisEntity.x >= 798 - ThisEntity.GetWidth());
+            return ((int)ThisEntity.y > 598 - ThisEntity.width);
         break;
         case LEFT:
-            return ((int)ThisEntity.y <= 1);
+            return ((int)ThisEntity.x <= 0);
         break;
         case RIGHT:
-            return ((int)ThisEntity.y >= 589 - ThisEntity.GetHeight());
+            return ((int)ThisEntity.x >= 798 - ThisEntity.height);
         break;
     }
 }

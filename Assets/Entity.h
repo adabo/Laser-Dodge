@@ -10,6 +10,8 @@ class Entity
     friend class GameManager;
 public:
     //virtual void Draw(D3DGraphics &Gfx) = 0;
+    //virtual int GetHeight();
+    //virtual int GetWidth();
 protected:
     float x, y,
           velocity,
