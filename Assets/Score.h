@@ -15,7 +15,6 @@ public:
 private:
     D3DCOLOR font_surf[512 * 84];
     Font fixedSys;
-    char s_score[64];
-    char missed[64];
+    char buffer[64];
     int i_score;
 };

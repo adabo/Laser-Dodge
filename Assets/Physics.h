@@ -11,6 +11,11 @@ enum Side
     LEFT, RIGHT, TOP, BOTTOM
 };
 
+enum Ty_Entity
+{
+    PLAYER, ENEMY, LASER
+};
+
 class Physics
 {
 public:
@@ -20,7 +25,7 @@ public:
     void CollisionDieByEntity(GameManager &Mgr);
     void CollisionClampToScreen(GameManager &Mgr);
     void ClampThisEntity(Entity &ThisEntity);
-    void EntityDieByScreen(Entity &ThisEntity, Player &ThisPlayer, Laser *PLaser = 0);
+    void EntityDieByScreen(Entity &ThisEntity, Player &ThisPlayer, Ty_Entity Entity_Type);
     bool EntityHitsScreen(Entity &ThisEntity);
     bool EntityClipScreen(Entity &ThisEntity, Side ThisSide);
 };

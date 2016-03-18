@@ -12,7 +12,7 @@ void Physics::CollisionDieByScreen(GameManager &Mgr)
 {
     for (auto &enemy : Mgr.enemies)
     {
-        EntityDieByScreen(enemy, Mgr.player);
+        EntityDieByScreen(enemy, Mgr.player, ENEMY);
     }
     for (auto &laser : Mgr.lasers)
     {
@@ -20,7 +20,7 @@ void Physics::CollisionDieByScreen(GameManager &Mgr)
         // type is Laser and not other inherited Entity. The
         // This test is to log all missed targets from the player
         // and then use to create percentage.
-        EntityDieByScreen(laser, Mgr.player, laser.p_laser);
+        EntityDieByScreen(laser, Mgr.player, LASER);
     }
     // EntityDieByScreen(ThisPlayer);
 }
@@ -105,14 +105,20 @@ void Physics::ClampThisEntity(Entity &ThisEntity)
     }
 }
 
-void Physics::EntityDieByScreen(Entity &ThisEntity, Player &ThisPlayer, Laser *PLaser)
+void Physics::EntityDieByScreen(Entity &ThisEntity, Player &ThisPlayer, Ty_Entity Entity_Type)
 {
     if (EntityHitsScreen(ThisEntity))
     {
-        if (ThisEntity.p_entity == PLaser)
+
+        if (Entity_Type == LASER)
         {
             /*Player missed targets*/
             ThisPlayer.shots_missed += 1;
+        }
+        if (Entity_Type == ENEMY)
+        {
+            /*Player lost target*/
+            ThisPlayer.targets_missed += 1;
         }
         ThisEntity.is_alive = false;
     }
