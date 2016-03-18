@@ -1,24 +1,31 @@
 #pragma once
+
 #include <time.h>
+#include "Common.h"
 #include "ProjectileHandler.h"
 #include "Player.h"
 #include "Physics.h"
 #include "Spawner.h"
 #include "Entity.h"
 #include "Enemy.h"
+#include "D3DGraphics.h"
 #include "Keyboard.h"
 #include "Mouse.h"
-#include "D3DGraphics.h"
 #include "Score.h"
+#include "ScreenState.h"
 
 class GameManager
 {
     friend class Physics;
+    friend class ScreenState;
 public:
-    GameManager();
-    void Update(KeyboardClient &Kbd, MouseClient &Mouse, float Dt);
-    void Draw(D3DGraphics &Gfx);
+    GameManager(HWND hWnd, const KeyboardServer& kServer, const MouseServer& mServer);
+    void Update();
+    void Draw();
 private:
+    D3DGraphics gfx;
+    KeyboardClient kbd;
+    MouseClient mouse;
     Player player;
     ProjectileHandler projectile;
     // Create one object to handle the vector
@@ -32,4 +39,5 @@ private:
     Physics physics;
     Spawner spawner;
     Score score;
+    SState s_state;
 };

@@ -24,12 +24,7 @@
 #include <time.h>
 #include <float.h>
 
-Game::Game( HWND hWnd,const KeyboardServer& kServer,const MouseServer& mServer )
-:   gfx( hWnd ),
-    audio( hWnd ),
-    kbd( kServer ),
-    mouse( mServer )
-{}
+Game::Game() {}
 
 Game::~Game() {}
 
@@ -38,7 +33,9 @@ void Game::Go()
     timer.StopWatch();
     float dt = timer.GetTimeMilli() * 0.001f;
     timer.StartWatch();
-    mgr.Update(kbd, mouse, dt);
+
+    mgr.Update();
+    
     gfx.BeginFrame();
     ComposeFrame();
     gfx.EndFrame();
@@ -46,5 +43,5 @@ void Game::Go()
 
 void Game::ComposeFrame()
 {
-    mgr.Draw(gfx);
+    mgr.Draw();
 }

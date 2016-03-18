@@ -20,26 +20,18 @@
  ******************************************************************************************/
 #pragma once
 
-#include "D3DGraphics.h"
-#include "Keyboard.h"
-#include "Mouse.h"
-#include "Sound.h"
 #include "Timer.h"
 #include "GameManager.h"
 
 class Game
 {
 public:
-    Game( HWND hWnd,const KeyboardServer& kServer,const MouseServer& mServer );
+    Game();
     ~Game();
     void Go();
 private:
     void ComposeFrame();
-    void Draw_FPS();
 private:
-    D3DGraphics gfx;
-    KeyboardClient kbd;
-    MouseClient mouse;
     DSound audio;
     Timer timer;
     GameManager mgr;

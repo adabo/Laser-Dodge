@@ -1,33 +1,27 @@
 #include "GameManager.h"
 
-GameManager::GameManager()
-    : p_lasers(&lasers)
+GameManager::GameManager( HWND hWnd,const KeyboardServer& kServer,const MouseServer& mServer )
+    :   p_lasers(&lasers)
+        gfx( hWnd ),
+        audio( hWnd ),
+        kbd( kServer ),
+        mouse( mServer )
 {
     srand((unsigned int)time(NULL));
-    
-    // entities.push_back(player);
-    // entities.push_back(enemies);
-    // entities.push_back(lasers);
 }
-void GameManager::Update(KeyboardClient &Kbd, MouseClient &Mouse, float Dt)
+void GameManager::Update()
 {
-    if (player.is_alive)
-    {
-        player.Update(Kbd, Mouse, projectile, lasers, Dt);
-    }
+    // if (player.is_alive)
+    // {
+        player.Update(kbd,mouse, projectile, lasers, Dt);
+    // }
     enemy.Update(player, enemies, Dt);
     laser.Update(lasers, Dt);
     physics.Update(*this);
     spawner.Update(player, enemies, lasers, score.i_score);
     projectile.Update(lasers);
 }
-void GameManager::Draw(D3DGraphics &Gfx)
+void GameManager::Draw()
 {
-    if (player.is_alive)
-    {
-        player.Draw(Gfx);
-        enemy.Draw(enemies, Gfx);
-        laser.Draw(lasers, Gfx);
-    }
-    score.Draw(player, Gfx, score.i_score);
+    screen_state.DrawState(*this);
 }
