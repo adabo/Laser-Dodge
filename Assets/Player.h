@@ -21,6 +21,10 @@ class Player : public Entity
 {
     friend class Spawner;
     friend class ScreenState;
+    friend class StateGame;
+    //friend class StateGamePause;
+    //friend class StateMainMenu;
+    //friend class StateGameover;
     friend class GameManager;
     friend class Physics;
     friend class Score;

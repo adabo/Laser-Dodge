@@ -5,7 +5,7 @@ GameManager::GameManager(HWND hWnd, const KeyboardServer& kServer, const MouseSe
         gfx( hWnd ),
         audio( hWnd ),
         kbd( kServer ),
-        mouse( mServer ),
+        mouse( mServer )
 
 {
     srand((unsigned int)time(NULL));
@@ -13,9 +13,9 @@ GameManager::GameManager(HWND hWnd, const KeyboardServer& kServer, const MouseSe
 void GameManager::Update(float Dt)
 {
     dt = Dt;
-    ScreenState.Update(*this);
+    s_state.Update(*this);
 }
 void GameManager::Draw()
 {
-    ScreenState.Draw(*this);
+    s_state.Draw(*this);
 }

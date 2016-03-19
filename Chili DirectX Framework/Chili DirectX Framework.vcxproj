@@ -173,6 +173,10 @@
     <ClCompile Include="..\Assets\ScreenState.cpp" />
     <ClCompile Include="..\Assets\Sound.cpp" />
     <ClCompile Include="..\Assets\Spawner.cpp" />
+    <ClCompile Include="..\Assets\StateGame.cpp" />
+    <ClCompile Include="..\Assets\StateGameOver.cpp" />
+    <ClCompile Include="..\Assets\StateGamePause.cpp" />
+    <ClCompile Include="..\Assets\StateMainMenu.cpp" />
     <ClCompile Include="..\Assets\Timer.cpp" />
     <ClCompile Include="..\Assets\Trigonometry.cpp" />
     <ClCompile Include="..\Assets\Windows.cpp" />
@@ -198,6 +202,10 @@
     <ClInclude Include="..\Assets\ScreenState.h" />
     <ClInclude Include="..\Assets\Sound.h" />
     <ClInclude Include="..\Assets\Spawner.h" />
+    <ClInclude Include="..\Assets\StateGame.h" />
+    <ClInclude Include="..\Assets\StateGameOver.h" />
+    <ClInclude Include="..\Assets\StateGamePause.h" />
+    <ClInclude Include="..\Assets\StateMainMenu.h" />
     <ClInclude Include="..\Assets\Timer.h" />
     <ClInclude Include="..\Assets\Trigonometry.h" />
   </ItemGroup>

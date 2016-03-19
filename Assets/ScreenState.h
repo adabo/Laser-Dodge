@@ -1,20 +1,22 @@
 #pragma once
 #include "Common.h"
+#include "StateGame.h"
+#include "StateGameOver.h"
+#include "StateGamePause.h"
+#include "StateMainMenu.h"
 
 class GameManager;
 
 class ScreenState
 {
+    friend class StateGame;
+    friend class StateGameOver;
+    friend class StateGamePause;
+    friend class StateMainMenu;
 public:
-    void Update(GameManager &Mgr, float Dt);
+    ScreenState();
+    void Update(GameManager &Mgr);
     void Draw(GameManager &Mgr);
-    void UpdateGame(GameManager &Mgr);
-    void UpdateMainMenu(GameManager &Mgr);
-    void UpdateGameOver(GameManager &Mgr);
-    void UpdateGamePause(GameManager &Mgr);
-    bool YesClicked(int MouseX, int MouseY);
-    bool NoClicked();
-    bool MouseClickedBox(int MX, int MY, int X, int Y, int W, int H);
 private:
     States states;
 

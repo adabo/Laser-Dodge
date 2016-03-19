@@ -1,8 +1,12 @@
 #include "ScreenState.h"
 #include "GameManager.h"
 
+ScreenState::ScreenState()
+    : states(GAME)
+{}
 
-void ScreenState::Update(GameManager &Mgr, float Dt)
+
+void ScreenState::Update(GameManager &Mgr)
 {
 
     // During each state it will set the next state
@@ -38,22 +42,15 @@ void ScreenState::Draw(GameManager &Mgr)
             state_game.Draw(Mgr);
         break;
         case GAMEOVER:
-            state_game_over.Draw(Mgr);
+            state_game_over.Draw(Mgr.gfx);
         break;
         case GAMEMAINMENU:
-            state_main_menu.Draw(Mgr);
+            state_main_menu.Draw(Mgr.gfx);
         break;
         case GAMEPAUSE:
-            state_game_pause.Draw(Mgr);
+            state_game_pause.Draw(Mgr.gfx);
         break;
         default:
         break;
     }
 }
-
-void ScreenState::UpdateMainMenu(GameManager &Mgr)
-{
-}
-
-void ScreenState::ScreenState::UpdateGamePause(GameManager &Mgr)
-{}

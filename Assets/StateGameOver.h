@@ -1,13 +1,20 @@
 #pragma once
 #include <stdlib.h>
+#include "D3DGraphics.h"
+#include "Font.h"
+
+class GameManager;
 
 class StateGameOver
 {
 public:
     StateGameOver();
-    void Update();
+    void Update(GameManager &Mgr);
     void Draw(D3DGraphics &Gfx);
+    bool MouseClickedBox(int MX, int MY, int X, int Y, int W, int H);
 private:
+    D3DCOLOR font_surf[512 * 84];
+    Font fixedSys;
     int yes_x;
     int yes_y;
     int yes_w;

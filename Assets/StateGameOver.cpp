@@ -1,6 +1,10 @@
+#ifdef _MSC_VER
+#define _CRT_SECURE_NO_WARNINGS
+#endif
 #include "StateGameOver.h"
+#include "GameManager.h"
 
-StateGameOver()
+StateGameOver::StateGameOver()
 :   yes_x(278),
     yes_y(232),
     yes_w(44),
@@ -9,20 +13,22 @@ StateGameOver()
     no_y(232),
     no_w(22),
     no_h(18)
-{}
+{
+    fixedSys.LoadFont(&fixedSys, font_surf, "Fixedsys16x28.bmp", 16, 28, 32);
+}
 
 
 void StateGameOver::Update(GameManager &Mgr)
 {
-    if (Mgr.mouse.LeftIsPressed)
+    if (Mgr.mouse.LeftIsPressed())
     {
         // Check if yes
-        if (MouseClickedBox(Mgr.GetMouseX(), Mgr.GetMouseY(), yes_x, yes_y, yes_w, yes_h))
+        if (MouseClickedBox(Mgr.mouse.GetMouseX(), Mgr.mouse.GetMouseY(), yes_x, yes_y, yes_w, yes_h))
         {
             Mgr.s_state.states = GAME;
         }
         // Check if no
-        else if (MouseClickedBox(Mgr.GetMouseX(), Mgr.GetMouseY(), no_x, no_y, no_w, no_h))
+        else if (MouseClickedBox(Mgr.mouse.GetMouseX(), Mgr.mouse.GetMouseY(), no_x, no_y, no_w, no_h))
         {
             Mgr.s_state.states = GAMEMAINMENU;
         }
@@ -42,11 +48,11 @@ void StateGameOver::Draw(D3DGraphics &Gfx)
     // continue x230 y182
     char buffer[64];
     sprintf(buffer, "Continue?");
-    fixedSys.DrawString(buffer, 330, 182, &fixedSys, D3DCOLOR_XRGB(100, 100, 100), Gfx)
+    fixedSys.DrawString(buffer, 330, 182, &fixedSys, D3DCOLOR_XRGB(100, 100, 100), Gfx);
 
     sprintf(buffer, "Yes");
-    fixedSys.DrawString(buffer, yes_x, yes_y, &fixedSys, D3DCOLOR_XRGB(100, 100, 100), Gfx)
+    fixedSys.DrawString(buffer, yes_x, yes_y, &fixedSys, D3DCOLOR_XRGB(100, 100, 100), Gfx);
 
     sprintf(buffer, "No");
-    fixedSys.DrawString(buffer, no_x, no_y, &fixedSys, D3DCOLOR_XRGB(100, 100, 100), Gfx)
+    fixedSys.DrawString(buffer, no_x, no_y, &fixedSys, D3DCOLOR_XRGB(100, 100, 100), Gfx);
 }

@@ -7,9 +7,10 @@
 
 class Score
 {
-    friend class ScreenState;
+    //friend class ScreenState;
     friend class GameManager;
     friend class Spawner;
+    friend class StateGame;
 public:
     Score();
     void Update();
