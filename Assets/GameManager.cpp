@@ -6,15 +6,16 @@ GameManager::GameManager(HWND hWnd, const KeyboardServer& kServer, const MouseSe
         audio( hWnd ),
         kbd( kServer ),
         mouse( mServer ),
-        
+
 {
     srand((unsigned int)time(NULL));
 }
 void GameManager::Update(float Dt)
 {
-
+    dt = Dt;
+    ScreenState.Update(*this);
 }
 void GameManager::Draw()
 {
-    s_state.DrawSState(*this);
+    ScreenState.Draw(*this);
 }

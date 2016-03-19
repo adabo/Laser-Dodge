@@ -19,6 +19,10 @@ class GameManager
 {
     friend class Physics;
     friend class ScreenState;
+    friend class StateMainMenu;
+    friend class StateGameOver;
+    friend class StateGame;
+    friend class StateGamePause;
     friend class Spawner;
 public:
     GameManager(HWND hWnd, const KeyboardServer& kServer, const MouseServer& mServer);
@@ -29,6 +33,8 @@ private:
     D3DGraphics    gfx;
     KeyboardClient kbd;
     MouseClient    mouse;
+
+    float dt;
 
     Player             player;
     ProjectileHandler  projectile;

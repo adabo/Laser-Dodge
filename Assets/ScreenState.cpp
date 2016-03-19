@@ -2,7 +2,7 @@
 #include "GameManager.h"
 
 
-void ScreenState::Update(GameManager &Mgr)
+void ScreenState::Update(GameManager &Mgr, float Dt)
 {
 
     // During each state it will set the next state

@@ -6,7 +6,7 @@ class GameManager;
 class ScreenState
 {
 public:
-    void Update(GameManager &Mgr);
+    void Update(GameManager &Mgr, float Dt);
     void Draw(GameManager &Mgr);
     void UpdateGame(GameManager &Mgr);
     void UpdateMainMenu(GameManager &Mgr);

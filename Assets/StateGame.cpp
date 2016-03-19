@@ -1,3 +1,6 @@
+#include "StateGame.h"
+#include "GameManager.h"
+
 void StateGame::Update(GameManager &Mgr)
 {
     if (!Mgr.player.is_alive)
@@ -13,12 +16,12 @@ void StateGame::Update(GameManager &Mgr)
         else
         {
             states = GAME;
-            player.Update(kbd, mouse, projectile, lasers, Dt);
-            enemy.Update(player, enemies, Dt);
-            laser.Update(lasers, Dt);
-            physics.Update(*this);
-            spawner.Update(*this);
-            projectile.Update(lasers);
+            player.Update(Mgr.kbd, Mgr.mouse, Mgr.projectile, Mgr.lasers, Mgr.dt);
+            enemy.Update(Mgr.player, Mgr.enemies, Mgr.dt);
+            laser.Update(Mgr.lasers, Mgr.dt);
+            physics.Update(Mgr);
+            spawner.Update(Mgr);
+            projectile.Update(Mgr.lasers);
         }
     }
 }

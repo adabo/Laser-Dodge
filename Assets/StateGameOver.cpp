@@ -1,5 +1,17 @@
 #include "StateGameOver.h"
 
+StateGameOver()
+:   yes_x(278),
+    yes_y(232),
+    yes_w(44),
+    yes_h(18),
+    no_x(486),
+    no_y(232),
+    no_w(22),
+    no_h(18)
+{}
+
+
 void StateGameOver::Update(GameManager &Mgr)
 {
     if (Mgr.mouse.LeftIsPressed)
@@ -30,11 +42,11 @@ void StateGameOver::Draw(D3DGraphics &Gfx)
     // continue x230 y182
     char buffer[64];
     sprintf(buffer, "Continue?");
-    fixedSys.DrawString(buffer, 230, 182, &fixedSys, D3DCOLOR_XRGB(100, 100, 100), Gfx)
+    fixedSys.DrawString(buffer, 330, 182, &fixedSys, D3DCOLOR_XRGB(100, 100, 100), Gfx)
 
     sprintf(buffer, "Yes");
-    fixedSys.DrawString(buffer, 278, 232, &fixedSys, D3DCOLOR_XRGB(100, 100, 100), Gfx)
+    fixedSys.DrawString(buffer, yes_x, yes_y, &fixedSys, D3DCOLOR_XRGB(100, 100, 100), Gfx)
 
     sprintf(buffer, "No");
-    fixedSys.DrawString(buffer, 486, 232, &fixedSys, D3DCOLOR_XRGB(100, 100, 100), Gfx)
+    fixedSys.DrawString(buffer, no_x, no_y, &fixedSys, D3DCOLOR_XRGB(100, 100, 100), Gfx)
 }
