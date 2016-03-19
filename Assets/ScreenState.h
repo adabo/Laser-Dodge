@@ -17,12 +17,9 @@ public:
     bool MouseClickedBox(int MX, int MY, int X, int Y, int W, int H);
 private:
     States states;
-    int yes_x;
-    int yes_y;
-    int yes_w;
-    int yes_h;
-    int no_x;
-    int no_y;
-    int no_w;
-    int no_h;
+
+    StateGame          state_game;
+    StateGameOver      state_game_over;
+    StateMainMenu      state_main_menu;
+    StateGamePause     state_game_pause;
 };
