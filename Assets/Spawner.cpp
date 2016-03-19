@@ -1,14 +1,14 @@
 #include "Spawner.h"
+#include "GameManager.h"
 
-void Spawner::Update(Player &ThisPlayer, std::vector<Enemy> &Enemies,
-                     std::vector<Laser> &Lasers, int &ThisScore)
+void Spawner::Update(GameManager &Mgr)
 {
     // Check if enemies are dead
-    CheckIsAlive(ThisPlayer, Enemies, Lasers, ThisScore);
+    CheckIsAlive(Mgr.player, Mgr.enemies, Mgr.lasers, Mgr.score.i_score);
     // Then add them if necessary
-    if (Enemies.size() <= 0)
+    if (Mgr.enemies.size() <= 0)
     {
-        AddEnemy(ThisPlayer, Enemies);
+        AddEnemy(Mgr.player, Mgr.enemies);
     }
 }
 

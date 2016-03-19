@@ -22,17 +22,22 @@
 
 #include "Timer.h"
 #include "GameManager.h"
+#include "Keyboard.h"
+#include "Mouse.h"
+#include "D3DGraphics.h"
 
 class Game
 {
 public:
-    Game();
+    Game(HWND hWnd,const KeyboardServer& kServer,const MouseServer& mServer);
     ~Game();
     void Go();
 private:
     void ComposeFrame();
 private:
-    DSound audio;
     Timer timer;
+    D3DGraphics gfx;
+    KeyboardClient kbd;
+    MouseClient mouse;
     GameManager mgr;
 };

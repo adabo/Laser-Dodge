@@ -19,12 +19,13 @@
  *  along with The Chili DirectX Framework.  If not, see <http://www.gnu.org/licenses/>.  *
  ******************************************************************************************/
 #include "Game.h"
-#include <stdio.h>
-#include <stdlib.h>
-#include <time.h>
-#include <float.h>
 
-Game::Game() {}
+Game::Game( HWND hWnd,const KeyboardServer& kServer,const MouseServer& mServer )
+:   gfx( hWnd ),
+    kbd( kServer ),
+    mouse( mServer ),
+    mgr(hWnd, kServer, mServer)
+{}
 
 Game::~Game() {}
 
@@ -34,7 +35,7 @@ void Game::Go()
     float dt = timer.GetTimeMilli() * 0.001f;
     timer.StartWatch();
 
-    mgr.Update();
+    mgr.Update(dt);
     
     gfx.BeginFrame();
     ComposeFrame();

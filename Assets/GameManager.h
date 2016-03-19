@@ -1,13 +1,14 @@
 #pragma once
 
 #include <time.h>
-#include "Common.h"
+// #include "Common.h"
 #include "ProjectileHandler.h"
 #include "Player.h"
 #include "Physics.h"
 #include "Spawner.h"
 #include "Entity.h"
 #include "Enemy.h"
+#include "Sound.h"
 #include "D3DGraphics.h"
 #include "Keyboard.h"
 #include "Mouse.h"
@@ -18,26 +19,26 @@ class GameManager
 {
     friend class Physics;
     friend class ScreenState;
+    friend class Spawner;
 public:
     GameManager(HWND hWnd, const KeyboardServer& kServer, const MouseServer& mServer);
-    void Update();
+    void Update(float Dt);
     void Draw();
 private:
-    D3DGraphics gfx;
+    DSound         audio;
+    D3DGraphics    gfx;
     KeyboardClient kbd;
-    MouseClient mouse;
-    Player player;
-    ProjectileHandler projectile;
-    // Create one object to handle the vector
-    Enemy enemy;
+    MouseClient    mouse;
+
+    Player             player;
+    ProjectileHandler  projectile;
+    Enemy              enemy; // Create one object to handle the vector
     std::vector<Enemy> enemies;
-    // Create one object to handle the vector
-    Laser laser;
+    Laser              laser; // Create one object to handle the vector
     std::vector<Laser> lasers;
-    std::vector<Laser> *p_lasers = &lasers;
-    std::vector<std::vector<Entity>> entities;
-    Physics physics;
-    Spawner spawner;
-    Score score;
-    SState s_state;
+    Physics            physics;
+    Spawner            spawner;
+    Score              score;
+    ScreenState        s_state;
+    // States             states;
 };

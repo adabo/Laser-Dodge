@@ -5,7 +5,7 @@
 #define SCREENCENTERX 400
 #define SCREENCENTERY 300
 
-enum SState
+enum States
 {
     GAME, GAMEOVER, GAMEMAINMENU, GAMEPAUSE
 };

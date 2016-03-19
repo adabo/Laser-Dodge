@@ -7,6 +7,7 @@
 // #include <vector>
 #include "Entity.h"
 #include "Trigonometry.h"
+#include "ScreenState.h"
 
 enum AIMSIDE
 {
@@ -18,6 +19,9 @@ enum AIMSIDE
 
 class Player : public Entity
 {
+    friend class Spawner;
+    friend class ScreenState;
+    friend class GameManager;
     friend class Physics;
     friend class Score;
 public:

@@ -9,8 +9,7 @@
 class Spawner
 {
 public:
-    void Update(Player &ThisPlayer, std::vector<Enemy> &Enemies,
-                     std::vector<Laser> &Lasers, int &ThisScore);
+    void Update(GameManager &Mgr);
     void CheckIsAlive(Player &ThisPlayer, std::vector<Enemy> &Enemies,
                       std::vector<Laser> &Lasers, int &ThisScore);
     void SetPlayerAlive(Player &ThisPlayer);

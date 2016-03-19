@@ -1,7 +1,7 @@
 #include "GameManager.h"
 
-GameManager::GameManager( HWND hWnd,const KeyboardServer& kServer,const MouseServer& mServer )
-    :   p_lasers(&lasers)
+GameManager::GameManager(HWND hWnd, const KeyboardServer& kServer, const MouseServer& mServer)
+    :   /*p_lasers(&lasers)*/
         gfx( hWnd ),
         audio( hWnd ),
         kbd( kServer ),
@@ -9,19 +9,16 @@ GameManager::GameManager( HWND hWnd,const KeyboardServer& kServer,const MouseSer
 {
     srand((unsigned int)time(NULL));
 }
-void GameManager::Update()
+void GameManager::Update(float Dt)
 {
-    // if (player.is_alive)
-    // {
-        player.Update(kbd,mouse, projectile, lasers, Dt);
-    // }
+    player.Update(kbd, mouse, projectile, lasers, Dt);
     enemy.Update(player, enemies, Dt);
     laser.Update(lasers, Dt);
     physics.Update(*this);
-    spawner.Update(player, enemies, lasers, score.i_score);
+    spawner.Update(*this);
     projectile.Update(lasers);
 }
 void GameManager::Draw()
 {
-    screen_state.DrawState(*this);
+    s_state.DrawSState(*this);
 }
