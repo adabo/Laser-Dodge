@@ -108,11 +108,15 @@ void KeyboardServer::OnZPressed()
 {
     z_is_pressed = true;
 }
+
+void KeyboardServer::OnTildeReleased()
+{
+    tilde_is_pressed = false;
+}
 void KeyboardServer::OnAReleased()
 {
     a_is_pressed = false;
 }
-
 void KeyboardServer::OnBReleased()
 {
     b_is_pressed = false;

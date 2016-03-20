@@ -20,6 +20,7 @@ class GameManager
 {
     friend class Physics;
     friend class ScreenState;
+    friend class Debug;
     friend class StateMainMenu;
     friend class StateGameOver;
     friend class StateGame;

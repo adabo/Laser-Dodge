@@ -14,17 +14,6 @@ void ProjectileHandler::AddProjectile(std::vector<Laser> &Lasers, float OriginX,
     Lasers.push_back(Laser(OriginX, OriginY, cos_x, sin_y, Damage));
 }
 
-// void ProjectileHandler::CheckIsAlive(std::vector<Laser> &Lasers)
-// {
-//     for (auto &laser : Lasers)
-//     {
-//         if (laser.hp <= 0)
-//         {
-//             laser.is_alive = false;
-//         }
-//     }
-// }
-
 void ProjectileHandler::DelProjectile(std::vector<Laser> &Lasers)
 {
     for (auto &laser : Lasers)

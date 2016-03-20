@@ -43,6 +43,7 @@ void StateGame::Update(GameManager &Mgr)
 void StateGame::UpdateAll(GameManager &Mgr)
 {
     Mgr.s_state.states = GAME;
+    Mgr.debug.Update(Mgr);
     Mgr.player.Update(Mgr.kbd, Mgr.mouse, Mgr.projectile, Mgr.lasers, Mgr.dt);
     Mgr.enemy.Update(Mgr.player, Mgr.enemies, Mgr.dt);
     Mgr.laser.Update(Mgr.lasers, Mgr.dt);
@@ -57,5 +58,5 @@ void StateGame::Draw(GameManager &Mgr)
     Mgr.enemy.Draw(Mgr.enemies,Mgr.gfx);
     Mgr.laser.Draw(Mgr.lasers, Mgr.gfx);
     Mgr.score.Draw(Mgr.player, Mgr.gfx, Mgr.score.i_score);
-    Mgr.debug.Draw(Mgr.gfx);
+    Mgr.debug.Draw(Mgr.gfx, Mgr);
 }

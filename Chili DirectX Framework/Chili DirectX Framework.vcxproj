@@ -155,6 +155,7 @@
   <ItemGroup>
     <ClCompile Include="..\Assets\Bitmap.cpp" />
     <ClCompile Include="..\Assets\D3DGraphics.cpp" />
+    <ClCompile Include="..\Assets\Debug.cpp" />
     <ClCompile Include="..\Assets\Enemy.cpp" />
     <ClCompile Include="..\Assets\Entity.cpp" />
     <ClCompile Include="..\Assets\Font.cpp" />
@@ -185,6 +186,7 @@
     <ClInclude Include="..\Assets\Bitmap.h" />
     <ClInclude Include="..\Assets\Common.h" />
     <ClInclude Include="..\Assets\D3DGraphics.h" />
+    <ClInclude Include="..\Assets\Debug.h" />
     <ClInclude Include="..\Assets\Enemy.h" />
     <ClInclude Include="..\Assets\Entity.h" />
     <ClInclude Include="..\Assets\Font.h" />
