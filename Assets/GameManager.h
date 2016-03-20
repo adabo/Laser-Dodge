@@ -13,6 +13,7 @@
 #include "Keyboard.h"
 #include "Mouse.h"
 #include "Score.h"
+#include "Debug.h"
 #include "ScreenState.h"
 
 class GameManager
@@ -45,6 +46,7 @@ private:
     Physics            physics;
     Spawner            spawner;
     Score              score;
+    Debug              debug;
     ScreenState        s_state;
     // States             states;
 };

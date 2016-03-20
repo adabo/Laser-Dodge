@@ -1,5 +1,9 @@
 #include "Keyboard.h"
 
+void KeyboardServer::OnTildePressed()
+{
+    tilde_is_pressed = true;
+}
 void KeyboardServer::OnAPressed()
 {
     a_is_pressed = true;

@@ -57,4 +57,5 @@ void StateGame::Draw(GameManager &Mgr)
     Mgr.enemy.Draw(Mgr.enemies,Mgr.gfx);
     Mgr.laser.Draw(Mgr.lasers, Mgr.gfx);
     Mgr.score.Draw(Mgr.player, Mgr.gfx, Mgr.score.i_score);
+    Mgr.debug.Draw(Mgr.gfx);
 }

@@ -1,5 +1,9 @@
 #include "Keyboard.h"
 
+void KeyboardServer::OnTildePressed() const
+{
+    return server.tilde_is_pressed;
+}
 bool KeyboardClient::AIsPressed() const
 {
     return server.a_is_pressed;
