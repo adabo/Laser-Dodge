@@ -67,7 +67,7 @@ void StateGameOver::Reset(GameManager &Mgr)
     Mgr.laser = Laser();
     Mgr.enemies.clear();
     Mgr.lasers.clear();
-    Mgr.score = Score();
+    Mgr.score = Score(Mgr.player.hp);
     Mgr.spawner = Spawner();
 }
 

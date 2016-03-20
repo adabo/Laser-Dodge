@@ -24,7 +24,7 @@ class Player : public Entity
     friend class StateGame;
     //friend class StateGamePause;
     //friend class StateMainMenu;
-    //friend class StateGameover;
+    friend class StateGameOver;
     friend class GameManager;
     friend class Physics;
     friend class Score;

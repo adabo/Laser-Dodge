@@ -2,20 +2,20 @@
 
 Player::Player()
 {
-    is_alive = true;
-    width    = 20;
-    height   = 20;
-    x        = 400;
-    y        = 300;
-    hp       = 88.0f;
-    damage   = 15.0f;
-    shield   = 1.0f;
-    velocity = 100;
-    col_dec  = 255 / (hp / 15);
-    col_r    = 255;
-    col_g    = 255;
-    col_b    = 255;
-    shots_missed = 0;
+    is_alive       = true;
+    width          = 20;
+    height         = 20;
+    x              = 400;
+    y              = 300;
+    hp             = 300.0f;
+    damage         = 15.0f;
+    shield         = 1.0f;
+    velocity       = 100;
+    col_dec        = 255 / (hp / 15);
+    col_r          = 255;
+    col_g          = 255;
+    col_b          = 255;
+    shots_missed   = 0;
     targets_missed = 0;
 }
 
@@ -118,11 +118,7 @@ void Player::SetAimDirection(int MouseX, int MouseY)
 
 void Player::Draw(D3DGraphics &Gfx)
 {
-    // static int hp_color = 17;
     Gfx.DrawRectOutline((int)x, (int)y, (int)x + width, (int)y + height, D3DCOLOR_XRGB(col_r, col_g, col_b));
-    // Gfx.DrawRectOutline(x - (width / 2), y - (height / 2),
-    //                     x + (width / 2), y + (height / 2),
-    //                     D3DCOLOR_XRGB(255, 255, 255));
 }
 
 

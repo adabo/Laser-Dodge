@@ -6,8 +6,11 @@ GameManager::GameManager(HWND hWnd, D3DGraphics &Gfx, const KeyboardServer& kSer
         audio( hWnd ),
         kbd( kServer ),
         mouse( mServer ),
-        gfx(Gfx)
+        gfx(Gfx),
+        player(),
+        score(player.hp)
 {
+    //score = Score(player.hp);
     srand((unsigned int)time(NULL));
 }
 void GameManager::Update(float Dt)
