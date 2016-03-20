@@ -15,6 +15,9 @@ public:
 private:
     D3DCOLOR font_surf[512 * 84];
     Font fixedSys;
+    int play_red;
+    int play_green;
+    int play_blue;
     int laser_dodge_x;
     int laser_dodge_y;
     int laser_dodge_w;

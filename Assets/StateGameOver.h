@@ -16,6 +16,7 @@ public:
 private:
     D3DCOLOR font_surf[512 * 84];
     Font fixedSys;
+    int y_red, y_green, y_blue, n_red, n_green, n_blue;
     int yes_x;
     int yes_y;
     int yes_w;
