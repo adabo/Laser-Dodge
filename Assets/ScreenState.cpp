@@ -48,7 +48,7 @@ void ScreenState::Draw(GameManager &Mgr)
             state_main_menu.Draw(Mgr.gfx);
         break;
         case GAMEPAUSE:
-            state_game_pause.Draw(Mgr.gfx);
+            state_game_pause.Draw(Mgr);
         break;
         default:
         break;

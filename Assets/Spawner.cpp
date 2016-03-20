@@ -1,6 +1,10 @@
 #include "Spawner.h"
 #include "GameManager.h"
 
+Spawner::Spawner()
+:   velocity_increase(0.0f)
+{} 
+
 void Spawner::Update(GameManager &Mgr)
 {
     // Check if enemies are dead
@@ -46,7 +50,6 @@ void Spawner::CheckIsAlive(Player &ThisPlayer, std::vector<Enemy> &Enemies,
 
 void Spawner::AddEnemy(Player &ThisPlayer, std::vector<Enemy> &Enemies)
 {
-    static float velocity_increase = 0.0f;
     velocity_increase += 4.0f;
     // I should not be hard coding these values especially
     // the height and width. Need to find a more elegant solution

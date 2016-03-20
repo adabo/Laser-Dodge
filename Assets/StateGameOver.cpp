@@ -20,6 +20,7 @@ StateGameOver::StateGameOver()
 
 void StateGameOver::Update(GameManager &Mgr)
 {
+    Reset(Mgr);
     if (Mgr.mouse.LeftIsPressed())
     {
         // Check if yes
@@ -35,10 +36,21 @@ void StateGameOver::Update(GameManager &Mgr)
     }
 }
 
+void StateGameOver::Reset(GameManager &Mgr)
+{
+    Mgr.player = Player();
+    Mgr.enemy = Enemy();
+    Mgr.laser = Laser();
+    Mgr.enemies.clear();
+    Mgr.lasers.clear();
+    Mgr.score = Score();
+    Mgr.spawner = Spawner();
+}
+
 bool StateGameOver::MouseClickedBox(int MX, int MY, int X, int Y, int W, int H)
 {
-    return (MX >= X || MX <= X + W ||
-            MX >= Y || MX <= Y + H);
+    return (MX >= X && MX <= X + W &&
+            MY >= Y && MY <= Y + H);
 }
 
 void StateGameOver::Draw(D3DGraphics &Gfx)

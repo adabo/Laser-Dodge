@@ -6,6 +6,9 @@ class GameManager;
 class StateGamePause
 {
 public:
+    StateGamePause();
     void Update(GameManager &Mgr);
-    void Draw(D3DGraphics &Gfx);
+    void Draw(GameManager &Mgr);
+private:
+    bool space_is_pressed;
 };

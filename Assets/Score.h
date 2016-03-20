@@ -11,6 +11,7 @@ class Score
     friend class GameManager;
     friend class Spawner;
     friend class StateGame;
+    friend class StateGamePause;
 public:
     Score();
     void Update();

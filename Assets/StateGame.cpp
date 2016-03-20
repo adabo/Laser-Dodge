@@ -1,6 +1,10 @@
 #include "StateGame.h"
 #include "GameManager.h"
 
+StateGame::StateGame()
+:   space_is_pressed(false)
+{}
+
 void StateGame::Update(GameManager &Mgr)
 {
     if (!Mgr.player.is_alive)
@@ -11,19 +15,40 @@ void StateGame::Update(GameManager &Mgr)
     {
         if (Mgr.kbd.SpaceIsPressed())
         {
-            Mgr.s_state.states = GAMEPAUSE;
+            if (!space_is_pressed)
+            {
+                space_is_pressed = true;
+                UpdateAll(Mgr);
+            }
+            else
+            {
+                UpdateAll(Mgr);
+            }
         }
         else
         {
-            Mgr.s_state.states = GAME;
-            Mgr.player.Update(Mgr.kbd, Mgr.mouse, Mgr.projectile, Mgr.lasers, Mgr.dt);
-            Mgr.enemy.Update(Mgr.player, Mgr.enemies, Mgr.dt);
-            Mgr.laser.Update(Mgr.lasers, Mgr.dt);
-            Mgr.physics.Update(Mgr);
-            Mgr.spawner.Update(Mgr);
-            Mgr.projectile.Update(Mgr.lasers);
+            if (space_is_pressed)
+            {
+                space_is_pressed = false;
+                Mgr.s_state.states = GAMEPAUSE;
+            }
+            else
+            {
+                UpdateAll(Mgr);
+            }
         }
     }
+}
+
+void StateGame::UpdateAll(GameManager &Mgr)
+{
+    Mgr.s_state.states = GAME;
+    Mgr.player.Update(Mgr.kbd, Mgr.mouse, Mgr.projectile, Mgr.lasers, Mgr.dt);
+    Mgr.enemy.Update(Mgr.player, Mgr.enemies, Mgr.dt);
+    Mgr.laser.Update(Mgr.lasers, Mgr.dt);
+    Mgr.physics.Update(Mgr);
+    Mgr.spawner.Update(Mgr);
+    Mgr.projectile.Update(Mgr.lasers);
 }
 
 void StateGame::Draw(GameManager &Mgr)

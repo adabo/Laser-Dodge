@@ -32,8 +32,8 @@ void StateMainMenu::Update(GameManager &Mgr)
 
 bool StateMainMenu::MouseClickedBox(int MX, int MY, int X, int Y, int W, int H)
 {
-    return (MX >= X || MX <= X + W ||
-            MX >= Y || MX <= Y + H);
+    return (MX >= X && MX <= X + W &&
+            MY >= Y && MY <= Y + H);
 }
 
 void StateMainMenu::Draw(D3DGraphics &Gfx)
