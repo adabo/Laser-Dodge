@@ -25,12 +25,12 @@ class GameManager
     friend class StateGamePause;
     friend class Spawner;
 public:
-    GameManager(HWND hWnd, const KeyboardServer& kServer, const MouseServer& mServer);
+    GameManager(HWND hWnd, D3DGraphics &Gfx, const KeyboardServer& kServer, const MouseServer& mServer);
     void Update(float Dt);
     void Draw();
 private:
     DSound         audio;
-    D3DGraphics    gfx;
+    D3DGraphics    &gfx;
     KeyboardClient kbd;
     MouseClient    mouse;
 

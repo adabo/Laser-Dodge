@@ -24,7 +24,7 @@ Game::Game( HWND hWnd,const KeyboardServer& kServer,const MouseServer& mServer )
 :   gfx( hWnd ),
     kbd( kServer ),
     mouse( mServer ),
-    mgr(hWnd, kServer, mServer)
+    mgr(hWnd, gfx, kServer, mServer)
 {}
 
 Game::~Game() {}
