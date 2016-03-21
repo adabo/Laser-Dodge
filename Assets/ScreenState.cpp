@@ -2,7 +2,7 @@
 #include "GameManager.h"
 
 ScreenState::ScreenState()
-    : states(GAMEMAINMENU)
+:   states(GAMEMAINMENU)
 {}
 
 

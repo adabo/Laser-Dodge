@@ -1,59 +1,35 @@
-shop x370 y88
---- upgrade screen ---
-upgrades x338 y200
-ship x370 y285
-weapons x346 y312
-skills x354 y368
+shop 370, 88
+--- main screen ---
+back 80, 84, 32, 28
+upgrades 338, 200
+ship 370, 285, 64, 28
+weapons 346, 312, 108, 28
+ammo 368, 336, 64, 28
+skills 354, 368, 64, 28
 ---
 
 --- ship upgrades ---
-ship x367 y200
-speed x362 y256
-acceleration x306 y284
-shield x354 y312
+back 80, 84, 32, 28
+ship 367, 200, 64, 28
+speed 362, 256, 76, 28
+acceleration 306, 284, 188, 28
+shield 354, 312, 96
 ---
 
 --- weapon upgrades ---
-weapons x344 y 200
-damage x354 y284
+back 80, 84, 32, 28
+weapons 344, 200, 108, 28
+damage 354, 284, 96, 28
 ---
 
 --- ammo upgrades ---
-ammo x370 y 200
+back 80, 84, 32, 28
+ammo 370, 200, 64, 28
 ---
 
 --- skill upgrades ---
-skills x352 y199
-missed enemies penalty x226 y284
-shots missed penalty x242 y312
+back 80, 84, 32, 28
+skills 352, 199, 64, 28
+missed enemies penalty 226, 284, 350, 28
+shots missed penalty 242, 312, 120, 28
 ---
-
-    // struct TxtStateUpgrades
-    // {
-    //     TextXY upgrades(338, 200),
-    //            ship(370, 285),
-    //            weapons(346, 312),
-    //            skills(354, 368);
-    // };
-    // struct TxtStateShip
-    // {
-    //     TextXY ship(367, 200),
-    //            speed(362, 256),
-    //            acceleration(306, 284),
-    //            sheild(354, 312);
-    // };
-    // struct TxtStateWeapons
-    // {
-    //     TextXY weapons(344, 200),
-    //            damage(354, 284);
-    // };
-    // struct TxtStateAmmo
-    // {
-    //     TextXY ammo(370, 200);
-    // };
-    // struct TxtStateSkills
-    // {
-    //     TextXY skills(352, 199),
-    //            miss_enemy(226, 284),
-    //            miss_shot(242, 312);
-    // };

@@ -1,38 +1,195 @@
 #include "StateShop.h"
 
 StateShop::StateShop()
-{
-    tx_st_upgrades.upgrades(338, 200);
-    tx_st_upgrades.ship(370, 285);
-    tx_st_upgrades.weapons(346, 312);
-    tx_st_upgrades.skills(354, 368);
-}
+:   shop_state (MAIN)
+    shop_main  (370, 88,   /*Shop*/
+                80,  84,   /*Back*/
+                338, 200,  /*Category*/
+                270, 285,  /*Upgrade1*/
+                346, 312,  /*Upgrade2*/
+                354, 368), /*Upgrade3*/
+    shop_ship  (370, 88,
+                80,  84,
+                367, 200,
+                362, 256,
+                306, 284,
+                354, 312),
+    shop_weapon(370, 88,
+                80,  84,
+                344, 200,
+                354, 284),
+    shop_ammo  (370, 88,
+                80,  84,
+                370, 200),
+    shop_skill (370, 88,
+                80,  84,
+                352, 199,
+                226, 284,
+                242, 312)
+{}
 
 void StateShop::Update(GameManager &Mgr)
 {
-    if (player clicks up speed)
+    switch(shop_state)
     {
-        Upgrade();
+        case MAIN:
+            UpdateShopMain(Mgr.s_state, Mgr.mouse)
+        case SHIP:
+            UpdateShopShip(Mgr.mouse);
+        break;
+        case WEAPON:
+            UpdateShopWeapon(Mgr.mouse);
+        break;
+        case AMMO:
+            UpdateShopAmmo(Mgr.mouse);
+        break;
+        case SKILL:
+            UpdateShopSkill(Mgr.mouse);
+        break;
     }
-    if (player clicks up speed)
+}
+
+StateShop::UpdateShopMain(ScreenState SState, MouseClient &Mouse)
+{
+    // Check main
+    int mx = Mouse.GetMouseX();
+    int my = Mouse.GetMouseY();
+    // Check back
+    if (MouseHoverOver(mx, my, 80, 84, 32, 28))
     {
-        Upgrade();
+        if (Mouse.LeftIsPressed())
+        {
+            SState.states = GAME;
+        }
     }
-    if (player clicks up speed)
+    // Check ship
+    else if (MouseHoverOver(mx, my, 370, 285, 64, 28))
     {
-        Upgrade();
+        if (Mouse.LeftIsPressed())
+        {
+            shop_state = SHIP;
+            UpdateShopShip(Mouse);
+        }
     }
-    if (player clicks up speed)
+    // Check weapon
+    else if (MouseHoverOver(mx, my, 346, 312, 108, 28))
     {
-        Upgrade();
+        if (Mouse.LeftIsPressed())
+        {
+            shop_state = WEAPON;
+            UpdateShopWeapon(Mouse);
+        }
     }
-    if (player clicks up speed)
+    // Check ammo
+    else if (MouseHoverOver(mx, my, 368, 336, 64, 28))
     {
-        Upgrade();
+        if (Mouse.LeftIsPressed())
+        {
+            shop_state = AMMO;
+            UpdateShopAmmo(Mouse);
+        }
     }
-    if (player clicks up speed)
+    // Check skill
+    else if (MouseHoverOver(mx, my, 354, 368, 64, 28))
     {
-        Upgrade();
+        if (Mouse.LeftIsPressed())
+        {
+            shop_state = SKILL;
+            UpdateShopSkill(Mouse);
+        }
+    }
+}
+
+StateShop::UpdateShopShip(MouseClient &Mouse)
+{
+    int mx = Mouse.GetMouseX();
+    int my = Mouse.GetMouseY();
+    // Check back
+    if (MouseHoverOver(mx, my, 80, 84, 32, 28))
+    {
+        if (Mouse.LeftIsPressed())
+        {
+            shop_state = MAIN;
+        }
+    }
+    // Check speed
+    if (MouseHoverOver(mx, my, 362, 256, 76, h28))
+    {
+        if (Mouse.LeftIsPressed())
+        {
+            UpgradeSpeed(Mouse);
+        }
+    }
+    // Check acceleration
+    if (MouseHoverOver(mx, my, 306, 284, 188, 28))
+    {
+        if (Mouse.LeftIsPressed())
+        {
+            UpgradeAccel(Mouse);
+        }
+    }
+    // Check shield 
+    if (MouseHoverOver(mx, my, 354, 312, 96))
+    {
+        if (Mouse.LeftIsPressed())
+        {
+            UpgradeShield(Mouse);
+        }
+    }
+}
+
+StateShop::UpdateShopWeapon(MouseClient &Mouse)
+{
+    int mx = Mouse.GetMouseX();
+    int my = Mouse.GetMouseY();
+    // Check back
+    if (MouseHoverOver(mx, my, 80, 84, 32, 28))
+    {
+        if (Mouse.LeftIsPressed())
+        {
+            shop_state = MAIN;
+        }
+    }
+    // Check damage
+    if (MouseHoverOver(mx, my, 362, 256, 76, 28))
+    {
+        if (Mouse.LeftIsPressed())
+        {
+            UpgradeDamage(Mouse);
+        }
+    }
+}
+
+StateShop::UpdateShopAmmo(MouseClient &Mouse
+{}
+
+StateShop::UpdateShopSkill(MouseClient &Mouse)
+{
+    int mx = Mouse.GetMouseX();
+    int my = Mouse.GetMouseY();
+    // Check back
+    if (MouseHoverOver(mx, my, 80, 84, 32, 28))
+    {
+        if (Mouse.LeftIsPressed())
+        {
+            shop_state = MAIN;
+        }
+    }
+    // Check miss enemy
+    if (MouseHoverOver(mx, my, 362, 256, 76, 28))
+    {
+        if (Mouse.LeftIsPressed())
+        {
+            UpgradeMissEnemy(Mouse);
+        }
+    }
+    // Check miss Shot
+    if (MouseHoverOver(mx, my, 362, 256, 76, 28))
+    {
+        if (Mouse.LeftIsPressed())
+        {
+            UpgradeMissShot(Mouse);
+        }
     }
 }
 
@@ -56,20 +213,22 @@ void StateShop::UpgradeShield(Player &ThisPlayer)
     ThisPlayer.money -= 20;
 }
 
-void StateShop::UpgradeMiss_enemy(Player &ThisPlayer)
+void StateShop::UpgradeMissEnemy(Player &ThisPlayer)
 {
     ThisPlayer.money -= 20;
 }
 
-void StateShop::UpgradeMiss_shot(Player &ThisPlayer)
+void StateShop::UpgradeMissShot(Player &ThisPlayer)
 {
     ThisPlayer.money -= 20;
 }
 
 void StateShop::Draw(GameManager &Mgr)
 {
-    switch(Selection)
+    switch(shop_state)
     {
+        case MAIN:
+            DrawMain(Mgr.gfx);
         case SHIP:
             DrawShipUpgrades(Mgr.gfx);
         break;
@@ -84,6 +243,26 @@ void StateShop::Draw(GameManager &Mgr)
         break;
     }
 }
+
+void StateShop::DrawMain(D3DGraphics &Gfx)
+{
+
+    sprintf(buffer, "<=");
+    fixedSys.DrawString(buffer, 80, 84, &fixedSys, D3DCOLOR_XRGB(100, 100, 100), Gfx);
+    sprintf(buffer, "SHOP");
+    fixedSys.DrawString(buffer, 370, 88, &fixedSys, D3DCOLOR_XRGB(100, 100, 100), Gfx);
+    sprintf(buffer, "UPGRADES");
+    fixedSys.DrawString(buffer, 338, 200, &fixedSys, D3DCOLOR_XRGB(100, 100, 100), Gfx);
+    sprintf(buffer, "SHIP");
+    fixedSys.DrawString(buffer, 370, 285, &fixedSys, D3DCOLOR_XRGB(100, 100, 100), Gfx);
+    sprintf(buffer, "WEAPONS");
+    fixedSys.DrawString(buffer, 346, 312, &fixedSys, D3DCOLOR_XRGB(100, 100, 100), Gfx);
+    sprintf(buffer, "AMMO");
+    fixedSys.DrawString(buffer, 368, 336, &fixedSys, D3DCOLOR_XRGB(100, 100, 100), Gfx);
+    sprintf(buffer, "SKILLS");
+    fixedSys.DrawString(buffer, 354, 368, &fixedSys, D3DCOLOR_XRGB(100, 100, 100), Gfx);
+}
+
 void StateShop::DrawShipUpgrades(D3DGraphics &Gfx)
 {}
 
@@ -96,7 +275,7 @@ void StateShop::DrawAmmoUpgrades(D3DGraphics &Gfx)
 void StateShop::DrawSkillUpgrades(D3DGraphics &Gfx)
 {}
 
-bool StateShop::MouseClickedBox(int MX, int MY, int X, int Y, int W, int H)
+bool StateShop::MouseHoverOver(int MX, int MY, int X, int Y, int W, int H)
 {
     return (MX >= X && MX <= X + W &&
             MY >= Y && MY <= Y + H);
