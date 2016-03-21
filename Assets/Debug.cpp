@@ -1,3 +1,6 @@
+#ifdef _MSC_VER
+#define _CRT_SECURE_NO_WARNINGS
+#endif
 #include "Debug.h"
 #include "GameManager.h"
 
@@ -30,6 +33,11 @@ void Debug::Update(GameManager &Mgr)
         }            
         if (draw_debug)
         {
+            // DEBUG ONLY
+            if (Mgr.kbd.KIsPressed())
+            {
+                Mgr.player.hp = 0;
+            }
             if (milli >= 1000.0f)
             {
                 timer.StopWatch();

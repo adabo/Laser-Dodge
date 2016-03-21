@@ -10,7 +10,7 @@ class StateGameOver
 public:
     StateGameOver();
     void Update(GameManager &Mgr);
-    void Draw(D3DGraphics &Gfx);
+    void Draw(GameManager &Mgr, D3DGraphics &Gfx);
     void Reset(GameManager &Mgr);
     bool MouseClickedBox(int MX, int MY, int X, int Y, int W, int H);
 private:

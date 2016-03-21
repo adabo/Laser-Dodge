@@ -20,7 +20,6 @@ StateGameOver::StateGameOver()
 
 void StateGameOver::Update(GameManager &Mgr)
 {
-    Reset(Mgr);
     if (MouseClickedBox(Mgr.mouse.GetMouseX(), Mgr.mouse.GetMouseY(), yes_x, yes_y, yes_w, yes_h))
     {
         y_red = 25;
@@ -51,11 +50,13 @@ void StateGameOver::Update(GameManager &Mgr)
         if (MouseClickedBox(Mgr.mouse.GetMouseX(), Mgr.mouse.GetMouseY(), yes_x, yes_y, yes_w, yes_h))
         {
             Mgr.s_state.states = GAME;
+            Reset(Mgr);
         }
         // Check if no
         else if (MouseClickedBox(Mgr.mouse.GetMouseX(), Mgr.mouse.GetMouseY(), no_x, no_y, no_w, no_h))
         {
             Mgr.s_state.states = GAMEMAINMENU;
+            Reset(Mgr);
         }
     }
 }
@@ -67,7 +68,7 @@ void StateGameOver::Reset(GameManager &Mgr)
     Mgr.laser = Laser();
     Mgr.enemies.clear();
     Mgr.lasers.clear();
-    Mgr.score = Score(Mgr.player.hp);
+    Mgr.score = Score((int)Mgr.player.hp);
     Mgr.spawner = Spawner();
 }
 
@@ -77,7 +78,7 @@ bool StateGameOver::MouseClickedBox(int MX, int MY, int X, int Y, int W, int H)
             MY >= Y && MY <= Y + H);
 }
 
-void StateGameOver::Draw(D3DGraphics &Gfx)
+void StateGameOver::Draw(GameManager &Mgr, D3DGraphics &Gfx)
 {
     // yes      x278 y232
     // no       x486 y232

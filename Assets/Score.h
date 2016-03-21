@@ -11,6 +11,7 @@ class Score
     //friend class ScreenState;
     friend class GameManager;
     friend class Spawner;
+    friend class ScreenState;
     friend class StateGame;
     friend class StateGamePause;
 public:

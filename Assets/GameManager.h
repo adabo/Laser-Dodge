@@ -26,6 +26,7 @@ class GameManager
     friend class StateGame;
     friend class StateGamePause;
     friend class Spawner;
+    friend class Debug;
 public:
     GameManager(HWND hWnd, D3DGraphics &Gfx, const KeyboardServer& kServer, const MouseServer& mServer);
     void Update(float Dt);

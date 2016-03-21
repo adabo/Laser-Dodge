@@ -28,6 +28,7 @@ class Player : public Entity
     friend class GameManager;
     friend class Physics;
     friend class Score;
+    friend class Debug;
 public:
     Player();
     void Update(KeyboardClient &Kbd, MouseClient &Mouse,

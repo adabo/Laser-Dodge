@@ -8,7 +8,7 @@ GameManager::GameManager(HWND hWnd, D3DGraphics &Gfx, const KeyboardServer& kSer
         mouse( mServer ),
         gfx(Gfx),
         player(),
-        score(player.hp)
+        score((int)player.hp)
 {
     //score = Score(player.hp);
     srand((unsigned int)time(NULL));

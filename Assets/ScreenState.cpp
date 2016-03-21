@@ -42,7 +42,8 @@ void ScreenState::Draw(GameManager &Mgr)
             state_game.Draw(Mgr);
         break;
         case GAMEOVER:
-            state_game_over.Draw(Mgr.gfx);
+            state_game_over.Draw(Mgr, Mgr.gfx);
+            Mgr.score.Draw(Mgr.player, Mgr.gfx, Mgr.score.i_score);
         break;
         case GAMEMAINMENU:
             state_main_menu.Draw(Mgr.gfx);

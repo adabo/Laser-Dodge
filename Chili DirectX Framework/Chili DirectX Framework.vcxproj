@@ -178,6 +178,7 @@
     <ClCompile Include="..\Assets\StateGameOver.cpp" />
     <ClCompile Include="..\Assets\StateGamePause.cpp" />
     <ClCompile Include="..\Assets\StateMainMenu.cpp" />
+    <ClCompile Include="..\Assets\StateShop.cpp" />
     <ClCompile Include="..\Assets\Timer.cpp" />
     <ClCompile Include="..\Assets\Trigonometry.cpp" />
     <ClCompile Include="..\Assets\Windows.cpp" />
@@ -208,6 +209,7 @@
     <ClInclude Include="..\Assets\StateGameOver.h" />
     <ClInclude Include="..\Assets\StateGamePause.h" />
     <ClInclude Include="..\Assets\StateMainMenu.h" />
+    <ClInclude Include="..\Assets\StateShop.h" />
     <ClInclude Include="..\Assets\Timer.h" />
     <ClInclude Include="..\Assets\Trigonometry.h" />
   </ItemGroup>
