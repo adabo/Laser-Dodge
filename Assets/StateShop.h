@@ -4,44 +4,23 @@
 
 class GameManager;
 
-class StateShop
+class State
 {
 public:
-    StateShop();
-    class TextXY
+    class Element;
+    State(float X1, float Y1,
+          float X2, float Y2,
+          float X3, float Y3,
+          float X4, float Y4);
+    class Element
     {
     public:
-        TextXY(int X, int Y);
-        int x;
-        int y;
+        Element(float X, float Y);
+    private:
+        float x, y;
     };
-    enum Selection
-    {
-       SHIP,WEAPON,AMMO,SKILL 
-    };
-public:
-    void Update(GameManager &Mgr);
-    void Draw(GameManager &Mgr);
-    void UpgradeSpeed();
-    void UpgradeDamage();
-    void UpgradeAccel();
-    void UpgradeShield();
-    void UpgradeMiss_enemy();
-    void UpgradeMiss_shot();
-private:
-    // Upgrades
-    int up_screen_upgrades_x, up_screen_upgrades_y,
-        up_screen)
-    float up_speed,
-          up_damage,
-          up_accel,
-          up_shield,
-          up_miss_enemy,
-          up_miss_shot;
-
-    int col_r,col_g,col_b;
-    D3DCOLOR font_surf[512 * 84];
-    Font fixedSys;
-    char buffer[64];
-    TextXY up_screen;
+    Element title;
+    Element category;
+    Element upgrade1;
+    Element upgrade2;
 };
