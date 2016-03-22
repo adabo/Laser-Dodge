@@ -5,10 +5,14 @@
 #include "GameManager.h"
 
 StateShop::StateShop(GameManager &MGR)
-:   mgr(MGR),
-    col_r(100),
-    col_g(100),
-    col_b(100),
+:   main(100, 100, 100),
+    dflt(100, 100, 100),
+    back(100, 100, 100),
+    ship(100, 100, 100),
+    weap(100, 100, 100),
+    ammo(100, 100, 100),
+    skll(100, 100, 100),
+    mgr(MGR),
     tab_is_pressed(false),
     left_is_pressed(false),
     shop_state (MAIN),
@@ -105,11 +109,13 @@ void StateShop::UpdateShopMain()
     // Check main
     int mx = mgr.mouse.GetMouseX();
     int my = mgr.mouse.GetMouseY();
-    col_r = 100, col_g = 100, col_b = 100;
+    // col_r = 100, col_g = 100, col_b = 100;
+    back = {100, 100, 100};
     // Check back
     if (MouseHoverOver(mx, my, 80, 84, 32, 28))
     {
-        col_r = 30, col_g = 99, col_b = 20;
+        // col_r = 30, col_g = 99, col_b = 20;
+        back = { 30, 99, 20 };
         if (mgr.mouse.LeftIsPressed())
         {
             if (!left_is_pressed)
@@ -358,21 +364,20 @@ void StateShop::UpgradeMissShot()
 // and BAM!
 void StateShop::DrawMain()
 {
-
     sprintf(buffer, "<=");
-    fixedSys.DrawString(buffer, 80, 84, &fixedSys, D3DCOLOR_XRGB(col_r, col_g, col_b), mgr.gfx);
+    fixedSys.DrawString(buffer, 80, 84, &fixedSys, D3DCOLOR_XRGB(back.r, back.g, back.b), mgr.gfx);
     sprintf(buffer, "SHOP");
-    fixedSys.DrawString(buffer, 370, 88, &fixedSys, D3DCOLOR_XRGB(col_r, col_g, col_b), mgr.gfx);
+    fixedSys.DrawString(buffer, 370, 88, &fixedSys, D3DCOLOR_XRGB(dflt.r, dflt.g, dflt.b), mgr.gfx);
     sprintf(buffer, "UPGRADES");
-    fixedSys.DrawString(buffer, 338, 200, &fixedSys, D3DCOLOR_XRGB(col_r, col_g, col_b), mgr.gfx);
+    fixedSys.DrawString(buffer, 338, 200, &fixedSys, D3DCOLOR_XRGB(dflt.r, dflt.g, dflt.b), mgr.gfx);
     sprintf(buffer, "SHIP");
-    fixedSys.DrawString(buffer, 370, 280, &fixedSys, D3DCOLOR_XRGB(col_r, col_g, col_b), mgr.gfx);
+    fixedSys.DrawString(buffer, 370, 280, &fixedSys, D3DCOLOR_XRGB(ship.r, ship.g, ship.b), mgr.gfx);
     sprintf(buffer, "WEAPONS");
-    fixedSys.DrawString(buffer, 346, 308, &fixedSys, D3DCOLOR_XRGB(col_r, col_g, col_b), mgr.gfx);
+    fixedSys.DrawString(buffer, 346, 308, &fixedSys, D3DCOLOR_XRGB(weap.r, weap.g, weap.b), mgr.gfx);
     sprintf(buffer, "AMMO");
-    fixedSys.DrawString(buffer, 368, 336, &fixedSys, D3DCOLOR_XRGB(col_r, col_g, col_b), mgr.gfx);
+    fixedSys.DrawString(buffer, 368, 336, &fixedSys, D3DCOLOR_XRGB(ammo.r, ammo.r, ammo.r), mgr.gfx);
     sprintf(buffer, "SKILLS");
-    fixedSys.DrawString(buffer, 354, 364, &fixedSys, D3DCOLOR_XRGB(col_r, col_g, col_b), mgr.gfx);
+    fixedSys.DrawString(buffer, 354, 364, &fixedSys, D3DCOLOR_XRGB(skll.r, skll.r, skll.r), mgr.gfx);
 }
 
 void StateShop::DrawShipUpgrades()

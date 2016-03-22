@@ -11,6 +11,12 @@ class GameManager;
 class StateShop
 {
 public:
+    struct TextColors
+    {
+        TextColors(int R, int G, int B)
+            : r(R), g(G), b(B) {}
+        int r,g,b;
+    };
     enum ShopStates
     {
         MAIN, SHIP, WEAPON, AMMO, SKILL
@@ -121,4 +127,11 @@ private:
     char buffer[64];
     bool tab_is_pressed;
     bool left_is_pressed;
+    TextColors back;
+    TextColors main;
+    TextColors ship;
+    TextColors weap;
+    TextColors ammo;
+    TextColors skll;
+    TextColors dflt;
 };
