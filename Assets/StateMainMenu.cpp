@@ -23,7 +23,7 @@ StateMainMenu::StateMainMenu()
 void StateMainMenu::Update(GameManager &Mgr)
 {
     // Check mouse hover
-    if (MouseClickedBox(Mgr.mouse.GetMouseX(), Mgr.mouse.GetMouseY(), play_x, play_y, play_w, play_h))
+    if (MouseHoverOver(Mgr.mouse.GetMouseX(), Mgr.mouse.GetMouseY(), play_x, play_y, play_w, play_h))
     {
         play_red = 25;
         play_green = 150;
@@ -37,7 +37,7 @@ void StateMainMenu::Update(GameManager &Mgr)
     }
     if (Mgr.mouse.LeftIsPressed())
     {
-        if (MouseClickedBox(Mgr.mouse.GetMouseX(), Mgr.mouse.GetMouseY(),
+        if (MouseHoverOver(Mgr.mouse.GetMouseX(), Mgr.mouse.GetMouseY(),
             play_x, play_y, play_w, play_h))
         {
             Mgr.s_state.states = GAME;
@@ -45,7 +45,7 @@ void StateMainMenu::Update(GameManager &Mgr)
     }
 }
 
-bool StateMainMenu::MouseClickedBox(int MX, int MY, int X, int Y, int W, int H)
+bool StateMainMenu::MouseHoverOver(int MX, int MY, int X, int Y, int W, int H)
 {
     return (MX >= X && MX <= X + W &&
             MY >= Y && MY <= Y + H);

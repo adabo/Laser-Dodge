@@ -11,7 +11,7 @@ public:
     StateMainMenu();
     void Update(GameManager &Mgr);
     void Draw(D3DGraphics &Gfx);
-    bool MouseClickedBox(int MX, int MY, int X, int Y, int W, int H);
+    bool MouseHoverOver(int MX, int MY, int X, int Y, int W, int H);
 private:
     D3DCOLOR font_surf[512 * 84];
     Font fixedSys;

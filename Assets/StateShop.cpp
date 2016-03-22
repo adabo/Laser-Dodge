@@ -6,6 +6,9 @@
 
 StateShop::StateShop(GameManager &MGR)
 :   mgr(MGR),
+    col_r(100),
+    col_g(100),
+    col_b(100),
     tab_is_pressed(false),
     left_is_pressed(false),
     shop_state (MAIN),
@@ -102,9 +105,11 @@ void StateShop::UpdateShopMain()
     // Check main
     int mx = mgr.mouse.GetMouseX();
     int my = mgr.mouse.GetMouseY();
+    col_r = 100, col_g = 100, col_b = 100;
     // Check back
     if (MouseHoverOver(mx, my, 80, 84, 32, 28))
     {
+        col_r = 30, col_g = 99, col_b = 20;
         if (mgr.mouse.LeftIsPressed())
         {
             if (!left_is_pressed)
@@ -122,7 +127,7 @@ void StateShop::UpdateShopMain()
         }
     }
     // Check ship
-    else if (MouseHoverOver(mx, my, 370, 280, 64, 28))
+    if (MouseHoverOver(mx, my, 370, 280, 64, 28))
     {
         if (mgr.mouse.LeftIsPressed())
         {
@@ -163,9 +168,11 @@ void StateShop::UpdateShopShip()
 {
     int mx = mgr.mouse.GetMouseX();
     int my = mgr.mouse.GetMouseY();
+    col_r = 100, col_g = 100, col_b = 100;
     // Check back
     if (MouseHoverOver(mx, my, 80, 84, 32, 28))
     {
+        col_r = 30, col_g = 99, col_b = 20;
         if (mgr.mouse.LeftIsPressed())
         {
             if (!left_is_pressed)
@@ -183,7 +190,7 @@ void StateShop::UpdateShopShip()
         }
     }
     // Check speed
-    if (MouseHoverOver(mx, my, 362, 256, 76, 28))
+    else if (MouseHoverOver(mx, my, 362, 256, 76, 28))
     {
         if (mgr.mouse.LeftIsPressed())
         {
@@ -191,7 +198,7 @@ void StateShop::UpdateShopShip()
         }
     }
     // Check acceleration
-    if (MouseHoverOver(mx, my, 306, 284, 188, 28))
+    else if (MouseHoverOver(mx, my, 306, 284, 188, 28))
     {
         if (mgr.mouse.LeftIsPressed())
         {
@@ -199,7 +206,7 @@ void StateShop::UpdateShopShip()
         }
     }
     // Check shield 
-    if (MouseHoverOver(mx, my, 354, 312, 96, 28))
+    else if (MouseHoverOver(mx, my, 354, 312, 96, 28))
     {
         if (mgr.mouse.LeftIsPressed())
         {
@@ -212,9 +219,11 @@ void StateShop::UpdateShopWeapon()
 {
     int mx = mgr.mouse.GetMouseX();
     int my = mgr.mouse.GetMouseY();
+    col_r = 100, col_g = 100, col_b = 100;
     // Check back
     if (MouseHoverOver(mx, my, 80, 84, 32, 28))
     {
+        col_r = 30, col_g = 99, col_b = 20;
         if (mgr.mouse.LeftIsPressed())
         {
             if (!left_is_pressed)
@@ -232,7 +241,7 @@ void StateShop::UpdateShopWeapon()
         }
     }
     // Check damage
-    if (MouseHoverOver(mx, my, 362, 256, 76, 28))
+    else if (MouseHoverOver(mx, my, 362, 256, 76, 28))
     {
         if (mgr.mouse.LeftIsPressed())
         {
@@ -245,9 +254,11 @@ void StateShop::UpdateShopAmmo()
 {
     int mx = mgr.mouse.GetMouseX();
     int my = mgr.mouse.GetMouseY();
+    col_r = 100, col_g = 100, col_b = 100;
     // Check back
     if (MouseHoverOver(mx, my, 80, 84, 32, 28))
     {
+        col_r = 30, col_g = 99, col_b = 20;
         if (mgr.mouse.LeftIsPressed())
         {
             if (!left_is_pressed)
@@ -270,9 +281,11 @@ void StateShop::UpdateShopSkill()
 {
     int mx = mgr.mouse.GetMouseX();
     int my = mgr.mouse.GetMouseY();
+    col_r = 100, col_g = 100, col_b = 100;
     // Check back
     if (MouseHoverOver(mx, my, 80, 84, 32, 28))
     {
+        col_r = 30, col_g = 99, col_b = 20;
         if (mgr.mouse.LeftIsPressed())
         {
             if (!left_is_pressed)
@@ -290,7 +303,7 @@ void StateShop::UpdateShopSkill()
         }
     }
     // Check miss enemy
-    if (MouseHoverOver(mx, my, 362, 256, 76, 28))
+    else if (MouseHoverOver(mx, my, 362, 256, 76, 28))
     {
         if (mgr.mouse.LeftIsPressed())
         {
@@ -298,7 +311,7 @@ void StateShop::UpdateShopSkill()
         }
     }
     // Check miss Shot
-    if (MouseHoverOver(mx, my, 362, 256, 76, 28))
+    else if (MouseHoverOver(mx, my, 362, 256, 76, 28))
     {
         if (mgr.mouse.LeftIsPressed())
         {
@@ -347,51 +360,51 @@ void StateShop::DrawMain()
 {
 
     sprintf(buffer, "<=");
-    fixedSys.DrawString(buffer, 80, 84, &fixedSys, D3DCOLOR_XRGB(100, 100, 100), mgr.gfx);
+    fixedSys.DrawString(buffer, 80, 84, &fixedSys, D3DCOLOR_XRGB(col_r, col_g, col_b), mgr.gfx);
     sprintf(buffer, "SHOP");
-    fixedSys.DrawString(buffer, 370, 88, &fixedSys, D3DCOLOR_XRGB(100, 100, 100), mgr.gfx);
+    fixedSys.DrawString(buffer, 370, 88, &fixedSys, D3DCOLOR_XRGB(col_r, col_g, col_b), mgr.gfx);
     sprintf(buffer, "UPGRADES");
-    fixedSys.DrawString(buffer, 338, 200, &fixedSys, D3DCOLOR_XRGB(100, 100, 100), mgr.gfx);
+    fixedSys.DrawString(buffer, 338, 200, &fixedSys, D3DCOLOR_XRGB(col_r, col_g, col_b), mgr.gfx);
     sprintf(buffer, "SHIP");
-    fixedSys.DrawString(buffer, 370, 280, &fixedSys, D3DCOLOR_XRGB(100, 100, 100), mgr.gfx);
+    fixedSys.DrawString(buffer, 370, 280, &fixedSys, D3DCOLOR_XRGB(col_r, col_g, col_b), mgr.gfx);
     sprintf(buffer, "WEAPONS");
-    fixedSys.DrawString(buffer, 346, 308, &fixedSys, D3DCOLOR_XRGB(100, 100, 100), mgr.gfx);
+    fixedSys.DrawString(buffer, 346, 308, &fixedSys, D3DCOLOR_XRGB(col_r, col_g, col_b), mgr.gfx);
     sprintf(buffer, "AMMO");
-    fixedSys.DrawString(buffer, 368, 336, &fixedSys, D3DCOLOR_XRGB(100, 100, 100), mgr.gfx);
+    fixedSys.DrawString(buffer, 368, 336, &fixedSys, D3DCOLOR_XRGB(col_r, col_g, col_b), mgr.gfx);
     sprintf(buffer, "SKILLS");
-    fixedSys.DrawString(buffer, 354, 364, &fixedSys, D3DCOLOR_XRGB(100, 100, 100), mgr.gfx);
+    fixedSys.DrawString(buffer, 354, 364, &fixedSys, D3DCOLOR_XRGB(col_r, col_g, col_b), mgr.gfx);
 }
 
 void StateShop::DrawShipUpgrades()
 {
     sprintf(buffer, "<=");
-    fixedSys.DrawString(buffer, 80, 84, &fixedSys, D3DCOLOR_XRGB(100, 100, 100), mgr.gfx);
+    fixedSys.DrawString(buffer, 80, 84, &fixedSys, D3DCOLOR_XRGB(col_r, col_g, col_b), mgr.gfx);
     sprintf(buffer, "SHOP");
-    fixedSys.DrawString(buffer, 370, 88, &fixedSys, D3DCOLOR_XRGB(100, 100, 100), mgr.gfx);
+    fixedSys.DrawString(buffer, 370, 88, &fixedSys, D3DCOLOR_XRGB(col_r, col_g, col_b), mgr.gfx);
 }
 
 void StateShop::DrawWeaponUpgrades()
 {
     sprintf(buffer, "<=");
-    fixedSys.DrawString(buffer, 80, 84, &fixedSys, D3DCOLOR_XRGB(100, 100, 100), mgr.gfx);
+    fixedSys.DrawString(buffer, 80, 84, &fixedSys, D3DCOLOR_XRGB(col_r, col_g, col_b), mgr.gfx);
     sprintf(buffer, "SHOP");
-    fixedSys.DrawString(buffer, 370, 88, &fixedSys, D3DCOLOR_XRGB(100, 100, 100), mgr.gfx);
+    fixedSys.DrawString(buffer, 370, 88, &fixedSys, D3DCOLOR_XRGB(col_r, col_g, col_b), mgr.gfx);
 }
 
 void StateShop::DrawAmmoUpgrades()
 {
     sprintf(buffer, "<=");
-    fixedSys.DrawString(buffer, 80, 84, &fixedSys, D3DCOLOR_XRGB(100, 100, 100), mgr.gfx);
+    fixedSys.DrawString(buffer, 80, 84, &fixedSys, D3DCOLOR_XRGB(col_r, col_g, col_b), mgr.gfx);
     sprintf(buffer, "SHOP");
-    fixedSys.DrawString(buffer, 370, 88, &fixedSys, D3DCOLOR_XRGB(100, 100, 100), mgr.gfx);
+    fixedSys.DrawString(buffer, 370, 88, &fixedSys, D3DCOLOR_XRGB(col_r, col_g, col_b), mgr.gfx);
 }
 
 void StateShop::DrawSkillUpgrades()
 {
     sprintf(buffer, "<=");
-    fixedSys.DrawString(buffer, 80, 84, &fixedSys, D3DCOLOR_XRGB(100, 100, 100), mgr.gfx);
+    fixedSys.DrawString(buffer, 80, 84, &fixedSys, D3DCOLOR_XRGB(col_r, col_g, col_b), mgr.gfx);
     sprintf(buffer, "SHOP");
-    fixedSys.DrawString(buffer, 370, 88, &fixedSys, D3DCOLOR_XRGB(100, 100, 100), mgr.gfx);
+    fixedSys.DrawString(buffer, 370, 88, &fixedSys, D3DCOLOR_XRGB(col_r, col_g, col_b), mgr.gfx);
 }
 
 bool StateShop::MouseHoverOver(int MX, int MY, int X, int Y, int W, int H)
