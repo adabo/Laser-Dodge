@@ -1,8 +1,9 @@
 #include "ScreenState.h"
 #include "GameManager.h"
 
-ScreenState::ScreenState()
-:   states(GAMEMAINMENU)
+ScreenState::ScreenState(GameManager &MGR)
+:   states(GAMEMAINMENU),
+    state_shop(MGR)
 {}
 
 
@@ -30,7 +31,7 @@ void ScreenState::Update(GameManager &Mgr)
             state_game_pause.Update(Mgr);
         break;
         case GAMESHOP:
-            state_shop.Update(Mgr);
+            state_shop.Update();
         break;
         default:
         break;
@@ -55,7 +56,7 @@ void ScreenState::Draw(GameManager &Mgr)
             state_game_pause.Draw(Mgr);
         break;
         case GAMESHOP:
-            state_shop.Draw(Mgr);
+            state_shop.Draw();
         break;
         default:
         break;

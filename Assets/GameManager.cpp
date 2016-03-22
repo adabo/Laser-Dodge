@@ -8,6 +8,7 @@ GameManager::GameManager(HWND hWnd, D3DGraphics &Gfx, const KeyboardServer& kSer
         mouse( mServer ),
         gfx(Gfx),
         player(),
+        s_state(*this),
         score((int)player.hp)
 {
     //score = Score(player.hp);

@@ -16,7 +16,7 @@ class ScreenState
     friend class StateMainMenu;
     friend class StateShop;
 public:
-    ScreenState();
+    ScreenState(GameManager &MGR);
     void Update(GameManager &Mgr);
     void Draw(GameManager &Mgr);
 private:

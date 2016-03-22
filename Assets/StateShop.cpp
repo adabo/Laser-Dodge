@@ -4,15 +4,17 @@
 #include "StateShop.h"
 #include "GameManager.h"
 
-StateShop::StateShop()
-:   tab_is_pressed(false),
+StateShop::StateShop(GameManager &MGR)
+:   mgr(MGR),
+    tab_is_pressed(false),
+    left_is_pressed(false),
     shop_state (MAIN),
     shop_main  (370, 88,   /*Shop*/
                 80,  84,   /*Back*/
                 338, 200,  /*Category*/
-                270, 285,  /*Upgrade1*/
-                346, 312,  /*Upgrade2*/
-                354, 368), /*Upgrade3*/
+                270, 280,  /*Upgrade1*/
+                346, 336,  /*Upgrade2*/
+                354, 364), /*Upgrade3*/
     shop_ship  (370, 88,
                 80,  84,
                 367, 200,
@@ -35,9 +37,9 @@ StateShop::StateShop()
     fixedSys.LoadFont(&fixedSys, font_surf, "Fixedsys16x28.bmp", 16, 28, 32);
 }
 
-void StateShop::Update(GameManager &Mgr)
+void StateShop::Update()
 {
-    if (Mgr.kbd.TabIsPressed())
+    if (mgr.kbd.TabIsPressed())
     {
         if (!tab_is_pressed)
         {
@@ -49,256 +51,348 @@ void StateShop::Update(GameManager &Mgr)
         if (tab_is_pressed)
         {
             tab_is_pressed = false;
-            Mgr.s_state.states = GAME;
+            mgr.s_state.states = GAME;
         }
     }
 
     switch(shop_state)
     {
         case MAIN:
-            UpdateShopMain(Mgr.s_state, Mgr.player, Mgr.mouse);
+            UpdateShopMain();
         break;
         case SHIP:
-            UpdateShopShip(Mgr.player, Mgr.mouse);
+            UpdateShopShip();
         break;
         case WEAPON:
-            UpdateShopWeapon(Mgr.player, Mgr.mouse);
+            UpdateShopWeapon();
         break;
         case AMMO:
-            UpdateShopAmmo(Mgr.player, Mgr.mouse);
+            UpdateShopAmmo();
         break;
         case SKILL:
-            UpdateShopSkill(Mgr.player, Mgr.mouse);
+            UpdateShopSkill();
         break;
     }
 }
 
-void StateShop::Draw(GameManager &Mgr)
+void StateShop::Draw()
 {
     switch(shop_state)
     {
         case MAIN:
-            DrawMain(Mgr.gfx);
+            DrawMain();
         break;
         case SHIP:
-            DrawShipUpgrades(Mgr.gfx);
+            DrawShipUpgrades();
         break;
         case WEAPON:
-            DrawWeaponUpgrades(Mgr.gfx);
+            DrawWeaponUpgrades();
         break;
         case AMMO:
-            DrawAmmoUpgrades(Mgr.gfx);
+            DrawAmmoUpgrades();
         break;
         case SKILL:
-            DrawSkillUpgrades(Mgr.gfx);
+            DrawSkillUpgrades();
         break;
     }
 }
 
-void StateShop::UpdateShopMain(ScreenState &SState, Player &ThisPlayer, MouseClient &Mouse)
+void StateShop::UpdateShopMain()
 {
     // Check main
-    int mx = Mouse.GetMouseX();
-    int my = Mouse.GetMouseY();
+    int mx = mgr.mouse.GetMouseX();
+    int my = mgr.mouse.GetMouseY();
     // Check back
     if (MouseHoverOver(mx, my, 80, 84, 32, 28))
     {
-        if (Mouse.LeftIsPressed())
+        if (mgr.mouse.LeftIsPressed())
         {
-            SState.states = GAME;
+            if (!left_is_pressed)
+            {
+                left_is_pressed = true;
+            }
+        }
+        else
+        {
+            if (left_is_pressed)
+            {
+                left_is_pressed = false;
+                mgr.s_state.states = GAME;
+            }
         }
     }
     // Check ship
-    else if (MouseHoverOver(mx, my, 370, 285, 64, 28))
+    else if (MouseHoverOver(mx, my, 370, 280, 64, 28))
     {
-        if (Mouse.LeftIsPressed())
+        if (mgr.mouse.LeftIsPressed())
         {
             shop_state = SHIP;
-            UpdateShopShip(ThisPlayer, Mouse);
+            UpdateShopShip();
         }
     }
     // Check weapon
-    else if (MouseHoverOver(mx, my, 346, 312, 108, 28))
+    else if (MouseHoverOver(mx, my, 346, 308, 108, 28))
     {
-        if (Mouse.LeftIsPressed())
+        if (mgr.mouse.LeftIsPressed())
         {
             shop_state = WEAPON;
-            UpdateShopWeapon(ThisPlayer, Mouse);
+            UpdateShopWeapon();
         }
     }
     // Check ammo
     else if (MouseHoverOver(mx, my, 368, 336, 64, 28))
     {
-        if (Mouse.LeftIsPressed())
+        if (mgr.mouse.LeftIsPressed())
         {
             shop_state = AMMO;
-            UpdateShopAmmo(ThisPlayer, Mouse);
+            UpdateShopAmmo();
         }
     }
     // Check skill
-    else if (MouseHoverOver(mx, my, 354, 368, 64, 28))
+    else if (MouseHoverOver(mx, my, 354, 364, 64, 28))
     {
-        if (Mouse.LeftIsPressed())
+        if (mgr.mouse.LeftIsPressed())
         {
             shop_state = SKILL;
-            UpdateShopSkill(ThisPlayer, Mouse);
+            UpdateShopSkill();
         }
     }
 }
 
-void StateShop::UpdateShopShip(Player &ThisPlayer, MouseClient &Mouse)
+void StateShop::UpdateShopShip()
 {
-    int mx = Mouse.GetMouseX();
-    int my = Mouse.GetMouseY();
+    int mx = mgr.mouse.GetMouseX();
+    int my = mgr.mouse.GetMouseY();
     // Check back
     if (MouseHoverOver(mx, my, 80, 84, 32, 28))
     {
-        if (Mouse.LeftIsPressed())
+        if (mgr.mouse.LeftIsPressed())
         {
-            shop_state = MAIN;
+            if (!left_is_pressed)
+            {
+                left_is_pressed = true;
+            }
+        }
+        else
+        {
+            if (left_is_pressed)
+            {
+                left_is_pressed = false;
+                shop_state = MAIN;
+            }
         }
     }
     // Check speed
     if (MouseHoverOver(mx, my, 362, 256, 76, 28))
     {
-        if (Mouse.LeftIsPressed())
+        if (mgr.mouse.LeftIsPressed())
         {
-            UpgradeSpeed(ThisPlayer);
+            UpgradeSpeed();
         }
     }
     // Check acceleration
     if (MouseHoverOver(mx, my, 306, 284, 188, 28))
     {
-        if (Mouse.LeftIsPressed())
+        if (mgr.mouse.LeftIsPressed())
         {
-            UpgradeAccel(ThisPlayer);
+            UpgradeAccel();
         }
     }
     // Check shield 
     if (MouseHoverOver(mx, my, 354, 312, 96, 28))
     {
-        if (Mouse.LeftIsPressed())
+        if (mgr.mouse.LeftIsPressed())
         {
-            UpgradeShield(ThisPlayer);
+            UpgradeShield();
         }
     }
 }
 
-void StateShop::UpdateShopWeapon(Player &ThisPlayer, MouseClient &Mouse)
+void StateShop::UpdateShopWeapon()
 {
-    int mx = Mouse.GetMouseX();
-    int my = Mouse.GetMouseY();
+    int mx = mgr.mouse.GetMouseX();
+    int my = mgr.mouse.GetMouseY();
     // Check back
     if (MouseHoverOver(mx, my, 80, 84, 32, 28))
     {
-        if (Mouse.LeftIsPressed())
+        if (mgr.mouse.LeftIsPressed())
         {
-            shop_state = MAIN;
+            if (!left_is_pressed)
+            {
+                left_is_pressed = true;
+            }
+        }
+        else
+        {
+            if (left_is_pressed)
+            {
+                left_is_pressed = false;
+                shop_state = MAIN;
+            }
         }
     }
     // Check damage
     if (MouseHoverOver(mx, my, 362, 256, 76, 28))
     {
-        if (Mouse.LeftIsPressed())
+        if (mgr.mouse.LeftIsPressed())
         {
-            UpgradeDamage(ThisPlayer);
+            UpgradeDamage();
         }
     }
 }
 
-void StateShop::UpdateShopAmmo(Player &ThisPlayer, MouseClient &Mouse)
-{}
-
-void StateShop::UpdateShopSkill(Player &ThisPlayer, MouseClient &Mouse)
+void StateShop::UpdateShopAmmo()
 {
-    int mx = Mouse.GetMouseX();
-    int my = Mouse.GetMouseY();
+    int mx = mgr.mouse.GetMouseX();
+    int my = mgr.mouse.GetMouseY();
     // Check back
     if (MouseHoverOver(mx, my, 80, 84, 32, 28))
     {
-        if (Mouse.LeftIsPressed())
+        if (mgr.mouse.LeftIsPressed())
         {
-            shop_state = MAIN;
+            if (!left_is_pressed)
+            {
+                left_is_pressed = true;
+            }
+        }
+        else
+        {
+            if (left_is_pressed)
+            {
+                left_is_pressed = false;
+                shop_state = MAIN;
+            }
+        }
+    }
+}
+
+void StateShop::UpdateShopSkill()
+{
+    int mx = mgr.mouse.GetMouseX();
+    int my = mgr.mouse.GetMouseY();
+    // Check back
+    if (MouseHoverOver(mx, my, 80, 84, 32, 28))
+    {
+        if (mgr.mouse.LeftIsPressed())
+        {
+            if (!left_is_pressed)
+            {
+                left_is_pressed = true;
+            }
+        }
+        else
+        {
+            if (left_is_pressed)
+            {
+                left_is_pressed = false;
+                shop_state = MAIN;
+            }
         }
     }
     // Check miss enemy
     if (MouseHoverOver(mx, my, 362, 256, 76, 28))
     {
-        if (Mouse.LeftIsPressed())
+        if (mgr.mouse.LeftIsPressed())
         {
-            UpgradeMissEnemy(ThisPlayer);
+            UpgradeMissEnemy();
         }
     }
     // Check miss Shot
     if (MouseHoverOver(mx, my, 362, 256, 76, 28))
     {
-        if (Mouse.LeftIsPressed())
+        if (mgr.mouse.LeftIsPressed())
         {
-            UpgradeMissShot(ThisPlayer);
+            UpgradeMissShot();
         }
     }
 }
 
-void StateShop::UpgradeSpeed(Player &ThisPlayer)
+void StateShop::UpgradeSpeed()
 {
-    ThisPlayer.money -= 20;
+    mgr.player.money -= 20;
 }
 
-void StateShop::UpgradeDamage(Player &ThisPlayer)
+void StateShop::UpgradeDamage()
 {
-    ThisPlayer.money -= 20;
+    mgr.player.money -= 20;
 }
 
-void StateShop::UpgradeAccel(Player &ThisPlayer)
+void StateShop::UpgradeAccel()
 {
-    ThisPlayer.money -= 20;
+    mgr.player.money -= 20;
 }
 
-void StateShop::UpgradeShield(Player &ThisPlayer)
+void StateShop::UpgradeShield()
 {
-    ThisPlayer.money -= 20;
+    mgr.player.money -= 20;
 }
 
-void StateShop::UpgradeMissEnemy(Player &ThisPlayer)
+void StateShop::UpgradeMissEnemy()
 {
-    ThisPlayer.money -= 20;
+    mgr.player.money -= 20;
 }
 
-void StateShop::UpgradeMissShot(Player &ThisPlayer)
+void StateShop::UpgradeMissShot()
 {
-    ThisPlayer.money -= 20;
+    mgr.player.money -= 20;
 }
 
-void StateShop::DrawMain(D3DGraphics &Gfx)
+// You should make a function that will take any text you put
+// and automatically position it wherever you want.
+// Middle aligned. Left justafied. Right justified. You can do it.
+// Use the same code that you used for the HP text. sprintf will give you
+// the number of chars, then just multiply by 16pixels. Then use screenwidth
+// and BAM!
+void StateShop::DrawMain()
 {
 
     sprintf(buffer, "<=");
-    fixedSys.DrawString(buffer, 80, 84, &fixedSys, D3DCOLOR_XRGB(100, 100, 100), Gfx);
+    fixedSys.DrawString(buffer, 80, 84, &fixedSys, D3DCOLOR_XRGB(100, 100, 100), mgr.gfx);
     sprintf(buffer, "SHOP");
-    fixedSys.DrawString(buffer, 370, 88, &fixedSys, D3DCOLOR_XRGB(100, 100, 100), Gfx);
+    fixedSys.DrawString(buffer, 370, 88, &fixedSys, D3DCOLOR_XRGB(100, 100, 100), mgr.gfx);
     sprintf(buffer, "UPGRADES");
-    fixedSys.DrawString(buffer, 338, 200, &fixedSys, D3DCOLOR_XRGB(100, 100, 100), Gfx);
+    fixedSys.DrawString(buffer, 338, 200, &fixedSys, D3DCOLOR_XRGB(100, 100, 100), mgr.gfx);
     sprintf(buffer, "SHIP");
-    fixedSys.DrawString(buffer, 370, 285, &fixedSys, D3DCOLOR_XRGB(100, 100, 100), Gfx);
+    fixedSys.DrawString(buffer, 370, 280, &fixedSys, D3DCOLOR_XRGB(100, 100, 100), mgr.gfx);
     sprintf(buffer, "WEAPONS");
-    fixedSys.DrawString(buffer, 346, 312, &fixedSys, D3DCOLOR_XRGB(100, 100, 100), Gfx);
+    fixedSys.DrawString(buffer, 346, 308, &fixedSys, D3DCOLOR_XRGB(100, 100, 100), mgr.gfx);
     sprintf(buffer, "AMMO");
-    fixedSys.DrawString(buffer, 368, 336, &fixedSys, D3DCOLOR_XRGB(100, 100, 100), Gfx);
+    fixedSys.DrawString(buffer, 368, 336, &fixedSys, D3DCOLOR_XRGB(100, 100, 100), mgr.gfx);
     sprintf(buffer, "SKILLS");
-    fixedSys.DrawString(buffer, 354, 368, &fixedSys, D3DCOLOR_XRGB(100, 100, 100), Gfx);
+    fixedSys.DrawString(buffer, 354, 364, &fixedSys, D3DCOLOR_XRGB(100, 100, 100), mgr.gfx);
 }
 
-void StateShop::DrawShipUpgrades(D3DGraphics &Gfx)
-{}
+void StateShop::DrawShipUpgrades()
+{
+    sprintf(buffer, "<=");
+    fixedSys.DrawString(buffer, 80, 84, &fixedSys, D3DCOLOR_XRGB(100, 100, 100), mgr.gfx);
+    sprintf(buffer, "SHOP");
+    fixedSys.DrawString(buffer, 370, 88, &fixedSys, D3DCOLOR_XRGB(100, 100, 100), mgr.gfx);
+}
 
-void StateShop::DrawWeaponUpgrades(D3DGraphics &Gfx)
-{}
+void StateShop::DrawWeaponUpgrades()
+{
+    sprintf(buffer, "<=");
+    fixedSys.DrawString(buffer, 80, 84, &fixedSys, D3DCOLOR_XRGB(100, 100, 100), mgr.gfx);
+    sprintf(buffer, "SHOP");
+    fixedSys.DrawString(buffer, 370, 88, &fixedSys, D3DCOLOR_XRGB(100, 100, 100), mgr.gfx);
+}
 
-void StateShop::DrawAmmoUpgrades(D3DGraphics &Gfx)
-{}
+void StateShop::DrawAmmoUpgrades()
+{
+    sprintf(buffer, "<=");
+    fixedSys.DrawString(buffer, 80, 84, &fixedSys, D3DCOLOR_XRGB(100, 100, 100), mgr.gfx);
+    sprintf(buffer, "SHOP");
+    fixedSys.DrawString(buffer, 370, 88, &fixedSys, D3DCOLOR_XRGB(100, 100, 100), mgr.gfx);
+}
 
-void StateShop::DrawSkillUpgrades(D3DGraphics &Gfx)
-{}
+void StateShop::DrawSkillUpgrades()
+{
+    sprintf(buffer, "<=");
+    fixedSys.DrawString(buffer, 80, 84, &fixedSys, D3DCOLOR_XRGB(100, 100, 100), mgr.gfx);
+    sprintf(buffer, "SHOP");
+    fixedSys.DrawString(buffer, 370, 88, &fixedSys, D3DCOLOR_XRGB(100, 100, 100), mgr.gfx);
+}
 
 bool StateShop::MouseHoverOver(int MX, int MY, int X, int Y, int W, int H)
 {
