@@ -24,6 +24,7 @@ class Player : public Entity
     friend class StateGame;
     //friend class StateGamePause;
     //friend class StateMainMenu;
+    friend class StateShop;
     friend class StateGameOver;
     friend class GameManager;
     friend class Physics;
@@ -40,6 +41,7 @@ public:
     int   GetWidth();
     int   GetHeight();
 private:
+    int money;
     float col_dec;
     int col_r;
     int col_g;

@@ -25,6 +25,7 @@ class GameManager
     friend class StateGameOver;
     friend class StateGame;
     friend class StateGamePause;
+    friend class StateShop;
     friend class Spawner;
     friend class Debug;
 public:

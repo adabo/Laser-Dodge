@@ -2,7 +2,10 @@
 #include "Common.h"
 #include "D3DGraphics.h"
 #include "Font.h"
+#include "Mouse.h"
 
+class Player;
+class ScreenState;
 class GameManager;
 
 class StateShop
@@ -12,7 +15,6 @@ public:
     {
         MAIN, SHIP, WEAPON, AMMO, SKILL
     };
-    StateShop();
     class Screen
     {
     public:
@@ -82,15 +84,31 @@ public:
         Element upgrade1;
         Element upgrade2;
         Element upgrade3;
+        Element upgrade4;
     };
 public:
-    UpdateShopMain(Mgr);
-    UpdateShopShip(Mgr);
-    UpdateShopWeapon(Mgr);
-    UpdateShopAmmo(Mgr;
-    UpdateShopSkill(Mgr);
+    StateShop();
+    void Update(GameManager &Mgr);
+    void Draw(GameManager &Mgr);
+    void UpdateShopMain(ScreenState SState, Player &ThisPlayer, MouseClient &Mouse);
+    void UpdateShopShip(Player &ThisPlayer, MouseClient &Mouse);
+    void UpdateShopWeapon(Player &ThisPlayer, MouseClient &Mouse);
+    void UpdateShopAmmo(Player &ThisPlayer, MouseClient &Mouse);
+    void UpdateShopSkill(Player &ThisPlayer, MouseClient &Mouse);
+    void UpgradeSpeed(Player &ThisPlayer);
+    void UpgradeDamage(Player &ThisPlayer);
+    void UpgradeAccel(Player &ThisPlayer);
+    void UpgradeShield(Player &ThisPlayer);
+    void UpgradeMissEnemy(Player &ThisPlayer);
+    void UpgradeMissShot(Player &ThisPlayer);
+    void DrawMain(D3DGraphics &Gfx);
+    void DrawShipUpgrades(D3DGraphics &Gfx);
+    void DrawWeaponUpgrades(D3DGraphics &Gfx);
+    void DrawAmmoUpgrades(D3DGraphics &Gfx);
+    void DrawSkillUpgrades(D3DGraphics &Gfx);
+    bool MouseHoverOver(int MX, int MY, int X, int Y, int W, int H);
 private:
-    ShopStates shop_state
+    ShopStates shop_state;
     Screen shop_main;
     Screen shop_ship;
     Screen shop_weapon;

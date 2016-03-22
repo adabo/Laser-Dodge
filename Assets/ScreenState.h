@@ -4,6 +4,7 @@
 #include "StateGameOver.h"
 #include "StateGamePause.h"
 #include "StateMainMenu.h"
+#include "StateShop.h"
 
 class GameManager;
 
@@ -13,6 +14,7 @@ class ScreenState
     friend class StateGameOver;
     friend class StateGamePause;
     friend class StateMainMenu;
+    friend class StateShop;
 public:
     ScreenState();
     void Update(GameManager &Mgr);

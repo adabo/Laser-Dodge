@@ -1,7 +1,8 @@
 #include "StateShop.h"
+#include "GameManager.h"
 
 StateShop::StateShop()
-:   shop_state (MAIN)
+:   shop_state (MAIN),
     shop_main  (370, 88,   /*Shop*/
                 80,  84,   /*Back*/
                 338, 200,  /*Category*/
@@ -33,23 +34,44 @@ void StateShop::Update(GameManager &Mgr)
     switch(shop_state)
     {
         case MAIN:
-            UpdateShopMain(Mgr.s_state, Mgr.mouse)
+            UpdateShopMain(Mgr.s_state, Mgr.player, Mgr.mouse);
         case SHIP:
-            UpdateShopShip(Mgr.mouse);
+            UpdateShopShip(Mgr.player, Mgr.mouse);
         break;
         case WEAPON:
-            UpdateShopWeapon(Mgr.mouse);
+            UpdateShopWeapon(Mgr.player, Mgr.mouse);
         break;
         case AMMO:
-            UpdateShopAmmo(Mgr.mouse);
+            UpdateShopAmmo(Mgr.player, Mgr.mouse);
         break;
         case SKILL:
-            UpdateShopSkill(Mgr.mouse);
+            UpdateShopSkill(Mgr.player, Mgr.mouse);
         break;
     }
 }
 
-StateShop::UpdateShopMain(ScreenState SState, MouseClient &Mouse)
+void StateShop::Draw(GameManager &Mgr)
+{
+    switch(shop_state)
+    {
+        case MAIN:
+            DrawMain(Mgr.gfx);
+        case SHIP:
+            DrawShipUpgrades(Mgr.gfx);
+        break;
+        case WEAPON:
+            DrawWeaponUpgrades(Mgr.gfx);
+        break;
+        case AMMO:
+            DrawAmmoUpgrades(Mgr.gfx);
+        break;
+        case SKILL:
+            DrawSkillUpgrades(Mgr.gfx);
+        break;
+    }
+}
+
+void StateShop::UpdateShopMain(ScreenState SState, Player &ThisPlayer, MouseClient &Mouse)
 {
     // Check main
     int mx = Mouse.GetMouseX();
@@ -68,7 +90,7 @@ StateShop::UpdateShopMain(ScreenState SState, MouseClient &Mouse)
         if (Mouse.LeftIsPressed())
         {
             shop_state = SHIP;
-            UpdateShopShip(Mouse);
+            UpdateShopShip(ThisPlayer, Mouse);
         }
     }
     // Check weapon
@@ -77,7 +99,7 @@ StateShop::UpdateShopMain(ScreenState SState, MouseClient &Mouse)
         if (Mouse.LeftIsPressed())
         {
             shop_state = WEAPON;
-            UpdateShopWeapon(Mouse);
+            UpdateShopWeapon(ThisPlayer, Mouse);
         }
     }
     // Check ammo
@@ -86,7 +108,7 @@ StateShop::UpdateShopMain(ScreenState SState, MouseClient &Mouse)
         if (Mouse.LeftIsPressed())
         {
             shop_state = AMMO;
-            UpdateShopAmmo(Mouse);
+            UpdateShopAmmo(ThisPlayer, Mouse);
         }
     }
     // Check skill
@@ -95,12 +117,12 @@ StateShop::UpdateShopMain(ScreenState SState, MouseClient &Mouse)
         if (Mouse.LeftIsPressed())
         {
             shop_state = SKILL;
-            UpdateShopSkill(Mouse);
+            UpdateShopSkill(ThisPlayer, Mouse);
         }
     }
 }
 
-StateShop::UpdateShopShip(MouseClient &Mouse)
+void StateShop::UpdateShopShip(Player &ThisPlayer, MouseClient &Mouse)
 {
     int mx = Mouse.GetMouseX();
     int my = Mouse.GetMouseY();
@@ -113,11 +135,11 @@ StateShop::UpdateShopShip(MouseClient &Mouse)
         }
     }
     // Check speed
-    if (MouseHoverOver(mx, my, 362, 256, 76, h28))
+    if (MouseHoverOver(mx, my, 362, 256, 76, 28))
     {
         if (Mouse.LeftIsPressed())
         {
-            UpgradeSpeed(Mouse);
+            UpgradeSpeed(ThisPlayer);
         }
     }
     // Check acceleration
@@ -125,20 +147,20 @@ StateShop::UpdateShopShip(MouseClient &Mouse)
     {
         if (Mouse.LeftIsPressed())
         {
-            UpgradeAccel(Mouse);
+            UpgradeAccel(ThisPlayer);
         }
     }
     // Check shield 
-    if (MouseHoverOver(mx, my, 354, 312, 96))
+    if (MouseHoverOver(mx, my, 354, 312, 96, 28))
     {
         if (Mouse.LeftIsPressed())
         {
-            UpgradeShield(Mouse);
+            UpgradeShield(ThisPlayer);
         }
     }
 }
 
-StateShop::UpdateShopWeapon(MouseClient &Mouse)
+void StateShop::UpdateShopWeapon(Player &ThisPlayer, MouseClient &Mouse)
 {
     int mx = Mouse.GetMouseX();
     int my = Mouse.GetMouseY();
@@ -155,15 +177,15 @@ StateShop::UpdateShopWeapon(MouseClient &Mouse)
     {
         if (Mouse.LeftIsPressed())
         {
-            UpgradeDamage(Mouse);
+            UpgradeDamage(ThisPlayer);
         }
     }
 }
 
-StateShop::UpdateShopAmmo(MouseClient &Mouse
+void StateShop::UpdateShopAmmo(Player &ThisPlayer, MouseClient &Mouse)
 {}
 
-StateShop::UpdateShopSkill(MouseClient &Mouse)
+void StateShop::UpdateShopSkill(Player &ThisPlayer, MouseClient &Mouse)
 {
     int mx = Mouse.GetMouseX();
     int my = Mouse.GetMouseY();
@@ -180,7 +202,7 @@ StateShop::UpdateShopSkill(MouseClient &Mouse)
     {
         if (Mouse.LeftIsPressed())
         {
-            UpgradeMissEnemy(Mouse);
+            UpgradeMissEnemy(ThisPlayer);
         }
     }
     // Check miss Shot
@@ -188,7 +210,7 @@ StateShop::UpdateShopSkill(MouseClient &Mouse)
     {
         if (Mouse.LeftIsPressed())
         {
-            UpgradeMissShot(Mouse);
+            UpgradeMissShot(ThisPlayer);
         }
     }
 }
@@ -221,27 +243,6 @@ void StateShop::UpgradeMissEnemy(Player &ThisPlayer)
 void StateShop::UpgradeMissShot(Player &ThisPlayer)
 {
     ThisPlayer.money -= 20;
-}
-
-void StateShop::Draw(GameManager &Mgr)
-{
-    switch(shop_state)
-    {
-        case MAIN:
-            DrawMain(Mgr.gfx);
-        case SHIP:
-            DrawShipUpgrades(Mgr.gfx);
-        break;
-        case WEAPON:
-            DrawWeaponUpgrades(Mgr.gfx);
-        break;
-        case AMMO:
-            DrawAmmoUpgrades(Mgr.gfx);
-        break;
-        case SKILL:
-            DrawSkillUpgrades(Mgr.gfx);
-        break;
-    }
 }
 
 void StateShop::DrawMain(D3DGraphics &Gfx)
