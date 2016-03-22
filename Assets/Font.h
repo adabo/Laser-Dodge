@@ -6,6 +6,7 @@
 class Font
 {
 public:
+    Font();
     void LoadFont(Font* font,D3DCOLOR* surface,const char* file_name,
                   int char_width,int char_height,int n_chars_per_row);
     void DrawChar( char c,int x,int y,Font* font,D3DCOLOR color, D3DGraphics &Gfx);

@@ -11,4 +11,5 @@ public:
     void UpdateAll(GameManager &Mgr);
 private:
     bool space_is_pressed;
+    bool tab_is_pressed;
 };

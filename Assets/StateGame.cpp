@@ -2,7 +2,8 @@
 #include "GameManager.h"
 
 StateGame::StateGame()
-:   space_is_pressed(false)
+:   space_is_pressed(false),
+    tab_is_pressed(false)
 {}
 
 void StateGame::Update(GameManager &Mgr)
@@ -18,11 +19,6 @@ void StateGame::Update(GameManager &Mgr)
             if (!space_is_pressed)
             {
                 space_is_pressed = true;
-                UpdateAll(Mgr);
-            }
-            else
-            {
-                UpdateAll(Mgr);
             }
         }
         else
@@ -32,12 +28,30 @@ void StateGame::Update(GameManager &Mgr)
                 space_is_pressed = false;
                 Mgr.s_state.states = GAMEPAUSE;
             }
-            else
+        }
+
+        if (Mgr.kbd.TabIsPressed())
+        {
+            if (!tab_is_pressed)
             {
-                UpdateAll(Mgr);
+                tab_is_pressed = true;
             }
         }
+        else
+        {
+            if (tab_is_pressed)
+            {
+                tab_is_pressed = false;
+                Mgr.s_state.states = GAMESHOP;
+            }
+          
+        }  
+        if (Mgr.s_state.states == GAME)
+        {
+            UpdateAll(Mgr);
+        }
     }
+
 }
 
 void StateGame::UpdateAll(GameManager &Mgr)

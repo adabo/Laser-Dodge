@@ -33,6 +33,7 @@ public:
 	bool SpaceIsPressed() const;
 	bool EnterIsPressed() const;
     bool TildeIsPressed() const;
+    bool TabIsPressed() const;
     bool AIsPressed() const;
     bool BIsPressed() const;
     bool CIsPressed() const;
@@ -76,6 +77,7 @@ public:
 	void OnSpacePressed();
 	void OnEnterPressed();
     void OnTildePressed();
+    void OnTabPressed();
 
     void OnAPressed();
     void OnBPressed();
@@ -111,6 +113,7 @@ public:
 	void OnSpaceReleased();
 	void OnEnterReleased();
     void OnTildeReleased();
+    void OnTabReleased();
 
     void OnAReleased();
     void OnBReleased();
@@ -146,6 +149,7 @@ private:
 	bool spaceIsPressed;
 	bool enterIsPressed;
     bool tilde_is_pressed;
+    bool tab_is_pressed;
     bool a_is_pressed;
     bool b_is_pressed;
     bool c_is_pressed;

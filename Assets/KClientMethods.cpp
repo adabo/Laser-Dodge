@@ -4,6 +4,10 @@ bool KeyboardClient::TildeIsPressed() const
 {
     return server.tilde_is_pressed;
 }
+bool KeyboardClient::TabIsPressed() const
+{
+    return server.tab_is_pressed;
+}
 bool KeyboardClient::AIsPressed() const
 {
     return server.a_is_pressed;

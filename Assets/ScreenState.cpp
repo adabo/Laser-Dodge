@@ -29,6 +29,9 @@ void ScreenState::Update(GameManager &Mgr)
         case GAMEPAUSE:
             state_game_pause.Update(Mgr);
         break;
+        case GAMESHOP:
+            state_shop.Update(Mgr);
+        break;
         default:
         break;
     }
@@ -50,6 +53,9 @@ void ScreenState::Draw(GameManager &Mgr)
         break;
         case GAMEPAUSE:
             state_game_pause.Draw(Mgr);
+        break;
+        case GAMESHOP:
+            state_shop.Draw(Mgr);
         break;
         default:
         break;

@@ -1,5 +1,5 @@
-/****************************************************************************************** 
- *  Chili DirectX Framework Version 12.04.24                                              * 
+/******************************************************************************************
+ *  Chili DirectX Framework Version 12.04.24                                              *
  *  Windows.cpp                                                                           *
  *  Copyright 2012 PlanetChili.net                                                        *
  *                                                                                        *
@@ -87,6 +87,9 @@ LRESULT WINAPI MsgProc( HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam )
                 break;
             case VK_OEM_3:
                 kServ.OnTildePressed();
+                break;
+            case VK_TAB:
+                kServ.OnTabPressed();
                 break;
             case VK_A:
                 kServ.OnAPressed();
@@ -191,6 +194,9 @@ LRESULT WINAPI MsgProc( HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam )
                 break;
             case VK_OEM_3:
                 kServ.OnTildeReleased();
+                break;
+            case VK_TAB:
+                kServ.OnTabReleased();
                 break;
             case VK_A:
                 kServ.OnAReleased();

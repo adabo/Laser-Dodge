@@ -90,7 +90,7 @@ public:
     StateShop();
     void Update(GameManager &Mgr);
     void Draw(GameManager &Mgr);
-    void UpdateShopMain(ScreenState SState, Player &ThisPlayer, MouseClient &Mouse);
+    void UpdateShopMain(ScreenState &SState, Player &ThisPlayer, MouseClient &Mouse);
     void UpdateShopShip(Player &ThisPlayer, MouseClient &Mouse);
     void UpdateShopWeapon(Player &ThisPlayer, MouseClient &Mouse);
     void UpdateShopAmmo(Player &ThisPlayer, MouseClient &Mouse);
@@ -118,5 +118,5 @@ private:
     D3DCOLOR font_surf[512 * 84];
     Font fixedSys;
     char buffer[64];
-
+    bool tab_is_pressed;
 };

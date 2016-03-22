@@ -1,8 +1,12 @@
+#ifdef _MSC_VER
+#define _CRT_SECURE_NO_WARNINGS
+#endif
 #include "StateShop.h"
 #include "GameManager.h"
 
 StateShop::StateShop()
-:   shop_state (MAIN),
+:   tab_is_pressed(false),
+    shop_state (MAIN),
     shop_main  (370, 88,   /*Shop*/
                 80,  84,   /*Back*/
                 338, 200,  /*Category*/
@@ -27,14 +31,33 @@ StateShop::StateShop()
                 352, 199,
                 226, 284,
                 242, 312)
-{}
+{
+    fixedSys.LoadFont(&fixedSys, font_surf, "Fixedsys16x28.bmp", 16, 28, 32);
+}
 
 void StateShop::Update(GameManager &Mgr)
 {
+    if (Mgr.kbd.TabIsPressed())
+    {
+        if (!tab_is_pressed)
+        {
+            tab_is_pressed = true;
+        }
+    }
+    else
+    {
+        if (tab_is_pressed)
+        {
+            tab_is_pressed = false;
+            Mgr.s_state.states = GAME;
+        }
+    }
+
     switch(shop_state)
     {
         case MAIN:
             UpdateShopMain(Mgr.s_state, Mgr.player, Mgr.mouse);
+        break;
         case SHIP:
             UpdateShopShip(Mgr.player, Mgr.mouse);
         break;
@@ -56,6 +79,7 @@ void StateShop::Draw(GameManager &Mgr)
     {
         case MAIN:
             DrawMain(Mgr.gfx);
+        break;
         case SHIP:
             DrawShipUpgrades(Mgr.gfx);
         break;
@@ -71,7 +95,7 @@ void StateShop::Draw(GameManager &Mgr)
     }
 }
 
-void StateShop::UpdateShopMain(ScreenState SState, Player &ThisPlayer, MouseClient &Mouse)
+void StateShop::UpdateShopMain(ScreenState &SState, Player &ThisPlayer, MouseClient &Mouse)
 {
     // Check main
     int mx = Mouse.GetMouseX();

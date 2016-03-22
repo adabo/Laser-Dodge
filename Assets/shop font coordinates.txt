@@ -13,7 +13,7 @@ back 80, 84, 32, 28
 ship 367, 200, 64, 28
 speed 362, 256, 76, 28
 acceleration 306, 284, 188, 28
-shield 354, 312, 96
+shield 354, 312, 96, 28
 ---
 
 --- weapon upgrades ---

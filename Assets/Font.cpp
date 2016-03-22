@@ -1,5 +1,7 @@
 #include "Font.h"
 
+Font::Font() {}
+
 void Font::LoadFont( Font* font,D3DCOLOR* surface,const char* file_name,
         int char_width,int char_height,int n_chars_per_row)
 {

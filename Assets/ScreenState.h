@@ -26,4 +26,5 @@ private:
     StateGameOver      state_game_over;
     StateMainMenu      state_main_menu;
     StateGamePause     state_game_pause;
+    StateShop          state_shop;
 };
