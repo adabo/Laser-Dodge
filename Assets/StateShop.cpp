@@ -5,7 +5,7 @@
 #include "GameManager.h"
 
 StateShop::StateShop(GameManager &MGR)
-:   main(100, 100, 100),
+:   main("MAIN", fixedSys, &MGR.D3DGraphics, ),
     dflt(100, 100, 100),
     back(100, 100, 100),
     ship(100, 100, 100),
@@ -364,20 +364,21 @@ void StateShop::UpgradeMissShot()
 // and BAM!
 void StateShop::DrawMain()
 {
-    sprintf(buffer, "<=");
-    fixedSys.DrawString(buffer, 80, 84, &fixedSys, D3DCOLOR_XRGB(back.r, back.g, back.b), mgr.gfx);
-    sprintf(buffer, "SHOP");
-    fixedSys.DrawString(buffer, 370, 88, &fixedSys, D3DCOLOR_XRGB(dflt.r, dflt.g, dflt.b), mgr.gfx);
-    sprintf(buffer, "UPGRADES");
-    fixedSys.DrawString(buffer, 338, 200, &fixedSys, D3DCOLOR_XRGB(dflt.r, dflt.g, dflt.b), mgr.gfx);
-    sprintf(buffer, "SHIP");
-    fixedSys.DrawString(buffer, 370, 280, &fixedSys, D3DCOLOR_XRGB(ship.r, ship.g, ship.b), mgr.gfx);
-    sprintf(buffer, "WEAPONS");
-    fixedSys.DrawString(buffer, 346, 308, &fixedSys, D3DCOLOR_XRGB(weap.r, weap.g, weap.b), mgr.gfx);
-    sprintf(buffer, "AMMO");
-    fixedSys.DrawString(buffer, 368, 336, &fixedSys, D3DCOLOR_XRGB(ammo.r, ammo.r, ammo.r), mgr.gfx);
-    sprintf(buffer, "SKILLS");
-    fixedSys.DrawString(buffer, 354, 364, &fixedSys, D3DCOLOR_XRGB(skll.r, skll.r, skll.r), mgr.gfx);
+    // sprintf(buffer, "<=");
+    // fixedSys.DrawString(buffer, 80, 84, &fixedSys, D3DCOLOR_XRGB(back.r, back.g, back.b), mgr.gfx);
+    // sprintf(buffer, "SHOP");
+    // fixedSys.DrawString(buffer, 370, 88, &fixedSys, D3DCOLOR_XRGB(dflt.r, dflt.g, dflt.b), mgr.gfx);
+    // sprintf(buffer, "UPGRADES");
+    // fixedSys.DrawString(buffer, 338, 200, &fixedSys, D3DCOLOR_XRGB(dflt.r, dflt.g, dflt.b), mgr.gfx);
+    // sprintf(buffer, "SHIP");
+    // fixedSys.DrawString(buffer, 370, 280, &fixedSys, D3DCOLOR_XRGB(ship.r, ship.g, ship.b), mgr.gfx);
+    // sprintf(buffer, "WEAPONS");
+    // fixedSys.DrawString(buffer, 346, 308, &fixedSys, D3DCOLOR_XRGB(weap.r, weap.g, weap.b), mgr.gfx);
+    // sprintf(buffer, "AMMO");
+    // fixedSys.DrawString(buffer, 368, 336, &fixedSys, D3DCOLOR_XRGB(ammo.r, ammo.r, ammo.r), mgr.gfx);
+    // sprintf(buffer, "SKILLS");
+    // fixedSys.DrawString(buffer, 354, 364, &fixedSys, D3DCOLOR_XRGB(skll.r, skll.r, skll.r), mgr.gfx);
+
 }
 
 void StateShop::DrawShipUpgrades()

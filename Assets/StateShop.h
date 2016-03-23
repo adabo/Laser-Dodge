@@ -127,11 +127,11 @@ private:
     char buffer[64];
     bool tab_is_pressed;
     bool left_is_pressed;
-    TextColors back;
-    TextColors main;
-    TextColors ship;
-    TextColors weap;
-    TextColors ammo;
-    TextColors skll;
-    TextColors dflt;
+    Text back;
+    Text main;
+    Text ship;
+    Text weap;
+    Text ammo;
+    Text skll;
+    Text dflt;
 };
