@@ -1,17 +1,25 @@
+#ifdef _MSC_VER
+#define _CRT_SECURE_NO_WARNINGS
+#endif
 #include "Text.h"
 
-Text::Text(const char* Str, WhichFont Type, D3DGraphics* Gfx,
-           int X, int Y, int DR, int DG, int DB,
-           int MR, int MG, int MB)
+//Text::Color Text::dc = GREY;
+D3DCOLOR Text::fixedSys_surf[512 * 84]; 
+D3DCOLOR Text::edges_surf[160 * 29];
+Font Text::fixedSys;
+Font Text::edges;
+Font Text::font;
+
+Text::Text(){}
+Text::Text(std::string Str, int X, int Y, WhichFont Type, Color DC, Color MC)
 :   str(Str),
-    gfx(Gfx),
     x(X),
     y(Y),
     type(Type),
-    dfault(DR, DG, DB),
-    mouseover(MR, MG, MB)
+    mc(MC),
+    dc(DC),
+    left_is_pressed(false)
 {
-    
     switch(type)
     {
         case FIXEDSYS:
@@ -19,7 +27,7 @@ Text::Text(const char* Str, WhichFont Type, D3DGraphics* Gfx,
             fixedSys.LoadFont(&fixedSys, fixedSys_surf, "Fixedsys16x28.bmp", 16, 28, 32);
             // Assign reference to 'font' so that you can use it for the rest of the program
             font = fixedSys;
-            w = sprintf(buff, "%s", str) * fixedSys.char_width;
+            w = sprintf(buff, "%s", str.c_str()) * fixedSys.char_width;
             h = fixedSys.char_height;
         }
             break;
@@ -27,7 +35,7 @@ Text::Text(const char* Str, WhichFont Type, D3DGraphics* Gfx,
         {
             edges.LoadFont(&edges, edges_surf, "Edges_5x9x32.bmp", 5, 9, 32);
             font = edges;
-            w = sprintf(buff, "%s", str) * edges.char_width;
+            w = sprintf(buff, "%s", str.c_str()) * edges.char_width;
             h = edges.char_height; 
         }
             break;
@@ -36,22 +44,39 @@ Text::Text(const char* Str, WhichFont Type, D3DGraphics* Gfx,
     }
 }
 
-void Text::Update(MouseClient& Mouse)
+bool Text::Update(MouseClient& Mouse)
 {
     int mx = Mouse.GetMouseX();
     int my = Mouse.GetMouseY();
     
-    r = dfault.r;
-    g = dfault.g;
-    b = dfault.b;
+    switch (dc)
+    {
+    case GREY:
+        r = g = b = 100;
+        break;
+    case PINK:
+        r = 255, g = 0, b = 255;
+        break;
+    case GREEN:
+        r = 0, g = 255, b = 0;
+    }
 
     if (Mouse.IsInWindow())
     {
         if (MouseHoverOver(mx, my, x, y, w, h))
         {
-            r = mouseover.r;
-            g = mouseover.g;
-            b = mouseover.b;
+            switch (mc)
+            {
+            case GREY:
+                r = g = b = 100;
+                break;
+            case PINK:
+                r = 255, g = 0, b = 255;
+                break;
+            case GREEN:
+                r = 0, g = 255, b = 0;
+            }
+
             if (Mouse.LeftIsPressed())
             {
                 if (!left_is_pressed)
@@ -65,19 +90,26 @@ void Text::Update(MouseClient& Mouse)
                 {
                     left_is_pressed = false;
                     // shop_state = MAIN;
+                    return true;
                 }
             }
         }
     }
+    return false;
 }
 
-void Text::Draw()
+void Text::Draw(D3DGraphics &Gfx)
 {
-    font.DrawString(buff, x, y, &font, D3DCOLOR_XRGB(r, g, b), *gfx);
+    font.DrawString(buff, x, y, &font, D3DCOLOR_XRGB(r, g, b), Gfx);
 }
 
 bool Text::MouseHoverOver(int MX, int MY, int X, int Y, int W, int H)
 {
     return (MX >= X && MX <= X + W &&
             MY >= Y && MY <= Y + H);
+}
+
+std::string Text::GetStr()
+{
+    return str;
 }

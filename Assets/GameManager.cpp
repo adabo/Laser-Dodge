@@ -9,16 +9,19 @@ GameManager::GameManager(HWND hWnd, D3DGraphics &Gfx, const KeyboardServer& kSer
         gfx(Gfx),
         player(),
         s_state(*this),
-        score((int)player.hp)
+        score((int)player.hp),
+        ec(Gfx, lasers, enemies)
 {
     //score = Score(player.hp);
     srand((unsigned int)time(NULL));
 }
+
 void GameManager::Update(float Dt)
 {
     dt = Dt;
     s_state.Update(*this);
 }
+
 void GameManager::Draw()
 {
     s_state.Draw(*this);

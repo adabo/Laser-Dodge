@@ -1,4 +1,6 @@
 #pragma once
+#include "Text.h"
+#include <vector>
 
 class GameManager;
 
@@ -10,6 +12,7 @@ public:
     void Draw(GameManager &Mgr);
     void UpdateAll(GameManager &Mgr);
 private:
+    std::vector<Text> game_text;
     bool space_is_pressed;
     bool tab_is_pressed;
 };

@@ -64,8 +64,6 @@ void StateGameOver::Update(GameManager &Mgr)
 void StateGameOver::Reset(GameManager &Mgr)
 {
     Mgr.player = Player();
-    Mgr.enemy = Enemy();
-    Mgr.laser = Laser();
     Mgr.enemies.clear();
     Mgr.lasers.clear();
     Mgr.score = Score((int)Mgr.player.hp);

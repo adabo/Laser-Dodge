@@ -18,29 +18,16 @@ Laser::Laser(float X, float Y, float Cos_X, float Sin_Y, float Damage)
     //velocity = 100;
 }
 
-void Laser::Update(std::vector<Laser> &Lasers, float Dt) 
+void Laser::Update(Laser &Lsr, float Dt) 
 {
-    if(Lasers.size())
-    {
-        float frame_step = 600.0f * Dt;
-        for (auto &laser : Lasers)
-        {
-            laser.x += frame_step * laser.cos_x;
-            laser.y += frame_step * laser.sin_y;
-        }
-    }
+    float frame_step = 600.0f * Dt;
+    Lsr.x += frame_step * Lsr.cos_x;
+    Lsr.y += frame_step * Lsr.sin_y;
 }
 
-void Laser::Draw(std::vector<Laser> &Lasers, D3DGraphics &Gfx)
+void Laser::Draw(Laser &Lsr, D3DGraphics &Gfx)
 {
-    if (Lasers.size() > 10)
-    {
-        float i = 0;
-    }
-    for (auto &laser : Lasers)
-    {
-        Gfx.PutPixel((int)laser.x, (int)laser.y, 255, 255, 255);
-    }
+    Gfx.PutPixel((int)Lsr.x, (int)Lsr.y, 255, 255, 255);
 }
 
 float Laser::GetX()

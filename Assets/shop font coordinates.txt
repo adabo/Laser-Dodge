@@ -2,7 +2,7 @@ shop 370, 88
 --- main screen ---
 back 80, 84, 32, 28
 upgrades 338, 200
-ship 370, 280, 64, 28
+ship 368, 280, 64, 28
 weapons 346, 308, 108, 28
 ammo 368, 336, 64, 28
 skills 354, 364, 64, 28
@@ -10,7 +10,7 @@ skills 354, 364, 64, 28
 
 --- ship upgrades ---
 back 80, 84, 32, 28
-ship 367, 200, 64, 28
+ship 368, 200, 64, 28
 speed 362, 256, 76, 28
 acceleration 306, 284, 188, 28
 shield 354, 312, 96, 28

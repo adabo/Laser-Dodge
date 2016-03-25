@@ -15,7 +15,7 @@ StateMainMenu::StateMainMenu()
     play_h(26),
     play_red(100),
     play_green(100),
-    play_blue(100)
+    play_blue(100)  
 {
     fixedSys.LoadFont(&fixedSys, font_surf, "Fixedsys16x28.bmp", 16, 28, 32);
 }

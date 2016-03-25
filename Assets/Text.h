@@ -2,46 +2,41 @@
 #include "Font.h"
 #include <stdio.h>
 #include "Mouse.h"
+#include <string>
+#include "D3DGraphics.h"
 
 class Text
 {
 public:
+    enum Color
+    {
+        GREY, PINK, GREEN
+    };
+
     enum WhichFont
     {
         FIXEDSYS, EDGES
     };
-    
-    class FontColorChange
-    {
-    public:
-        FontColorChange(int R, int G, int B)
-        :   r(R),
-            g(G),
-            b(B)
-        {}
-        ~FontColorChange(){}
-        int r, g, b;
-    };
-    
-    Text(const char* Str, WhichFont Type, D3DGraphics* Gfx,
-        int X, int Y, int DR, int DG, int DB,
-        int MR, int MG, int MB);
-    void Draw();
-    void Update(MouseClient &Mouse);
+public:
+    Text();
+    Text(std::string Str, int X, int Y, WhichFont Type, Color DC, Color MC);
+    void Draw(D3DGraphics &Gfx);
+    bool Update(MouseClient &Mouse);
     bool MouseHoverOver(int MX, int MY, int X, int Y, int W, int H);
+    std::string GetStr();
+
 private:
     int x, y, w, h;
     int r, g, b;
     char buff[64];
-    const char *str;
-    D3DGraphics *gfx;
-    D3DCOLOR fixedSys_surf[512 * 84]; // fixedSys
-    D3DCOLOR edges_surf[160 * 29];    // edges
-    Font fixedSys;
-    Font edges;
-    Font font;
+    std::string str;
     WhichFont type;
-    FontColorChange dfault;
-    FontColorChange mouseover;
+    Color dc;
+    Color mc;
+    static D3DCOLOR fixedSys_surf[512 * 84]; // fixedSys
+    static D3DCOLOR edges_surf[160 * 29];    // edges
+    static Font fixedSys;
+    static Font edges;
+    static Font font;
     bool left_is_pressed;
 };

@@ -1,0 +1,5 @@
+--- Game screen ---
+Targets hit: 0    ... 16,  504  | 224, 504
+Targets missed: 0 ... 16,  532  | 272, 532
+Shots missed: 0   ... 16,  560  | 240, 560
+HP: 000.00        ... 624, 560  | 688, 560
