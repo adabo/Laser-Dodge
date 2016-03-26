@@ -20,6 +20,7 @@ Text::Text(std::string Str, int X, int Y, WhichFont Type, Color DC, Color MC)
     dc(DC),
     left_is_pressed(false)
 {
+    // Set font
     switch(type)
     {
         case FIXEDSYS:
@@ -42,6 +43,8 @@ Text::Text(std::string Str, int X, int Y, WhichFont Type, Color DC, Color MC)
         default:
             break;
     }
+    // Set default color
+    SetColor(dc);
 }
 
 bool Text::Update(MouseClient& Mouse)
@@ -49,45 +52,12 @@ bool Text::Update(MouseClient& Mouse)
     int mx = Mouse.GetMouseX();
     int my = Mouse.GetMouseY();
     
-    switch (dc)
-    {
-    case GREY:
-        r = g = b = 100;
-        break;
-    case PINK:
-        r = 255, g = 0, b = 255;
-        break;
-    case GREEN:
-        r = 0, g = 255, b = 0;
-        break;
-    case BLACK:
-        r = g = b = 0;
-        break;
-    default:
-    break;
-    }
-
+    SetColor(dc);
     if (Mouse.IsInWindow())
     {
         if (MouseHoverOver(mx, my, x, y, w, h))
         {
-            switch (mc)
-            {
-            case GREY:
-                r = g = b = 100;
-                break;
-            case PINK:
-                r = 255, g = 0, b = 255;
-                break;
-            case GREEN:
-                r = 0, g = 255, b = 0;
-            case BLACK:
-                r = g = b = 0;
-                break;
-            default:
-            break;
-            }
-
+            SetColor(mc);
             if (Mouse.LeftIsPressed())
             {
                 if (!left_is_pressed)
@@ -99,8 +69,13 @@ bool Text::Update(MouseClient& Mouse)
             {
                 if (left_is_pressed)
                 {
+                    // For some reason, if you don't set the color back to
+                    // default here, then it will flash it's old color when
+                    // switch back to that screen. "<=" is a different object
+                    // on every shop_screen. So you have to account for that
+                    // when you are assigning colors.
+                    SetColor(dc);
                     left_is_pressed = false;
-                    // shop_state = MAIN;
                     return true;
                 }
             }
@@ -118,6 +93,52 @@ bool Text::MouseHoverOver(int MX, int MY, int X, int Y, int W, int H)
 {
     return (MX >= X && MX <= X + W &&
             MY >= Y && MY <= Y + H);
+}
+
+void Text::SetColor(Color Cl)
+{
+    switch (Cl)
+    {
+    case GREY:
+        r = g = b = 100;
+        break;
+    case PINK:
+        r = 255, g = 0, b = 255;
+        break;
+    case GREEN:
+        r = 0, g = 255, b = 0;
+        break;
+    case BLACK:
+        r = g = b = 0;
+        break;
+    default:
+    break;
+    }
+}
+
+int Text::GetR()
+{
+    return r;
+}
+
+int Text::GetG()
+{
+    return g;
+}
+
+int Text::GetB()
+{
+    return b;
+}
+
+Text::Color Text::GetDC()
+{
+    return dc;
+}
+
+Text::Color Text::GetMC()
+{
+    return mc;
 }
 
 std::string Text::GetStr()

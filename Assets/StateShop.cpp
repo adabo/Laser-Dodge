@@ -102,6 +102,7 @@ void StateShop::UpdateShopMain()
 {
     for (auto &el : shop_main)
     {
+        // Check mouse over
         if (el.Update(mgr.mouse))
         {
             if (el.GetStr() == "<=")
@@ -249,6 +250,7 @@ void StateShop::DrawMain()
     for (auto &el : shop_main)
     {
         el.Draw(mgr.gfx);
+        el.SetColor(el.GetDC());
     }
 }
 
@@ -256,7 +258,11 @@ void StateShop::DrawShipUpgrades()
 {
     for (auto &el : shop_ship)
     {
+        if (el.GetStr() == "<=" && el.GetR() != 100)
+            el.GetR();
         el.Draw(mgr.gfx);
+        el.SetColor(el.GetDC());
+        el.GetR();
     }
 }
 

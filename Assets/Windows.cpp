@@ -344,9 +344,9 @@ int WINAPI wWinMain( HINSTANCE hInst,HINSTANCE,LPWSTR,INT )
     RegisterClassEx( &wc );
     
     RECT wr;
-    wr.left = 650;
+    wr.left = 0;
     wr.right = 800 + wr.left;
-    wr.top = 150;
+    wr.top = 30;
     wr.bottom = 600 + wr.top;
     AdjustWindowRect( &wr,WS_OVERLAPPEDWINDOW,FALSE );
     HWND hWnd = CreateWindowW( L"Chili DirectX Framework Window",L"Chili DirectX Framework",

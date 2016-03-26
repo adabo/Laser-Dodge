@@ -23,6 +23,12 @@ public:
     void Draw(D3DGraphics &Gfx);
     bool Update(MouseClient &Mouse);
     bool MouseHoverOver(int MX, int MY, int X, int Y, int W, int H);
+    Color GetDC();
+    Color GetMC();
+    int GetR();
+    int GetG();
+    int GetB();
+    void SetColor(Color Cl);
     std::string GetStr();
     void SetStr(std::string Str);
     void SetX(int X);
