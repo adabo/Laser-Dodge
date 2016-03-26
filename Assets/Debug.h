@@ -1,8 +1,10 @@
 #pragma once
+#include <vector>
 #include "Font.h"
 #include "D3DGraphics.h"
 #include "Player.h"
 #include "Timer.h"
+#include "Text.h"
 
 class GameManager;
 
@@ -23,8 +25,5 @@ private:
     int n_frames;
     bool draw_debug;
     bool tilde_is_pressed;
-    // bool tilde_toggle;
-    D3DCOLOR font_surf[160 * 29];
-    Font edges;
-    char buffer[64];
+    std::vector<Text> debug_text;
 };

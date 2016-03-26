@@ -8,7 +8,7 @@ D3DCOLOR Text::fixedSys_surf[512 * 84];
 D3DCOLOR Text::edges_surf[160 * 29];
 Font Text::fixedSys;
 Font Text::edges;
-Font Text::font;
+// Font Text::font;
 
 Text::Text(){}
 Text::Text(std::string Str, int X, int Y, WhichFont Type, Color DC, Color MC)
@@ -59,6 +59,12 @@ bool Text::Update(MouseClient& Mouse)
         break;
     case GREEN:
         r = 0, g = 255, b = 0;
+        break;
+    case BLACK:
+        r = g = b = 0;
+        break;
+    default:
+    break;
     }
 
     if (Mouse.IsInWindow())
@@ -75,6 +81,11 @@ bool Text::Update(MouseClient& Mouse)
                 break;
             case GREEN:
                 r = 0, g = 255, b = 0;
+            case BLACK:
+                r = g = b = 0;
+                break;
+            default:
+            break;
             }
 
             if (Mouse.LeftIsPressed())
@@ -112,4 +123,19 @@ bool Text::MouseHoverOver(int MX, int MY, int X, int Y, int W, int H)
 std::string Text::GetStr()
 {
     return str;
+}
+
+void Text::SetStr(std::string Str)
+{
+    str = Str;
+}
+
+void Text::SetX(int X)
+{
+    x = X;
+}
+
+void Text::SetY(int Y)
+{
+    y = Y;
 }

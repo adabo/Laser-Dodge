@@ -9,13 +9,18 @@ Debug::Debug()
     draw_debug(false),
     milli(0.0f),
     fps(0),
-    n_frames(0)
-{
-    edges.LoadFont(&edges, font_surf, "Edges_5x10x32.bmp", 5, 10, 32);
-}
+    n_frames(0),
+    debug_text({{"FPS:", 1, 0, Text::EDGES, Text::PINK, Text::PINK},
+                {"MouseXY:", 1, 9, Text::EDGES, Text::PINK, Text::PINK},
+                {"Lasers:", 1, 18, Text::EDGES, Text::PINK, Text::PINK}})
+{}
 
 void Debug::Update(GameManager &Mgr)
 {
+    for (auto &el: debug_text)
+    {
+        el.Update(Mgr.mouse);
+    }
     if (Mgr.kbd.TildeIsPressed())
     {
         if (!tilde_is_pressed)
@@ -59,14 +64,9 @@ void Debug::Draw(D3DGraphics &Gfx, GameManager &Mgr)
 {
     if (draw_debug)
     {
-        
-        sprintf(buffer, "FPS: %d", fps);
-        edges.DrawString(buffer, 0, 0, &edges, D3DCOLOR_XRGB(215, 130, 215), Gfx);
-    
-        sprintf(buffer, "MouseXY: %dx%d", Mgr.mouse.GetMouseX(), Mgr.mouse.GetMouseY());
-        edges.DrawString(buffer, 0, 10, &edges, D3DCOLOR_XRGB(215, 130, 215), Gfx);
-
-        sprintf(buffer, "Lasers: %d", Mgr.lasers.size());
-        edges.DrawString(buffer, 0, 20, &edges, D3DCOLOR_XRGB(215, 130, 215), Gfx);
+        for (auto &el: debug_text)
+        {
+            el.Draw(Gfx);
+        }
     }
 }

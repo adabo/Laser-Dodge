@@ -10,7 +10,7 @@ class Text
 public:
     enum Color
     {
-        GREY, PINK, GREEN
+        GREY, PINK, GREEN, BLACK
     };
 
     enum WhichFont
@@ -24,6 +24,9 @@ public:
     bool Update(MouseClient &Mouse);
     bool MouseHoverOver(int MX, int MY, int X, int Y, int W, int H);
     std::string GetStr();
+    void SetStr(std::string Str);
+    void SetX(int X);
+    void SetY(int Y);
 
 private:
     int x, y, w, h;
@@ -37,6 +40,6 @@ private:
     static D3DCOLOR edges_surf[160 * 29];    // edges
     static Font fixedSys;
     static Font edges;
-    static Font font;
+    Font font;
     bool left_is_pressed;
 };

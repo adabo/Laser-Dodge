@@ -27,14 +27,13 @@ class GameManager
     friend class StateGamePause;
     friend class StateShop;
     friend class Spawner;
-    friend class Debug;
 public:
     GameManager(HWND hWnd, D3DGraphics &Gfx, const KeyboardServer& kServer, const MouseServer& mServer);
     void Update(float Dt);
     void Draw();
 private:
     DSound         audio;
-    D3DGraphics    &gfx;
+    D3DGraphics    gfx;
     KeyboardClient kbd;
     MouseClient    mouse;
 

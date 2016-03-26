@@ -1,11 +1,12 @@
 #include "EntityController.h"
 
-EntityController::EntityController(D3DGraphics &Gfx,
+EntityController::EntityController(D3DGraphics &Gfx, const MouseServer& mServer,
                                    std::vector<Laser> &Lasers,
                                    std::vector<Enemy> &Enemies)
 :   gfx(Gfx),
     lasers(Lasers),
-    enemies(Enemies)
+    enemies(Enemies),
+    mouse(mServer)
 {}
 
 void EntityController::Update(float Dt)
@@ -16,7 +17,7 @@ void EntityController::Update(float Dt)
     }
     for (auto &enemy: enemies)
     {
-        enemy.Update(enemy, Dt);
+        enemy.Update(enemy, mouse, Dt);
     }
 }
 
