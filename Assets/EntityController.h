@@ -14,7 +14,8 @@ public:
     void Update(float Dt);
     void Draw();
 private:
-    D3DGraphics gfx;
+    // Why do I have to use &gfx if the constructor already has one?
+    D3DGraphics &gfx;
     MouseClient mouse;
     std::vector<Laser> &lasers;
     std::vector<Enemy> &enemies;

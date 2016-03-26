@@ -33,7 +33,7 @@ public:
     void Draw();
 private:
     DSound         audio;
-    D3DGraphics    gfx;
+    D3DGraphics    &gfx;
     KeyboardClient kbd;
     MouseClient    mouse;
 
