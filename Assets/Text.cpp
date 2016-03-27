@@ -190,13 +190,15 @@ void Text::Draw(D3DGraphics &Gfx)
 
 void Text::SetIToA(int IStr)
 {
-    sprintf(buff, "%d", i_str);
+    sprintf(buff, "%d", IStr);
+    str = buff;
     SetBuff();
 }
 
 void Text::SetFToA(float FStr)
 {
-    sprintf(buff, "%.2f", f_str);
+    sprintf(buff, "%.2f", FStr);
+    str = buff;
     SetBuff();
 }
 
