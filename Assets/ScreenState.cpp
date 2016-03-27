@@ -21,6 +21,7 @@ void ScreenState::Update(GameManager &Mgr)
     {
         case GAME:
             state_game.Update(Mgr);
+            Mgr.score_text.Update();
         break;
         case GAMEOVER:
             state_game_over.Update(Mgr);
@@ -45,10 +46,12 @@ void ScreenState::Draw(GameManager &Mgr)
     {
         case GAME:
             state_game.Draw(Mgr);
+            Mgr.score_text.Draw();
         break;
         case GAMEOVER:
             state_game_over.Draw(Mgr, Mgr.gfx);
             Mgr.score.Draw(Mgr.player, Mgr.gfx, Mgr.score.i_score);
+            Mgr.score_text.Draw();
         break;
         case GAMEMAINMENU:
             state_main_menu.Draw(Mgr.gfx);

@@ -5,6 +5,7 @@
 #include "Font.h"
 #include <stdio.h>
 #include "Player.h"
+#include "ScoreText.h"
 
 class Score
 {
@@ -14,6 +15,7 @@ class Score
     friend class ScreenState;
     friend class StateGame;
     friend class StateGamePause;
+    friend class ScoreText;
 public:
     Score();
     Score(int hp);

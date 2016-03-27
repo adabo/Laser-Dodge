@@ -108,6 +108,9 @@
     <ClCompile Include="..\Assets\EntityController.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="..\Assets\ScoreText.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\Assets\D3DGraphics.h">
@@ -198,6 +201,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="..\Assets\EntityController.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Assets\ScoreText.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

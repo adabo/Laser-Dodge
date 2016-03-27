@@ -12,7 +12,11 @@ Font Text::edges;
 
 Text::Text(){}
 Text::Text(std::string Str, int X, int Y, WhichFont Type, Color DC, Color MC)
-:   str(Str),
+// I set the others NULL becuase during the update I couldn't think
+// of another way for the object to know if it's a: string, int, or float.
+// With this method I can just do if() checks on these 3 and the one that
+// is not NULL will be the one that gets processed.
+:   str(Str), i_str(NULL), f_str(NULL),
     x(X),
     y(Y),
     type(Type),
@@ -28,16 +32,14 @@ Text::Text(std::string Str, int X, int Y, WhichFont Type, Color DC, Color MC)
             fixedSys.LoadFont(&fixedSys, fixedSys_surf, "Fixedsys16x28.bmp", 16, 28, 32);
             // Assign reference to 'font' so that you can use it for the rest of the program
             font = fixedSys;
-            w = sprintf(buff, "%s", str.c_str()) * fixedSys.char_width;
-            h = fixedSys.char_height;
+            SetBuff();
         }
             break;
         case EDGES:
         {
             edges.LoadFont(&edges, edges_surf, "Edges_5x9x32.bmp", 5, 9, 32);
             font = edges;
-            w = sprintf(buff, "%s", str.c_str()) * edges.char_width;
-            h = edges.char_height; 
+            SetBuff();
         }
             break;
         default:
@@ -47,11 +49,105 @@ Text::Text(std::string Str, int X, int Y, WhichFont Type, Color DC, Color MC)
     SetColor(dc);
 }
 
+Text::Text(int IStr,       int X, int Y, WhichFont Type, Color DC, Color MC)
+// I set the others NULL becuase during the update I couldn't think
+// of another way for the object to know if it's a: string, int, or float.
+// With this method I can just do if() checks on these 3 and the one that
+// is not NULL will be the one that gets processed.
+:   i_str(IStr), str(""), f_str(NULL),
+    x(X),
+    y(Y),
+    type(Type),
+    mc(MC),
+    dc(DC),
+    left_is_pressed(false)
+    {
+    // Set font
+    switch(type)
+    {
+        case FIXEDSYS:
+        {
+            fixedSys.LoadFont(&fixedSys, fixedSys_surf, "Fixedsys16x28.bmp", 16, 28, 32);
+            // Assign reference to 'font' so that you can use it for the rest of the program
+            font = fixedSys;
+            SetIToA(i_str);
+        }
+            break;
+        case EDGES:
+        {
+            edges.LoadFont(&edges, edges_surf, "Edges_5x9x32.bmp", 5, 9, 32);
+            font = edges;
+            SetIToA(i_str);
+        }
+            break;
+        default:
+            break;
+    }
+    // Set default color
+    SetColor(dc);
+}
+
+Text::Text(float FStr,     int X, int Y, WhichFont Type, Color DC, Color MC)
+// I set the others NULL becuase during the update I couldn't think
+// of another way for the object to know if it's a: string, int, or float.
+// With this method I can just do if() checks on these 3 and the one that
+// is not NULL will be the one that gets processed.
+:   f_str(FStr), str(""), i_str(NULL),
+    x(X),
+    y(Y),
+    type(Type),
+    mc(MC),
+    dc(DC),
+    left_is_pressed(false)
+{
+    // Set font
+    switch(type)
+    {
+        case FIXEDSYS:
+        {
+            fixedSys.LoadFont(&fixedSys, fixedSys_surf, "Fixedsys16x28.bmp", 16, 28, 32);
+            // Assign reference to 'font' so that you can use it for the rest of the program
+            font = fixedSys;
+            SetFToA(f_str);
+        }
+            break;
+        case EDGES:
+        {
+            edges.LoadFont(&edges, edges_surf, "Edges_5x9x32.bmp", 5, 9, 32);
+            font = edges;
+            SetFToA(f_str);
+        }
+            break;
+        default:
+            break;
+    }
+    // Set default color
+    SetColor(dc);
+}
+
+void Text::ToString()
+{
+    if (str != "")
+    {
+        SetStr(str);
+    }
+    else if (i_str != NULL)
+    {
+        SetIToA(i_str);
+    }
+    else if (f_str != NULL)
+    {
+        SetFToA(f_str);
+    }
+}
+
 bool Text::Update(MouseClient& Mouse)
 {
     int mx = Mouse.GetMouseX();
     int my = Mouse.GetMouseY();
-    
+
+    ToString();
+
     SetColor(dc);
     if (Mouse.IsInWindow())
     {
@@ -86,7 +182,22 @@ bool Text::Update(MouseClient& Mouse)
 
 void Text::Draw(D3DGraphics &Gfx)
 {
+    // int string_width = sprintf(buffer, "HP: %.2f", ThisPlayer.hp);
+    // string_width = string_width * fixedSys.char_width;
+
     font.DrawString(buff, x, y, &font, D3DCOLOR_XRGB(r, g, b), Gfx);
+}
+
+void Text::SetIToA(int IStr)
+{
+    sprintf(buff, "%d", i_str);
+    SetBuff();
+}
+
+void Text::SetFToA(float FStr)
+{
+    sprintf(buff, "%.2f", f_str);
+    SetBuff();
 }
 
 bool Text::MouseHoverOver(int MX, int MY, int X, int Y, int W, int H)
@@ -151,6 +262,12 @@ std::string Text::GetStr()
 void Text::SetStr(std::string Str)
 {
     str = Str;
+}
+
+void Text::SetBuff()
+{
+    w = sprintf(buff, "%s", str.c_str()) * font.char_width;
+    h = font.char_height;
 }
 
 void Text::SetX(int X)

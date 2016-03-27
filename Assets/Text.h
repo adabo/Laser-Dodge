@@ -19,17 +19,27 @@ public:
     };
 public:
     Text();
-    Text(std::string Str, int X, int Y, WhichFont Type, Color DC, Color MC);
+    Text(std::string Str,  int X, int Y, WhichFont Type, Color DC, Color MC);
+    Text(int         IStr, int X, int Y, WhichFont Type, Color DC, Color MC);
+    Text(float       FStr, int X, int Y, WhichFont Type, Color DC, Color MC);
+
     void Draw(D3DGraphics &Gfx);
-    bool Update(MouseClient &Mouse);
+    bool Update(MouseClient& Mouse);
+
     bool MouseHoverOver(int MX, int MY, int X, int Y, int W, int H);
-    Color GetDC();
-    Color GetMC();
-    int GetR();
-    int GetG();
-    int GetB();
-    void SetColor(Color Cl);
+    void ToString();
+
+    Color       GetDC();
+    Color       GetMC();
+    int         GetR();
+    int         GetG();
+    int         GetB();
     std::string GetStr();
+
+    void SetIToA(int IStr);
+    void SetFToA(float FStr);
+    void SetColor(Color Cl);
+    void SetBuff();
     void SetStr(std::string Str);
     void SetX(int X);
     void SetY(int Y);
@@ -39,6 +49,8 @@ private:
     int r, g, b;
     char buff[64];
     std::string str;
+    int i_str = NULL;
+    float f_str = NULL;
     WhichFont type;
     Color dc;
     Color mc;

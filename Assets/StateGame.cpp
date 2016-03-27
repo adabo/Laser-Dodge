@@ -3,11 +3,7 @@
 
 StateGame::StateGame()
 :   space_is_pressed(false),
-    tab_is_pressed(false),
-    game_text({ {"Targets hit:",    16,  504, Text::FIXEDSYS, Text::GREY, Text::GREY},
-                {"Targets missed:", 16,  532, Text::FIXEDSYS, Text::GREY, Text::GREY},
-                {"Shots missed:",   16,  560, Text::FIXEDSYS, Text::GREY, Text::GREY},
-                {"HP:",             624, 560, Text::FIXEDSYS, Text::GREY, Text::GREY}})
+    tab_is_pressed(false)
 {}
 
 void StateGame::Update(GameManager &Mgr)
@@ -61,10 +57,6 @@ void StateGame::Update(GameManager &Mgr)
 void StateGame::UpdateAll(GameManager &Mgr)
 {
     Mgr.s_state.states = GAME;
-    for (auto &el : game_text)
-    {
-        el.Update(Mgr.mouse);
-    }
     Mgr.debug.Update(Mgr);
     Mgr.player.Update(Mgr.kbd, Mgr.mouse, Mgr.projectile, Mgr.lasers, Mgr.dt);
     Mgr.ec.Update(Mgr.dt);
@@ -82,10 +74,5 @@ void StateGame::Draw(GameManager &Mgr)
 {
     Mgr.player.Draw(Mgr.gfx);
     Mgr.ec.Draw();
-    // Mgr.score.Draw(Mgr.player, Mgr.gfx, Mgr.score.i_score);
-    for (auto &el: game_text)
-    {
-        el.Draw(Mgr.gfx);
-    }
     Mgr.debug.Draw(Mgr.gfx, Mgr);
 }

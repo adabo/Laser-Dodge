@@ -17,6 +17,7 @@ Player::Player()
     col_b          = 255;
     shots_missed   = 0;
     targets_missed = 0;
+    money          = 0;
 }
 
 void Player::Update(KeyboardClient &Kbd, MouseClient &Mouse,

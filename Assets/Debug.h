@@ -21,7 +21,7 @@ private:
     Timer timer;
     float milli;
     int fps;
-    int n_lasers;
+    // int n_lasers;
     int n_frames;
     bool draw_debug;
     bool tilde_is_pressed;

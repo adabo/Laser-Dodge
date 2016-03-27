@@ -172,6 +172,7 @@
     <ClCompile Include="..\Assets\Player.cpp" />
     <ClCompile Include="..\Assets\ProjectileHandler.cpp" />
     <ClCompile Include="..\Assets\Score.cpp" />
+    <ClCompile Include="..\Assets\ScoreText.cpp" />
     <ClCompile Include="..\Assets\ScreenState.cpp" />
     <ClCompile Include="..\Assets\Sound.cpp" />
     <ClCompile Include="..\Assets\Spawner.cpp" />
@@ -205,6 +206,7 @@
     <ClInclude Include="..\Assets\ProjectileHandler.h" />
     <ClInclude Include="..\Assets\Resource.h" />
     <ClInclude Include="..\Assets\Score.h" />
+    <ClInclude Include="..\Assets\ScoreText.h" />
     <ClInclude Include="..\Assets\ScreenState.h" />
     <ClInclude Include="..\Assets\Sound.h" />
     <ClInclude Include="..\Assets\Spawner.h" />

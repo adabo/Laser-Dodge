@@ -29,6 +29,7 @@ void Spawner::CheckIsAlive(Player &ThisPlayer, std::vector<Enemy> &Enemies,
             // This is redundant. Fix this Abel. Seriously :P
             if (Enemies[i].hp <= 0)
             {
+                // Spawner should not be keeping score. Use events
                 ThisScore += 1;
             }
             Enemies.erase(Enemies.begin() + i);

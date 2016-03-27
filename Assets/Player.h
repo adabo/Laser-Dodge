@@ -29,6 +29,7 @@ class Player : public Entity
     friend class GameManager;
     friend class Physics;
     friend class Score;
+    friend class ScoreText;
     friend class Debug;
 public:
     Player();

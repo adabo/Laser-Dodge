@@ -30,52 +30,11 @@ void StateGameOver::Update(GameManager &Mgr)
             }
         }
     }
-
     // Loop through Game text to display stats
     for (auto &el: game_text)
     {
         el.Update(Mgr.mouse);
     }
-
-/*    if (MouseClickedBox(Mgr.mouse.GetMouseX(), Mgr.mouse.GetMouseY(), yes_x, yes_y, yes_w, yes_h))
-    {
-        y_red = 25;
-        y_green = 150;
-        y_blue = 25;
-    }
-    else
-    {
-        y_red = 100;
-        y_green = 100;
-        y_blue = 100;
-    }
-    if (MouseClickedBox(Mgr.mouse.GetMouseX(), Mgr.mouse.GetMouseY(), no_x, no_y, no_w, no_h))
-    {
-        n_red = 150;
-        n_green = 25;
-        n_blue = 25;
-    }
-    else
-    {
-        n_red = 100;
-        n_green = 100;
-        n_blue = 100;
-    }
-    if (Mgr.mouse.LeftIsPressed())
-    {
-        // Check if yes
-        if (MouseClickedBox(Mgr.mouse.GetMouseX(), Mgr.mouse.GetMouseY(), yes_x, yes_y, yes_w, yes_h))
-        {
-            Mgr.s_state.states = GAME;
-            Reset(Mgr);
-        }
-        // Check if no
-        else if (MouseClickedBox(Mgr.mouse.GetMouseX(), Mgr.mouse.GetMouseY(), no_x, no_y, no_w, no_h))
-        {
-            Mgr.s_state.states = GAMEMAINMENU;
-            Reset(Mgr);
-        }
-    }*/
 }
 
 void StateGameOver::Reset(GameManager &Mgr)

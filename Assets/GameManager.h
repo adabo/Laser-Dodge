@@ -15,6 +15,7 @@
 #include "Debug.h"
 #include "ScreenState.h"
 #include "EntityController.h"
+#include "ScoreText.h"
 
 class GameManager
 {
@@ -27,6 +28,7 @@ class GameManager
     friend class StateGamePause;
     friend class StateShop;
     friend class Spawner;
+    friend class ScoreText;
 public:
     GameManager(HWND hWnd, D3DGraphics &Gfx, const KeyboardServer& kServer, const MouseServer& mServer);
     void Update(float Dt);
@@ -47,6 +49,7 @@ private:
     Physics            physics;
     Spawner            spawner;
     Score              score;
+    ScoreText          score_text;
     Debug              debug;
     ScreenState        s_state;
 };
