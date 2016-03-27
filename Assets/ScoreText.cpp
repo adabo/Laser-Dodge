@@ -11,14 +11,14 @@ ScoreText::ScoreText(GameManager &Mgr)
 :    mgr(Mgr)
      
 {
-score_text = {{"Targets hit:",             16,  504, Text::FIXEDSYS, Text::GREY, Text::GREY},
-                {mgr.score.i_score,         224, 504, Text::FIXEDSYS, Text::GREY, Text::GREY},
-                {"Targets missed:",          16,  532, Text::FIXEDSYS, Text::GREY, Text::GREEN},
-                {mgr.player.targets_missed, 272, 532, Text::FIXEDSYS, Text::GREY, Text::GREY},
-                {"Shots missed:",            16,  560, Text::FIXEDSYS, Text::GREY, Text::RED},
-                {mgr.player.shots_missed,   240, 560, Text::FIXEDSYS, Text::GREY, Text::GREY},
-                {"HP:",                      624, 560, Text::FIXEDSYS, Text::GREY, Text::GREY},
-                {mgr.player.hp,             688, 560, Text::FIXEDSYS, Text::GREY, Text::GREY}};
+    score_text = {  {"Targets hit:",             16,  504, Text::FIXEDSYS, Text::GREY, Text::GREY},
+                    {mgr.score.i_score,         224, 504, Text::FIXEDSYS, Text::GREY, Text::GREY},
+                    {"Targets missed:",          16,  532, Text::FIXEDSYS, Text::GREY, Text::GREEN},
+                    {mgr.player.targets_missed, 272, 532, Text::FIXEDSYS, Text::GREY, Text::GREY},
+                    {"Shots missed:",            16,  560, Text::FIXEDSYS, Text::GREY, Text::RED},
+                    {mgr.player.shots_missed,   240, 560, Text::FIXEDSYS, Text::GREY, Text::GREY},
+                    {"HP:",                      624, 560, Text::FIXEDSYS, Text::GREY, Text::GREY},
+                    {mgr.player.hp,             688, 560, Text::FIXEDSYS, Text::GREY, Text::GREY}};
 }
 
 void ScoreText::Update()
