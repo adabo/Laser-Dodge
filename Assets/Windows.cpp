@@ -344,7 +344,7 @@ int WINAPI wWinMain( HINSTANCE hInst,HINSTANCE,LPWSTR,INT )
     RegisterClassEx( &wc );
     
     RECT wr;
-    wr.left = 0;
+    wr.left = 8;
     wr.right = 800 + wr.left;
     wr.top = 30;
     wr.bottom = 600 + wr.top;

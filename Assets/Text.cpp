@@ -111,6 +111,8 @@ void Text::SetColor(Color Cl)
     case BLACK:
         r = g = b = 0;
         break;
+    case RED:
+        r = 255, g = b = 0;
     default:
     break;
     }

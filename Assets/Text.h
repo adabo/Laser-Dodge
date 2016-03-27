@@ -10,7 +10,7 @@ class Text
 public:
     enum Color
     {
-        GREY, PINK, GREEN, BLACK
+        GREY, PINK, GREEN, BLACK, RED
     };
 
     enum WhichFont

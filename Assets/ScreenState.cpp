@@ -3,7 +3,8 @@
 
 ScreenState::ScreenState(GameManager &MGR)
 :   states(GAMEMAINMENU),
-    state_shop(MGR)
+    state_shop(MGR),
+    state_game_over(state_game.GetVecText())
 {}
 
 

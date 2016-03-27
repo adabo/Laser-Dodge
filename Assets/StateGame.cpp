@@ -73,6 +73,11 @@ void StateGame::UpdateAll(GameManager &Mgr)
     Mgr.projectile.Update(Mgr.lasers);
 }
 
+std::vector<Text> StateGame::GetVecText()
+{
+    return game_text;
+}
+
 void StateGame::Draw(GameManager &Mgr)
 {
     Mgr.player.Draw(Mgr.gfx);

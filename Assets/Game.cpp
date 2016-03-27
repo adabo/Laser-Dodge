@@ -45,4 +45,14 @@ void Game::Go()
 void Game::ComposeFrame()
 {
     mgr.Draw();
+    for (int x = 0; x < 800; ++x)
+    {
+        gfx.PutPixel(x, 0, D3DCOLOR_XRGB(255, 0, 255));
+        gfx.PutPixel(x, 599, D3DCOLOR_XRGB(255, 0, 255));
+    }
+    for (int y = 0; y < 600; ++y)
+    {
+        gfx.PutPixel(0, y, D3DCOLOR_XRGB(255, 0, 255));
+        gfx.PutPixel(799, y, D3DCOLOR_XRGB(255, 0, 255));
+    }
 }
