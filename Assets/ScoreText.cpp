@@ -13,9 +13,9 @@ ScoreText::ScoreText(GameManager &Mgr)
 {
     score_text = {  {"Targets hit:",             16,  504, Text::FIXEDSYS, Text::GREY, Text::GREY},
                     {&mgr.score.i_score,         224, 504, Text::FIXEDSYS, Text::GREY, Text::GREY, Text::INT},
-                    {"Targets missed:",          16,  532, Text::FIXEDSYS, Text::GREY, Text::GREEN},
+                    {"Targets missed:",          16,  532, Text::FIXEDSYS, Text::GREY, Text::GREY},
                     {&mgr.player.targets_missed, 272, 532, Text::FIXEDSYS, Text::GREY, Text::GREY, Text::INT},
-                    {"Shots missed:",            16,  560, Text::FIXEDSYS, Text::GREY, Text::RED},
+                    {"Shots missed:",            16,  560, Text::FIXEDSYS, Text::GREY, Text::GREY},
                     {&mgr.player.shots_missed,   240, 560, Text::FIXEDSYS, Text::GREY, Text::GREY, Text::INT},
                     {"HP:",                      624, 560, Text::FIXEDSYS, Text::GREY, Text::GREY},
                     {&mgr.player.hp,             688, 560, Text::FIXEDSYS, Text::GREY, Text::GREY, Text::FLOAT}};

@@ -47,6 +47,11 @@ void Spawner::CheckIsAlive(Player &ThisPlayer, std::vector<Enemy> &Enemies,
     {
         ThisPlayer.is_alive = false;
     }
+    float targhits_bonus   = ThisScore * 2;
+    float targmiss_penalty = ThisPlayer.targets_missed * 0.4;
+    float shotmiss_penalty = ThisPlayer.shots_missed * 0.2;
+    float reward = targhits_bonus - (targmiss_penalty + shotmiss_penalty);
+    ThisPlayer.money = (int)reward;
 }
 
 void Spawner::AddEnemy(Player &ThisPlayer, std::vector<Enemy> &Enemies)
