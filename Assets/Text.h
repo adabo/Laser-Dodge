@@ -27,7 +27,7 @@ public:
     Text(std::string Str,  int X, int Y, WhichFont Type, Color DC, Color MC, StrType SType = STRING);
     Text(int*         IStr, int X, int Y, WhichFont Type, Color DC, Color MC, StrType SType = STRING);
     Text(float*       FStr, int X, int Y, WhichFont Type, Color DC, Color MC, StrType SType = STRING);
-    // Text(float*       FStr, int* X, int* Y, WhichFont Type, Color DC, Color MC, StrType SType = STRING);
+    Text(int*       FStr, int* X, int* Y, WhichFont Type, Color DC, Color MC, StrType SType = STRING);
 
     void Draw(D3DGraphics &Gfx);
     bool Update(MouseClient& Mouse);

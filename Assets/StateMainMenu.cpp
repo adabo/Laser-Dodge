@@ -18,6 +18,7 @@ void StateMainMenu::Update(GameManager &Mgr)
             if (el.GetStr() == "Play")
             {
                 Mgr.s_state.states = GAME;
+                Mgr.s_state.Update(Mgr);
             }
         }
     }

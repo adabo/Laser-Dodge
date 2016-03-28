@@ -10,25 +10,25 @@ ScoreText::ScoreText(GameManager &Mgr)
 // Loop 3: The dynamic ints/floats
 :   mgr(Mgr)
 {
-    hp = mgr.enemies[0].GetHP();
-    x  = mgr.enemies[0].GetX();
-    y  = mgr.enemies[0].GetY();
-    score_text = {  {"Targets hit:",             16,  504, Text::FIXEDSYS, Text::GREY, Text::GREY},
-                    {&mgr.score.i_score,         224, 504, Text::FIXEDSYS, Text::GREY, Text::GREY, Text::INT},
-                    {"Targets missed:",          16,  532, Text::FIXEDSYS, Text::GREY, Text::GREY},
-                    {&mgr.player.targets_missed, 272, 532, Text::FIXEDSYS, Text::GREY, Text::GREY, Text::INT},
-                    {"Shots missed:",            16,  560, Text::FIXEDSYS, Text::GREY, Text::GREY},
-                    {&mgr.player.shots_missed,   240, 560, Text::FIXEDSYS, Text::GREY, Text::GREY, Text::INT},
-                    {"HP:",                      624, 560, Text::FIXEDSYS, Text::GREY, Text::GREY},
-                    {&mgr.player.hp,             688, 560, Text::FIXEDSYS, Text::GREY, Text::GREY, Text::FLOAT}};
-                    //{&hp,                 (int)&x, (int)&y,  Text::EDGES,    Text::BLACK, Text::RED, Text::FLOAT}};
+    hp = 0;
+    x  = 0;
+    y  = 0;
+    score_text = {  {"Targets hit:",             16,  504, Text::FIXEDSYS, Text::GREY,  Text::GREY},
+                    {&mgr.score.i_score,         224, 504, Text::FIXEDSYS, Text::GREY,  Text::GREY, Text::INT},
+                    {"Targets missed:",          16,  532, Text::FIXEDSYS, Text::GREY,  Text::GREY},
+                    {&mgr.player.targets_missed, 272, 532, Text::FIXEDSYS, Text::GREY,  Text::GREY, Text::INT},
+                    {"Shots missed:",            16,  560, Text::FIXEDSYS, Text::GREY,  Text::GREY},
+                    {&mgr.player.shots_missed,   240, 560, Text::FIXEDSYS, Text::GREY,  Text::GREY, Text::INT},
+                    {"HP:",                      624, 560, Text::FIXEDSYS, Text::GREY,  Text::GREY},
+                    {&mgr.player.hp,             688, 560, Text::FIXEDSYS, Text::GREY,  Text::GREY, Text::FLOAT},
+                    {&hp,                         &x,  &y, Text::EDGES,    Text::BLACK, Text::RED,  Text::INT}};
 }
 
 void ScoreText::Update()
 {
     hp = mgr.enemies[0].GetHP();
-    x = mgr.enemies[0].GetX();
-    y = mgr.enemies[0].GetY();
+    x = mgr.enemies[0].GetX() + mgr.enemies[0].GetWidth() / 2;
+    y = mgr.enemies[0].GetY() + mgr.enemies[0].GetHeight() /2;
     for (auto &el: score_text)
     {
         el.Update(mgr.mouse);

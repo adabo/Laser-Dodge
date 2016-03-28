@@ -16,7 +16,7 @@ Text::Text(std::string Str, int X, int Y, WhichFont Type, Color DC, Color MC, St
 // of another way for the object to know if it's a: string, int, or float.
 // With this method I can just do if() checks on these 3 and the one that
 // is not NULL will be the one that gets processed.
-:   str(Str), i_str(NULL), f_str(NULL), s_type(SType),
+:   str(Str), i_str(NULL), f_str(NULL), s_type(SType), px(NULL), py(NULL),
     x(X),
     y(Y),
     type(Type),
@@ -54,14 +54,14 @@ Text::Text(int* IStr,       int X, int Y, WhichFont Type, Color DC, Color MC, St
 // of another way for the object to know if it's a: string, int, or float.
 // With this method I can just do if() checks on these 3 and the one that
 // is not NULL will be the one that gets processed.
-:   i_str(IStr), str(""), f_str(NULL), s_type(SType),
+:   i_str(IStr), str(""), f_str(NULL), s_type(SType), px(NULL), py(NULL),
     x(X),
     y(Y),
     type(Type),
     mc(MC),
     dc(DC),
     left_is_pressed(false)
-    {
+{
     // Set font
     switch(type)
     {
@@ -92,7 +92,7 @@ Text::Text(float* FStr,     int X, int Y, WhichFont Type, Color DC, Color MC, St
 // of another way for the object to know if it's a: string, int, or float.
 // With this method I can just do if() checks on these 3 and the one that
 // is not NULL will be the one that gets processed.
-:   f_str(FStr), str(""), i_str(NULL), s_type(SType),
+:   f_str(FStr), str(""), i_str(NULL), s_type(SType), px(NULL), py(NULL),
     x(X),
     y(Y),
     type(Type),
@@ -125,8 +125,8 @@ Text::Text(float* FStr,     int X, int Y, WhichFont Type, Color DC, Color MC, St
     SetColor(dc);
 }
 
-/*Text::Text(float* FStr,     int* X, int* Y, WhichFont Type, Color DC, Color MC, StrType SType)
-:   f_str(FStr), str(""), i_str(NULL), s_type(SType),
+Text::Text(int* IStr,     int* X, int* Y, WhichFont Type, Color DC, Color MC, StrType SType)
+:   f_str(NULL), str(""), i_str(IStr), s_type(SType),
     px(X),
     py(Y),
     x(NULL),
@@ -144,14 +144,14 @@ Text::Text(float* FStr,     int X, int Y, WhichFont Type, Color DC, Color MC, St
             fixedSys.LoadFont(&fixedSys, fixedSys_surf, "Fixedsys16x28.bmp", 16, 28, 32);
             // Assign reference to 'font' so that you can use it for the rest of the program
             font = fixedSys;
-            SetFToA(f_str);
+            SetIToA(i_str);
         }
             break;
         case EDGES:
         {
             edges.LoadFont(&edges, edges_surf, "Edges_5x9x32.bmp", 5, 9, 32);
             font = edges;
-            SetFToA(f_str);
+            SetIToA(i_str);
         }
             break;
         default:
@@ -160,13 +160,13 @@ Text::Text(float* FStr,     int X, int Y, WhichFont Type, Color DC, Color MC, St
     // Set default color
     SetColor(dc);
 }
-*/
+
 void Text::ToString()
 {
-    if (s_type == STRING)
-    {
-        SetStr(str);
-    }
+    if (s_type == STRING);
+    //{
+    //    SetStr(str);
+    //}
     else if (s_type == INT)
     {
         SetIToA(i_str);
@@ -181,6 +181,12 @@ bool Text::Update(MouseClient& Mouse)
 {
     int mx = Mouse.GetMouseX();
     int my = Mouse.GetMouseY();
+
+    if (px != NULL && py != NULL)
+    {
+        x = *px;
+        y = *py;
+    }
 
     ToString();
 
