@@ -11,12 +11,12 @@ Font Text::edges;
 // Font Text::font;
 
 Text::Text(){}
-Text::Text(std::string Str, int X, int Y, WhichFont Type, Color DC, Color MC)
+Text::Text(std::string Str, int X, int Y, WhichFont Type, Color DC, Color MC, StrType SType)
 // I set the others NULL becuase during the update I couldn't think
 // of another way for the object to know if it's a: string, int, or float.
 // With this method I can just do if() checks on these 3 and the one that
 // is not NULL will be the one that gets processed.
-:   str(Str), i_str(NULL), f_str(NULL),
+:   str(Str), i_str(NULL), f_str(NULL), s_type(SType),
     x(X),
     y(Y),
     type(Type),
@@ -49,12 +49,12 @@ Text::Text(std::string Str, int X, int Y, WhichFont Type, Color DC, Color MC)
     SetColor(dc);
 }
 
-Text::Text(int IStr,       int X, int Y, WhichFont Type, Color DC, Color MC)
+Text::Text(int* IStr,       int X, int Y, WhichFont Type, Color DC, Color MC, StrType SType)
 // I set the others NULL becuase during the update I couldn't think
 // of another way for the object to know if it's a: string, int, or float.
 // With this method I can just do if() checks on these 3 and the one that
 // is not NULL will be the one that gets processed.
-:   i_str(IStr), str(""), f_str(NULL),
+:   i_str(IStr), str(""), f_str(NULL), s_type(SType),
     x(X),
     y(Y),
     type(Type),
@@ -87,12 +87,12 @@ Text::Text(int IStr,       int X, int Y, WhichFont Type, Color DC, Color MC)
     SetColor(dc);
 }
 
-Text::Text(float FStr,     int X, int Y, WhichFont Type, Color DC, Color MC)
+Text::Text(float* FStr,     int X, int Y, WhichFont Type, Color DC, Color MC, StrType SType)
 // I set the others NULL becuase during the update I couldn't think
 // of another way for the object to know if it's a: string, int, or float.
 // With this method I can just do if() checks on these 3 and the one that
 // is not NULL will be the one that gets processed.
-:   f_str(FStr), str(""), i_str(NULL),
+:   f_str(FStr), str(""), i_str(NULL), s_type(SType),
     x(X),
     y(Y),
     type(Type),
@@ -127,15 +127,15 @@ Text::Text(float FStr,     int X, int Y, WhichFont Type, Color DC, Color MC)
 
 void Text::ToString()
 {
-    if (str != "")
+    if (s_type == STRING)
     {
         SetStr(str);
     }
-    else if (i_str != NULL)
+    else if (s_type == INT)
     {
         SetIToA(i_str);
     }
-    else if (f_str != NULL)
+    else if (s_type == FLOAT)
     {
         SetFToA(f_str);
     }
@@ -188,16 +188,16 @@ void Text::Draw(D3DGraphics &Gfx)
     font.DrawString(buff, x, y, &font, D3DCOLOR_XRGB(r, g, b), Gfx);
 }
 
-void Text::SetIToA(int IStr)
+void Text::SetIToA(int* IStr)
 {
-    sprintf(buff, "%d", IStr);
+    sprintf(buff, "%d", *IStr);
     str = buff;
     SetBuff();
 }
 
-void Text::SetFToA(float FStr)
+void Text::SetFToA(float* FStr)
 {
-    sprintf(buff, "%.2f", FStr);
+    sprintf(buff, "%.2f", *FStr);
     str = buff;
     SetBuff();
 }

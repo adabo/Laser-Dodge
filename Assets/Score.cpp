@@ -9,14 +9,12 @@ Score::Score()
 :   i_score(0)
 {}
 Score::Score(int hp)
-    : i_score(0),
-    col_r(255),
-    col_g(0),
-    col_b(0),
-    dist_pct(hp / (float)col_r)
-{
-    fixedSys.LoadFont( &fixedSys,font_surf,"Fixedsys16x28.bmp",16,28,32 );
-}
+    : i_score(0)
+    //col_r(255),
+    //col_g(0),
+    //col_b(0),
+    //dist_pct(hp / (float)col_r)
+{}
 
 void Score::Update()
 {}

@@ -17,6 +17,8 @@ GameManager::GameManager(HWND hWnd, D3DGraphics &Gfx, const KeyboardServer& kSer
 
 void GameManager::Update(float Dt)
 {
+    if (score.i_score > 0)
+        score.i_score = score.i_score;
     dt = Dt;
     s_state.Update(*this);
 }

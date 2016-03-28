@@ -8,6 +8,11 @@
 class Text
 {
 public:
+    enum StrType
+    {
+        STRING, INT, FLOAT
+    };
+
     enum Color
     {
         GREY, PINK, GREEN, BLACK, RED
@@ -19,9 +24,9 @@ public:
     };
 public:
     Text();
-    Text(std::string Str,  int X, int Y, WhichFont Type, Color DC, Color MC);
-    Text(int         IStr, int X, int Y, WhichFont Type, Color DC, Color MC);
-    Text(float       FStr, int X, int Y, WhichFont Type, Color DC, Color MC);
+    Text(std::string Str,  int X, int Y, WhichFont Type, Color DC, Color MC, StrType SType = STRING);
+    Text(int*         IStr, int X, int Y, WhichFont Type, Color DC, Color MC, StrType SType = STRING);
+    Text(float*       FStr, int X, int Y, WhichFont Type, Color DC, Color MC, StrType SType = STRING);
 
     void Draw(D3DGraphics &Gfx);
     bool Update(MouseClient& Mouse);
@@ -36,8 +41,8 @@ public:
     int         GetB();
     std::string GetStr();
 
-    void SetIToA(int IStr);
-    void SetFToA(float FStr);
+    void SetIToA(int* IStr);
+    void SetFToA(float* FStr);
     void SetColor(Color Cl);
     void SetBuff();
     void SetStr(std::string Str);
@@ -45,12 +50,13 @@ public:
     void SetY(int Y);
 
 private:
+    StrType s_type;
     int x, y, w, h;
     int r, g, b;
     char buff[64];
     std::string str;
-    int i_str = NULL;
-    float f_str = NULL;
+    int* i_str;
+    float* f_str;
     WhichFont type;
     Color dc;
     Color mc;
