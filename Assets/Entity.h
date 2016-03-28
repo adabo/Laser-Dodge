@@ -19,7 +19,7 @@ public:
     virtual void Draw(Entity Ent, D3DGraphics Gfx);
 protected:
     float x, y,
-          velocity,
+          speed,
           hp,
           damage,
           shield;

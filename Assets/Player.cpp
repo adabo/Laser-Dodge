@@ -10,7 +10,7 @@ Player::Player()
     hp             = 300.0f;
     damage         = 15.0f;
     shield         = 1.0f;
-    velocity       = 100;
+    speed          = 100;
     col_dec        = 255 / (hp / 15);
     col_r          = 255;
     col_g          = 255;
@@ -23,7 +23,7 @@ Player::Player()
 void Player::Update(KeyboardClient &Kbd, MouseClient &Mouse,
                     ProjectileHandler &Projectile, std::vector<Laser> &Lasers, float Dt)
 {
-    float frame_step = velocity * Dt;
+    float frame_step = speed * Dt;
     if (Kbd.AIsPressed())
     {
         x -= frame_step;
@@ -117,9 +117,39 @@ void Player::SetAimDirection(int MouseX, int MouseY)
     }
 }
 
+void Player::SetSpeed(float Speed)
+{
+    speed = Speed;
+}
+
 void Player::Draw(D3DGraphics &Gfx)
 {
     Gfx.DrawRectOutline((int)x, (int)y, (int)x + width, (int)y + height, D3DCOLOR_XRGB(col_r, col_g, col_b));
+}
+
+void Player::SetX(float X)
+{
+    x = X;
+}
+
+void Player::SetY(float Y)
+{
+    y = Y;
+}
+
+void Player::SetHp(float HP)
+{
+    hp = HP;
+}
+
+void Player::SetDamage(float Dmg)
+{
+    damage = Dmg;
+}
+
+void Player::SetShield(float Shield)
+{
+    shield = shield;
 }
 
 

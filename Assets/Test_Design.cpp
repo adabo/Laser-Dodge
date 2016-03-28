@@ -22,7 +22,7 @@ public:
     virtual void Draw(D3DGraphics &Gfx) = 0;
 protected:
     float x, y,
-          velocity,
+          speed,
           hp,
           damage,
           shield;
@@ -51,7 +51,7 @@ public:
     Laser(float X, float Y, float Cos_X, float Sin_Y, float Damage)
     :   x        (X)
         y        (Y)
-        velocity (900)
+        speed (900)
         cos_x    (Cos_X)
         sin_y    (Sin_Y)
         is_alive (true)
@@ -64,7 +64,7 @@ public:
         {
             // Temporary use 0 to get global laser speed
             // since all lasers carry same speed
-            frame_step = velocity * Dt;
+            frame_step = speed * Dt;
             for (auto &laser : lasers)
             {
                 lasers.x += frame_step * lasers.cos_x;

@@ -2,7 +2,7 @@
 #include "GameManager.h"
 
 Spawner::Spawner()
-:   velocity_increase(0.0f)
+:   speed_increase(0.0f)
 {} 
 
 void Spawner::Update(GameManager &Mgr)
@@ -58,7 +58,7 @@ void Spawner::CheckIsAlive(Player &ThisPlayer, std::vector<Enemy> &Enemies,
 
 void Spawner::AddEnemy(Player &ThisPlayer, std::vector<Enemy> &Enemies)
 {
-    velocity_increase += 4.0f;
+    speed_increase += 4.0f;
     // I should not be hard coding these values especially
     // the height and width. Need to find a more elegant solution
     float x = (float)(rand() % (800 - 30 * 2) + 30);
@@ -68,7 +68,7 @@ void Spawner::AddEnemy(Player &ThisPlayer, std::vector<Enemy> &Enemies)
     float cos_x      = trg.GetCosX(x, ThisPlayer.GetX(), hypotenuse);
     float sin_y      = trg.GetSinY(y, ThisPlayer.GetY(), hypotenuse);
 
-    Enemies.push_back(Enemy(x, y, cos_x, sin_y, velocity_increase));
+    Enemies.push_back(Enemy(x, y, cos_x, sin_y, speed_increase));
 }
 
 void Spawner::SetPlayerAlive(Player &ThisPlayer)

@@ -5,7 +5,7 @@ Laser::Laser(float X, float Y, float Cos_X, float Sin_Y, float Damage)
 {
     x        = X;
     y        = Y;
-    velocity = 600;
+    speed = 600;
     cos_x    = Cos_X;
     sin_y    = Sin_Y;
     is_alive = true;
@@ -15,7 +15,7 @@ Laser::Laser(float X, float Y, float Cos_X, float Sin_Y, float Damage)
     height   = 1;
     p_entity = this;
     p_laser = this;
-    //velocity = 100;
+    //speed = 100;
 }
 
 void Laser::Update(Laser &Lsr, float Dt) 

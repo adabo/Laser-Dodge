@@ -16,6 +16,7 @@ public:
     Enemy(float X, float Y, float Cos_X, float Sin_Y, float VelocityIncrease);
     void Update(Enemy &Emy, MouseClient &Mouse, float Dt);
     void Draw(Enemy &Emy, D3DGraphics &Gfx);
+    void SetSpeed(float Speed);
     float GetX();
     float GetY();
     int   GetWidth();

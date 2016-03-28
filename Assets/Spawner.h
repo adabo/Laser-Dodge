@@ -16,6 +16,6 @@ public:
     void SetPlayerAlive(Player &ThisPlayer);
     void AddEnemy(Player &ThisPlayer, std::vector<Enemy> &Enemies);
 private:
-    float velocity_increase;
+    float speed_increase;
     Trigonometry trg;
 };

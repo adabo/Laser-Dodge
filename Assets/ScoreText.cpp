@@ -26,9 +26,9 @@ ScoreText::ScoreText(GameManager &Mgr)
 
 void ScoreText::Update()
 {
-    hp = mgr.enemies[0].GetHP();
-    x = mgr.enemies[0].GetX() + mgr.enemies[0].GetWidth() / 2;
-    y = mgr.enemies[0].GetY() + mgr.enemies[0].GetHeight() /2;
+    hp = (int)mgr.enemies[0].GetHP();
+    x = (int)mgr.enemies[0].GetX() + mgr.enemies[0].GetWidth() / 2;
+    y = (int)mgr.enemies[0].GetY() + mgr.enemies[0].GetHeight() /2;
     for (auto &el: score_text)
     {
         el.Update(mgr.mouse);

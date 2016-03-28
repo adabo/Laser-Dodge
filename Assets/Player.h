@@ -36,6 +36,12 @@ public:
     void Update(KeyboardClient &Kbd, MouseClient &Mouse,
                     ProjectileHandler &Projectile, std::vector<Laser> &Lasers, float Dt);
     void SetAimDirection(int MouseX, int MouseY);
+    void SetSpeed(float Speed);
+    void SetX(float X);
+    void SetY(float Y);
+    void SetHp(float HP);
+    void SetDamage(float Dmg);
+    void SetShield(float Shield);
     void Draw(D3DGraphics &Gfx);
     float GetX();
     float GetY();

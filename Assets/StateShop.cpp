@@ -216,33 +216,51 @@ void StateShop::UpdateShopSkill()
 
 void StateShop::UpgradeSpeed()
 {
-    mgr.player.money -= 20;
-    //mgr.player.
+    if (mgr.player.money - 20 > 0)
+    {
+        mgr.player.money -= 20;
+        mgr.player.SetSpeed(mgr.player.speed + 40);
+    }
 }
 
 void StateShop::UpgradeDamage()
 {
-    mgr.player.money -= 20;
+    if (mgr.player.money - 20 > 0)
+    {
+        mgr.player.money -= 20;
+    }
 }
 
 void StateShop::UpgradeAccel()
 {
-    mgr.player.money -= 20;
+    if (mgr.player.money - 20 > 0)
+    {
+        mgr.player.money -= 20;
+    }
 }
 
 void StateShop::UpgradeShield()
 {
-    mgr.player.money -= 20;
+    if (mgr.player.money - 20 > 0)
+    {
+        mgr.player.money -= 20;
+    }
 }
 
 void StateShop::UpgradeMissEnemy()
 {
-    mgr.player.money -= 20;
+    if (mgr.player.money - 20 > 0)
+    {
+        mgr.player.money -= 20;
+    }
 }
 
 void StateShop::UpgradeMissShot()
 {
-    mgr.player.money -= 20;
+    if (mgr.player.money - 20 > 0)
+    {
+        mgr.player.money -= 20;
+    }
 }
 
 // You should make a function that will take any text you put
