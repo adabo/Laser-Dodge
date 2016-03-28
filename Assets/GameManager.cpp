@@ -9,7 +9,8 @@ GameManager::GameManager(HWND hWnd, D3DGraphics &Gfx, const KeyboardServer& kSer
         score((int)player.hp),
         ec(Gfx, mServer, lasers, enemies),
         score_text(*this),
-        s_state(*this)
+        s_state(*this),
+        debug(*this)
 {
     //score = Score(player.hp);
     srand((unsigned int)time(NULL));

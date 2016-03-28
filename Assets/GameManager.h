@@ -46,6 +46,7 @@ private:
     EntityController   ec;
     std::vector<Enemy> enemies;
     std::vector<Laser> lasers;
+    //int*               nlasers;
     Physics            physics;
     Spawner            spawner;
     Score              score;
