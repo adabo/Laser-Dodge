@@ -47,10 +47,12 @@ void Spawner::CheckIsAlive(Player &ThisPlayer, std::vector<Enemy> &Enemies,
     {
         ThisPlayer.is_alive = false;
     }
-    float targhits_bonus   = ThisScore * 2;
-    float targmiss_penalty = ThisPlayer.targets_missed * 0.4;
-    float shotmiss_penalty = ThisPlayer.shots_missed * 0.2;
-    float reward = targhits_bonus - (targmiss_penalty + shotmiss_penalty);
+    // This money code should not be in the spawner. And neither should
+    // the score code up above. I REALLY need to figure out the observer/subject trick;
+    int targhits_bonus   = ThisScore * 2;
+    int targmiss_penalty = (int)(ThisPlayer.targets_missed * 0.4f);
+    int shotmiss_penalty = (int)(ThisPlayer.shots_missed * 0.2f);
+    int reward = targhits_bonus - (targmiss_penalty + shotmiss_penalty);
     ThisPlayer.money = (int)reward;
 }
 

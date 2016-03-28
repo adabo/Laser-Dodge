@@ -23,14 +23,7 @@ Debug::Debug(GameManager &Mgr)
                   {&mouse_y, 65,9, Text::EDGES, Text::PINK, Text::PINK, Text::INT},
                   {"Lasers:", 1, 18, Text::EDGES, Text::PINK, Text::PINK},
                   {&n_lasers, 40, 18, Text::EDGES, Text::PINK, Text::PINK, Text::INT}};
-/*    debug_text = {{"FPS:", 1, 0, Text::EDGES, Text::PINK, Text::PINK},
-                 {&fps, 25, 0, Text::EDGES, Text::PINK, Text::PINK, Text::INT},
-                 {"MouseXY:", 1, 9, Text::EDGES, Text::PINK, Text::PINK},
-                 {&mouse_x, 45, 9, Text::EDGES, Text::PINK, Text::PINK, Text::INT},
-                 {&mouse_y, 65,9, Text::EDGES, Text::PINK, Text::PINK, Text::INT},
-                 {"Lasers:", 1, 18, Text::EDGES, Text::PINK, Text::PINK},
-                 {(int*)mgr.lasers.size(), 40, 18, Text::EDGES, Text::PINK, Text::PINK, Text::INT}};
-*/}
+}
 
 void Debug::Update(GameManager &Mgr)
 {

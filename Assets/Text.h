@@ -27,6 +27,7 @@ public:
     Text(std::string Str,  int X, int Y, WhichFont Type, Color DC, Color MC, StrType SType = STRING);
     Text(int*         IStr, int X, int Y, WhichFont Type, Color DC, Color MC, StrType SType = STRING);
     Text(float*       FStr, int X, int Y, WhichFont Type, Color DC, Color MC, StrType SType = STRING);
+    // Text(float*       FStr, int* X, int* Y, WhichFont Type, Color DC, Color MC, StrType SType = STRING);
 
     void Draw(D3DGraphics &Gfx);
     bool Update(MouseClient& Mouse);
@@ -52,6 +53,7 @@ public:
 private:
     StrType s_type;
     int x, y, w, h;
+    int *px, *py;
     int r, g, b;
     char buff[64];
     std::string str;

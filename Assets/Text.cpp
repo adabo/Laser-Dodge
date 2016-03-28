@@ -125,6 +125,42 @@ Text::Text(float* FStr,     int X, int Y, WhichFont Type, Color DC, Color MC, St
     SetColor(dc);
 }
 
+/*Text::Text(float* FStr,     int* X, int* Y, WhichFont Type, Color DC, Color MC, StrType SType)
+:   f_str(FStr), str(""), i_str(NULL), s_type(SType),
+    px(X),
+    py(Y),
+    x(NULL),
+    y(NULL),
+    type(Type),
+    mc(MC),
+    dc(DC),
+    left_is_pressed(false)
+{
+    // Set font
+    switch(type)
+    {
+        case FIXEDSYS:
+        {
+            fixedSys.LoadFont(&fixedSys, fixedSys_surf, "Fixedsys16x28.bmp", 16, 28, 32);
+            // Assign reference to 'font' so that you can use it for the rest of the program
+            font = fixedSys;
+            SetFToA(f_str);
+        }
+            break;
+        case EDGES:
+        {
+            edges.LoadFont(&edges, edges_surf, "Edges_5x9x32.bmp", 5, 9, 32);
+            font = edges;
+            SetFToA(f_str);
+        }
+            break;
+        default:
+            break;
+    }
+    // Set default color
+    SetColor(dc);
+}
+*/
 void Text::ToString()
 {
     if (s_type == STRING)

@@ -6,9 +6,11 @@
 // #include "Player.h"
 
 // class Player;
+class GameMangager;
 
 class Enemy : public Entity
 {
+    friend class GameManager;
 public:
     Enemy();
     Enemy(float X, float Y, float Cos_X, float Sin_Y, float VelocityIncrease);
@@ -18,6 +20,7 @@ public:
     float GetY();
     int   GetWidth();
     int   GetHeight();
+    float GetHP();
 private:
     Text enemy_text;
     float cos_x, sin_y;

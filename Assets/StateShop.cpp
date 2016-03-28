@@ -217,6 +217,7 @@ void StateShop::UpdateShopSkill()
 void StateShop::UpgradeSpeed()
 {
     mgr.player.money -= 20;
+    //mgr.player.
 }
 
 void StateShop::UpgradeDamage()

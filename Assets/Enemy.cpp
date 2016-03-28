@@ -57,3 +57,8 @@ int Enemy::GetHeight()
 {
     return height; 
 }
+
+float Enemy::GetHP()
+{
+    return hp;
+}

@@ -13,4 +13,5 @@ public:
 private:
     std::vector<Text> score_text;
     GameManager &mgr;
+    float x,y,hp;
 };
