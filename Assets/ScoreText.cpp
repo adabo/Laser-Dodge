@@ -14,7 +14,7 @@ ScoreText::ScoreText(GameManager &Mgr)
     x  = 0;
     y  = 0;
     score_text = {  {"Targets hit:",             16,  504, Text::FIXEDSYS, Text::GREY,  Text::GREY},
-                    {&mgr.score.i_score,         224, 504, Text::FIXEDSYS, Text::GREY,  Text::GREY, Text::INT},
+                    {&mgr.score.targets_hit,         224, 504, Text::FIXEDSYS, Text::GREY,  Text::GREY, Text::INT},
                     {"Targets missed:",          16,  532, Text::FIXEDSYS, Text::GREY,  Text::GREY},
                     {&mgr.player.targets_missed, 272, 532, Text::FIXEDSYS, Text::GREY,  Text::GREY, Text::INT},
                     {"Shots missed:",            16,  560, Text::FIXEDSYS, Text::GREY,  Text::GREY},
@@ -27,8 +27,8 @@ ScoreText::ScoreText(GameManager &Mgr)
 void ScoreText::Update()
 {
     hp = (int)mgr.enemies[0].GetHP();
-    x = (int)mgr.enemies[0].GetX() + mgr.enemies[0].GetWidth() / 2;
-    y = (int)mgr.enemies[0].GetY() + mgr.enemies[0].GetHeight() /2;
+    x  = (int)mgr.enemies[0].GetX() + mgr.enemies[0].GetWidth() / 2;
+    y  = (int)mgr.enemies[0].GetY() + mgr.enemies[0].GetHeight() / 2;
     for (auto &el: score_text)
     {
         el.Update(mgr.mouse);

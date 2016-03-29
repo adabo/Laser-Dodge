@@ -22,7 +22,11 @@ Debug::Debug(GameManager &Mgr)
                   {&mouse_x, 45, 9, Text::EDGES, Text::PINK, Text::PINK, Text::INT},
                   {&mouse_y, 65,9, Text::EDGES, Text::PINK, Text::PINK, Text::INT},
                   {"Lasers:", 1, 18, Text::EDGES, Text::PINK, Text::PINK},
-                  {&n_lasers, 40, 18, Text::EDGES, Text::PINK, Text::PINK, Text::INT}};
+                  {&n_lasers, 40, 18, Text::EDGES, Text::PINK, Text::PINK, Text::INT},
+                  {"Speed", 1, 27, Text::EDGES, Text::PINK, Text::PINK},
+                  {&mgr.player.speed, 30, 27, Text::EDGES, Text::PINK, Text::PINK, Text::FLOAT},
+                  {"$", 1, 36, Text::EDGES, Text::PINK, Text::PINK},
+                  {&mgr.player.money, 15, 36, Text::EDGES, Text::PINK, Text::PINK, Text::INT}};
 }
 
 void Debug::Update(GameManager &Mgr)

@@ -6,10 +6,10 @@
 // #define DISTPCT 3.921568627450980392156862745098
 
 Score::Score()
-:   i_score(0)
+:   targets_hit(0)
 {}
 Score::Score(int hp)
-    : i_score(0)
+    : targets_hit(0)
     //col_r(255),
     //col_g(0),
     //col_b(0),

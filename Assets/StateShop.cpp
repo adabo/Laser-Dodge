@@ -202,7 +202,7 @@ void StateShop::UpdateShopSkill()
             {
                 shop_state = MAIN;
             }
-            else if (el.GetStr() == "ENEMYMISSSED")
+            else if (el.GetStr() == "ENEMYMISSED")
             {
                 UpgradeMissEnemy();
             }
@@ -216,10 +216,14 @@ void StateShop::UpdateShopSkill()
 
 void StateShop::UpgradeSpeed()
 {
-    if (mgr.player.money - 20 > 0)
+    if (mgr.player.money - 20 >= 0)
     {
-        mgr.player.money -= 20;
+        mgr.player.SetMoney(mgr.player.money - 20);
         mgr.player.SetSpeed(mgr.player.speed + 40);
+        mgr.spawner.points = 0;
+        mgr.score.targets_hit = 0;
+        mgr.player.shots_missed = 0;
+        mgr.player.targets_missed = 0;
     }
 }
 
@@ -227,7 +231,7 @@ void StateShop::UpgradeDamage()
 {
     if (mgr.player.money - 20 > 0)
     {
-        mgr.player.money -= 20;
+        mgr.player.SetMoney(mgr.player.money - 20);
     }
 }
 
@@ -235,7 +239,7 @@ void StateShop::UpgradeAccel()
 {
     if (mgr.player.money - 20 > 0)
     {
-        mgr.player.money -= 20;
+        mgr.player.SetMoney(mgr.player.money - 20);
     }
 }
 
@@ -243,7 +247,7 @@ void StateShop::UpgradeShield()
 {
     if (mgr.player.money - 20 > 0)
     {
-        mgr.player.money -= 20;
+        mgr.player.SetMoney(mgr.player.money - 20);
     }
 }
 
@@ -251,7 +255,7 @@ void StateShop::UpgradeMissEnemy()
 {
     if (mgr.player.money - 20 > 0)
     {
-        mgr.player.money -= 20;
+        mgr.player.SetMoney(mgr.player.money - 20);
     }
 }
 
@@ -259,7 +263,7 @@ void StateShop::UpgradeMissShot()
 {
     if (mgr.player.money - 20 > 0)
     {
-        mgr.player.money -= 20;
+        mgr.player.SetMoney(mgr.player.money - 20);
     }
 }
 

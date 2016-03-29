@@ -50,7 +50,7 @@ void ScreenState::Draw(GameManager &Mgr)
         break;
         case GAMEOVER:
             state_game_over.Draw(Mgr, Mgr.gfx);
-            Mgr.score.Draw(Mgr.player, Mgr.gfx, Mgr.score.i_score);
+            Mgr.score.Draw(Mgr.player, Mgr.gfx, Mgr.score.targets_hit);
             Mgr.score_text.Draw();
         break;
         case GAMEMAINMENU:
@@ -58,6 +58,8 @@ void ScreenState::Draw(GameManager &Mgr)
         break;
         case GAMEPAUSE:
             state_game_pause.Draw(Mgr);
+            Mgr.score.Draw(Mgr.player, Mgr.gfx, Mgr.score.targets_hit);
+            Mgr.score_text.Draw();
         break;
         case GAMESHOP:
             state_shop.Draw();

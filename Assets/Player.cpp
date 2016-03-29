@@ -152,6 +152,10 @@ void Player::SetShield(float Shield)
     shield = shield;
 }
 
+void Player::SetMoney(int Money)
+{
+    money = Money;
+}
 
 float Player::GetX()
 {

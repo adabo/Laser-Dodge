@@ -42,6 +42,7 @@ public:
     void SetHp(float HP);
     void SetDamage(float Dmg);
     void SetShield(float Shield);
+    void SetMoney(int Money);
     void Draw(D3DGraphics &Gfx);
     float GetX();
     float GetY();

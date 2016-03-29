@@ -2,13 +2,14 @@
 #include "GameManager.h"
 
 Spawner::Spawner()
-:   speed_increase(0.0f)
+:   speed_increase(0.0f),
+    points(0)
 {} 
 
 void Spawner::Update(GameManager &Mgr)
 {
     // Check if enemies are dead
-    CheckIsAlive(Mgr.player, Mgr.enemies, Mgr.lasers, Mgr.score.i_score);
+    CheckIsAlive(Mgr.player, Mgr.enemies, Mgr.lasers, Mgr.score.targets_hit);
     // Then add them if necessary
     if (Mgr.enemies.size() <= 0)
     {
@@ -17,7 +18,7 @@ void Spawner::Update(GameManager &Mgr)
 }
 
 void Spawner::CheckIsAlive(Player &ThisPlayer, std::vector<Enemy> &Enemies,
-                     std::vector<Laser> &Lasers, int &ThisScore)
+                     std::vector<Laser> &Lasers, int &TargsHit)
 {
     // Spawner doesn't care which entity it's
     // checking since the entities will hold
@@ -30,7 +31,8 @@ void Spawner::CheckIsAlive(Player &ThisPlayer, std::vector<Enemy> &Enemies,
             if (Enemies[i].hp <= 0)
             {
                 // Spawner should not be keeping score. Use events
-                ThisScore += 1;
+                TargsHit += 1;
+                points += 1;
             }
             Enemies.erase(Enemies.begin() + i);
             AddEnemy(ThisPlayer, Enemies);
@@ -49,12 +51,12 @@ void Spawner::CheckIsAlive(Player &ThisPlayer, std::vector<Enemy> &Enemies,
     }
     // This money code should not be in the spawner. And neither should
     // the score code up above. I REALLY need to figure out the observer/subject trick;
-    int targhits_bonus   = ThisScore * 2;
-    int targmiss_penalty = (int)(ThisPlayer.targets_missed * 0.4f);
-    int shotmiss_penalty = (int)(ThisPlayer.shots_missed * 0.2f);
-    int reward = targhits_bonus - (targmiss_penalty + shotmiss_penalty);
+    int targsHit_bonus   = points * 2;
+    int targMiss_penalty = (int)(ThisPlayer.targets_missed * 0.4f);
+    int shotMiss_penalty = (int)(ThisPlayer.shots_missed * 0.2f);
+    int reward = targsHit_bonus - (targMiss_penalty + shotMiss_penalty);
     ThisPlayer.money = (int)reward;
-}
+ }
 
 void Spawner::AddEnemy(Player &ThisPlayer, std::vector<Enemy> &Enemies)
 {
