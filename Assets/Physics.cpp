@@ -7,7 +7,6 @@ void Physics::Update(GameManager &Mgr)
     CollisionDieByEntity(Mgr);
     CollisionClampToScreen(Mgr);
 }
-
 void Physics::CollisionDieByScreen(GameManager &Mgr)
 {
     for (auto &enemy : Mgr.enemies)
@@ -24,7 +23,6 @@ void Physics::CollisionDieByScreen(GameManager &Mgr)
     }
     // EntityDieByScreen(ThisPlayer);
 }
-
 void Physics::CollisionDieByEntity(GameManager &Mgr)
 {
     // Player laser hits enemy
@@ -69,7 +67,6 @@ void Physics::CollisionDieByEntity(GameManager &Mgr)
         }
     }
 }
-
 void Physics::CollisionClampToScreen(GameManager &Mgr)
 {
     // Todo: Add enemy laser clamps
@@ -83,7 +80,6 @@ void Physics::CollisionClampToScreen(GameManager &Mgr)
     }
     ClampThisEntity(Mgr.player);
 }
-
 void Physics::ClampThisEntity(Entity &ThisEntity)
 {
     // instead of just dying.
@@ -104,7 +100,6 @@ void Physics::ClampThisEntity(Entity &ThisEntity)
         ThisEntity.x = (float)(798 - ThisEntity.width);
     }
 }
-
 void Physics::EntityDieByScreen(Entity &ThisEntity, Player &ThisPlayer, Ty_Entity Entity_Type)
 {
     if (EntityHitsScreen(ThisEntity))
@@ -123,13 +118,11 @@ void Physics::EntityDieByScreen(Entity &ThisEntity, Player &ThisPlayer, Ty_Entit
         ThisEntity.is_alive = false;
     }
 }
-
 bool Physics::EntityHitsScreen(Entity &ThisEntity)
 {
     return ((int)ThisEntity.x <= 0 || (int)ThisEntity.x >= 798 - ThisEntity.width ||
             (int)ThisEntity.y <= 1 || (int)ThisEntity.y >= 589 - ThisEntity.height);
 }
-
 bool Physics::EntityClipScreen(Entity &ThisEntity, Side ThisSide)
 {
     switch(ThisSide)
