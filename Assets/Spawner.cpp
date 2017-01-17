@@ -2,13 +2,14 @@
 #include "GameManager.h"
 
 Spawner::Spawner()
-:   velocity_increase(0.0f)
+:   speed_increase(0.0f),
+    points(0)
 {} 
 
 void Spawner::Update(GameManager &Mgr)
 {
     // Check if enemies are dead
-    CheckIsAlive(Mgr.player, Mgr.enemies, Mgr.lasers, Mgr.score.i_score);
+    CheckIsAlive(Mgr.player, Mgr.enemies, Mgr.lasers, Mgr.score.targets_hit);
     // Then add them if necessary
     if (Mgr.enemies.size() <= 0)
     {
@@ -17,7 +18,7 @@ void Spawner::Update(GameManager &Mgr)
 }
 
 void Spawner::CheckIsAlive(Player &ThisPlayer, std::vector<Enemy> &Enemies,
-                     std::vector<Laser> &Lasers, int &ThisScore)
+                     std::vector<Laser> &Lasers, int &TargsHit)
 {
     // Spawner doesn't care which entity it's
     // checking since the entities will hold
@@ -29,7 +30,9 @@ void Spawner::CheckIsAlive(Player &ThisPlayer, std::vector<Enemy> &Enemies,
             // This is redundant. Fix this Abel. Seriously :P
             if (Enemies[i].hp <= 0)
             {
-                ThisScore += 1;
+                // Spawner should not be keeping score. Use events
+                TargsHit += 1;
+                points += 1;
             }
             Enemies.erase(Enemies.begin() + i);
             AddEnemy(ThisPlayer, Enemies);
@@ -46,11 +49,18 @@ void Spawner::CheckIsAlive(Player &ThisPlayer, std::vector<Enemy> &Enemies,
     {
         ThisPlayer.is_alive = false;
     }
-}
+    // This money code should not be in the spawner. And neither should
+    // the score code up above. I REALLY need to figure out the observer/subject trick;
+    int targsHit_bonus   = points * 2;
+    int targMiss_penalty = (int)(ThisPlayer.targets_missed * 0.4f);
+    int shotMiss_penalty = (int)(ThisPlayer.shots_missed * 0.2f);
+    int reward = targsHit_bonus - (targMiss_penalty + shotMiss_penalty);
+    ThisPlayer.money = (int)reward;
+ }
 
 void Spawner::AddEnemy(Player &ThisPlayer, std::vector<Enemy> &Enemies)
 {
-    velocity_increase += 4.0f;
+    speed_increase += 4.0f;
     // I should not be hard coding these values especially
     // the height and width. Need to find a more elegant solution
     float x = (float)(rand() % (800 - 30 * 2) + 30);
@@ -60,7 +70,7 @@ void Spawner::AddEnemy(Player &ThisPlayer, std::vector<Enemy> &Enemies)
     float cos_x      = trg.GetCosX(x, ThisPlayer.GetX(), hypotenuse);
     float sin_y      = trg.GetSinY(y, ThisPlayer.GetY(), hypotenuse);
 
-    Enemies.push_back(Enemy(x, y, cos_x, sin_y, velocity_increase));
+    Enemies.push_back(Enemy(x, y, cos_x, sin_y, speed_increase));
 }
 
 void Spawner::SetPlayerAlive(Player &ThisPlayer)

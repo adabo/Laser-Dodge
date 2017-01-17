@@ -1,0 +1,35 @@
+shop 370, 88
+--- main screen ---
+back 80, 84, 32, 28
+upgrades 338, 200
+ship 368, 280, 64, 28
+weapons 346, 308, 108, 28
+ammo 368, 336, 64, 28
+skills 354, 364, 64, 28
+---
+
+--- ship upgrades ---
+back 80, 84, 32, 28
+ship 368, 200, 64, 28
+speed 362, 256, 76, 28
+acceleration 306, 284, 188, 28
+shield 354, 312, 96, 28
+---
+
+--- weapon upgrades ---
+back 80, 84, 32, 28
+weapons 344, 200, 108, 28
+damage 354, 284, 96, 28
+---
+
+--- ammo upgrades ---
+back 80, 84, 32, 28
+ammo 370, 200, 64, 28
+---
+
+--- skill upgrades ---
+back 80, 84, 32, 28
+skills 352, 199, 64, 28
+missed enemies penalty 226, 284, 350, 28
+shots missed penalty 242, 312, 120, 28
+---

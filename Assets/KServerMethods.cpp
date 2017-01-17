@@ -4,6 +4,10 @@ void KeyboardServer::OnTildePressed()
 {
     tilde_is_pressed = true;
 }
+void KeyboardServer::OnTabPressed()
+{
+    tab_is_pressed = true;
+}
 void KeyboardServer::OnAPressed()
 {
     a_is_pressed = true;
@@ -112,6 +116,10 @@ void KeyboardServer::OnZPressed()
 void KeyboardServer::OnTildeReleased()
 {
     tilde_is_pressed = false;
+}
+void KeyboardServer::OnTabReleased()
+{
+    tab_is_pressed = false;
 }
 void KeyboardServer::OnAReleased()
 {

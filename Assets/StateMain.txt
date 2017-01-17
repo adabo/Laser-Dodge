@@ -1,0 +1,3 @@
+--- Main screen ---
+Laser Dodge | 320, 168
+Play        | 368, 308

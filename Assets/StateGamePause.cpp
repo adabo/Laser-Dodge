@@ -29,8 +29,5 @@ void StateGamePause::Update(GameManager &Mgr)
 
 void StateGamePause::Draw(GameManager &Mgr)
 {
-    Mgr.player.Draw(Mgr.gfx);
-    Mgr.enemy.Draw(Mgr.enemies, Mgr.gfx);
-    Mgr.laser.Draw(Mgr.lasers, Mgr.gfx);
-    Mgr.score.Draw(Mgr.player, Mgr.gfx, Mgr.score.i_score);
+    Mgr.s_state.state_game.Draw(Mgr);
 }

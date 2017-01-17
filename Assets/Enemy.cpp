@@ -5,47 +5,41 @@
 
 Enemy::Enemy(){}
 Enemy::Enemy(float X, float Y, float Cos_X, float Sin_Y, float VelocityIncrease)
+:   enemy_text("", 0, 0, Text::EDGES, Text::BLACK, Text::BLACK),
+    cos_x(Cos_X), sin_y(Sin_Y)
 {
     x        = X;
     y        = Y;
     width    = 30;
     height   = 30;
-    cos_x    = Cos_X;
-    sin_y    = Sin_Y;
     is_alive = true;
     hp       = 50.0f;
     damage   = 15.0f;
     shield   = 5.0f;
-    velocity = 100.0f + VelocityIncrease;
-    edges.LoadFont(&edges, font_surf, "Edges_5x10x32.bmp", 5, 10, 32);
+    speed    = 100.0f + VelocityIncrease;
 }
 
-void Enemy::Update(Player &ThisPlayer, std::vector<Enemy> &Enemies, float Dt)
+void Enemy::Update(Enemy &Emy, MouseClient &Mouse, float Dt)
 {
-    if(Enemies.size())
-    {
-        for (auto &enemy : Enemies)
-        {
-            float frame_step = enemy.velocity * Dt;
-            enemy.x += frame_step * enemy.cos_x;
-            enemy.y += frame_step * enemy.sin_y;
-        }
-    }
+    float frame_step = Emy.speed * Dt;
+    Emy.x += frame_step * Emy.cos_x;
+    Emy.y += frame_step * Emy.sin_y;
+    enemy_text.Update(Mouse);
 }
 
-void Enemy::Draw(std::vector<Enemy> &Enemies, D3DGraphics &Gfx)
+void Enemy::Draw(Enemy &Emy, D3DGraphics &Gfx)
 {
-    for (auto &enemy : Enemies)
-    {
-        Gfx.DrawFilledRect((int)enemy.x, (int)enemy.y, (int)enemy.x + enemy.width,
-                           (int)enemy.y + enemy.height, D3DCOLOR_XRGB(0, 255, 0));
-        sprintf(buffer, "%.2f", enemy.hp);
-        // Because it's a vector you must add enemy. in front of the edges font
-        // otherwise just using 'edges' with 'enemy.' means you are using the
-        // Mgr.enemy.edges which was never constructed with the font.Load()
-        enemy.edges.DrawString(buffer, (int)enemy.x + 4, (int)enemy.y + (enemy.height / 2),
-                         &enemy.edges, D3DCOLOR_XRGB(0, 0, 0), Gfx);
-    }
+    Gfx.DrawFilledRect((int)Emy.x, (int)Emy.y, (int)Emy.x + Emy.width,
+                       (int)Emy.y + Emy.height, D3DCOLOR_XRGB(0, 255, 0));
+    enemy_text.SetStr(std::to_string(Emy.hp));
+    enemy_text.SetX((int)Emy.x);
+    enemy_text.SetY((int)Emy.y);
+    enemy_text.Draw(Gfx);
+}
+
+void Enemy::SetSpeed(float Speed)
+{
+    speed = Speed;
 }
 
 float Enemy::GetX()
@@ -66,4 +60,9 @@ int Enemy::GetWidth()
 int Enemy::GetHeight()
 {
     return height; 
+}
+
+float Enemy::GetHP()
+{
+    return hp;
 }

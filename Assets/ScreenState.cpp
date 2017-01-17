@@ -1,8 +1,10 @@
 #include "ScreenState.h"
 #include "GameManager.h"
 
-ScreenState::ScreenState()
-    : states(GAMEMAINMENU)
+ScreenState::ScreenState(GameManager &MGR)
+:   states(GAMEMAINMENU),
+    state_shop(MGR),
+    state_game_over(state_game.GetVecText())
 {}
 
 
@@ -19,6 +21,7 @@ void ScreenState::Update(GameManager &Mgr)
     {
         case GAME:
             state_game.Update(Mgr);
+            Mgr.score_text.Update();
         break;
         case GAMEOVER:
             state_game_over.Update(Mgr);
@@ -28,6 +31,9 @@ void ScreenState::Update(GameManager &Mgr)
         break;
         case GAMEPAUSE:
             state_game_pause.Update(Mgr);
+        break;
+        case GAMESHOP:
+            state_shop.Update();
         break;
         default:
         break;
@@ -40,15 +46,23 @@ void ScreenState::Draw(GameManager &Mgr)
     {
         case GAME:
             state_game.Draw(Mgr);
+            Mgr.score_text.Draw();
         break;
         case GAMEOVER:
-            state_game_over.Draw(Mgr.gfx);
+            state_game_over.Draw(Mgr, Mgr.gfx);
+            Mgr.score.Draw(Mgr.player, Mgr.gfx, Mgr.score.targets_hit);
+            Mgr.score_text.Draw();
         break;
         case GAMEMAINMENU:
             state_main_menu.Draw(Mgr.gfx);
         break;
         case GAMEPAUSE:
             state_game_pause.Draw(Mgr);
+            Mgr.score.Draw(Mgr.player, Mgr.gfx, Mgr.score.targets_hit);
+            Mgr.score_text.Draw();
+        break;
+        case GAMESHOP:
+            state_shop.Draw();
         break;
         default:
         break;

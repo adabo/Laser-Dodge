@@ -2,7 +2,6 @@
 #include "Entity.h"
 #include "D3DGraphics.h"
 #include "Trigonometry.h"
-#include <vector>
 
 class Laser : public Entity
 {
@@ -11,8 +10,8 @@ class Laser : public Entity
 public:
     Laser();
     Laser(float X, float Y, float Cos_X, float Sin_Y, float Damage);
-    void Update(std::vector<Laser> &Lasers, float Dt);
-    void Draw(std::vector<Laser> &Lasers, D3DGraphics &Gfx);
+    void Update(Laser &Lsr, float Dt);
+    void Draw(Laser &Lsr, D3DGraphics &Gfx);
     // void AddLaser(int MouseX, int MouseY);
     float GetX();
     float GetY();

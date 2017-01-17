@@ -1,18 +1,43 @@
+#ifdef _MSC_VER
+#define _CRT_SECURE_NO_WARNINGS
+#endif
 #include "Debug.h"
 #include "GameManager.h"
 
-Debug::Debug()
-:   tilde_is_pressed(false),
+
+Debug::Debug(GameManager &Mgr)
+:   mgr(Mgr),
+    tilde_is_pressed(false),
     draw_debug(false),
     milli(0.0f),
     fps(0),
     n_frames(0)
 {
-    edges.LoadFont(&edges, font_surf, "Edges_5x10x32.bmp", 5, 10, 32);
+    mouse_x = 0;
+    mouse_y = 0;
+    n_lasers = 0;
+    debug_text = {{"FPS:", 1, 0, Text::EDGES, Text::PINK, Text::PINK},
+                 {&fps, 25, 0, Text::EDGES, Text::PINK, Text::PINK, Text::INT},
+                  {"MouseXY:", 1, 9, Text::EDGES, Text::PINK, Text::PINK},
+                  {&mouse_x, 45, 9, Text::EDGES, Text::PINK, Text::PINK, Text::INT},
+                  {&mouse_y, 65,9, Text::EDGES, Text::PINK, Text::PINK, Text::INT},
+                  {"Lasers:", 1, 18, Text::EDGES, Text::PINK, Text::PINK},
+                  {&n_lasers, 40, 18, Text::EDGES, Text::PINK, Text::PINK, Text::INT},
+                  {"Speed", 1, 27, Text::EDGES, Text::PINK, Text::PINK},
+                  {&mgr.player.speed, 30, 27, Text::EDGES, Text::PINK, Text::PINK, Text::FLOAT},
+                  {"$", 1, 36, Text::EDGES, Text::PINK, Text::PINK},
+                  {&mgr.player.money, 15, 36, Text::EDGES, Text::PINK, Text::PINK, Text::INT}};
 }
 
 void Debug::Update(GameManager &Mgr)
 {
+    n_lasers = mgr.lasers.size();
+    mouse_x = mgr.mouse.GetMouseX();
+    mouse_y = mgr.mouse.GetMouseY();
+    for (auto &el: debug_text)
+    {
+        el.Update(Mgr.mouse);
+    }
     if (Mgr.kbd.TildeIsPressed())
     {
         if (!tilde_is_pressed)
@@ -30,6 +55,11 @@ void Debug::Update(GameManager &Mgr)
         }            
         if (draw_debug)
         {
+            // DEBUG ONLY
+            if (Mgr.kbd.KIsPressed())
+            {
+                Mgr.player.hp = 0;
+            }
             if (milli >= 1000.0f)
             {
                 timer.StopWatch();
@@ -51,14 +81,9 @@ void Debug::Draw(D3DGraphics &Gfx, GameManager &Mgr)
 {
     if (draw_debug)
     {
-        
-        sprintf(buffer, "FPS: %d", fps);
-        edges.DrawString(buffer, 0, 0, &edges, D3DCOLOR_XRGB(215, 130, 215), Gfx);
-    
-        sprintf(buffer, "MouseXY: %dx%d", Mgr.mouse.GetMouseX(), Mgr.mouse.GetMouseY());
-        edges.DrawString(buffer, 0, 10, &edges, D3DCOLOR_XRGB(215, 130, 215), Gfx);
-
-        sprintf(buffer, "Lasers: %d", Mgr.lasers.size());
-        edges.DrawString(buffer, 0, 20, &edges, D3DCOLOR_XRGB(215, 130, 215), Gfx);
+        for (auto &el: debug_text)
+        {
+            el.Draw(Gfx);
+        }
     }
 }

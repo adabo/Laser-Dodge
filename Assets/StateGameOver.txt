@@ -1,0 +1,4 @@
+--- GameOver ---
+Continue? 336, 196
+Yes       272, 224
+No        496, 224

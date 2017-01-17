@@ -2,7 +2,8 @@
 #include "GameManager.h"
 
 StateGame::StateGame()
-:   space_is_pressed(false)
+:   space_is_pressed(false),
+    tab_is_pressed(false)
 {}
 
 void StateGame::Update(GameManager &Mgr)
@@ -18,11 +19,6 @@ void StateGame::Update(GameManager &Mgr)
             if (!space_is_pressed)
             {
                 space_is_pressed = true;
-                UpdateAll(Mgr);
-            }
-            else
-            {
-                UpdateAll(Mgr);
             }
         }
         else
@@ -32,12 +28,30 @@ void StateGame::Update(GameManager &Mgr)
                 space_is_pressed = false;
                 Mgr.s_state.states = GAMEPAUSE;
             }
-            else
+        }
+
+        if (Mgr.kbd.TabIsPressed())
+        {
+            if (!tab_is_pressed)
             {
-                UpdateAll(Mgr);
+                tab_is_pressed = true;
             }
         }
+        else
+        {
+            if (tab_is_pressed)
+            {
+                tab_is_pressed = false;
+                Mgr.s_state.states = GAMESHOP;
+            }
+          
+        }  
+        if (Mgr.s_state.states == GAME)
+        {
+            UpdateAll(Mgr);
+        }
     }
+
 }
 
 void StateGame::UpdateAll(GameManager &Mgr)
@@ -45,18 +59,20 @@ void StateGame::UpdateAll(GameManager &Mgr)
     Mgr.s_state.states = GAME;
     Mgr.debug.Update(Mgr);
     Mgr.player.Update(Mgr.kbd, Mgr.mouse, Mgr.projectile, Mgr.lasers, Mgr.dt);
-    Mgr.enemy.Update(Mgr.player, Mgr.enemies, Mgr.dt);
-    Mgr.laser.Update(Mgr.lasers, Mgr.dt);
+    Mgr.ec.Update(Mgr.dt);
     Mgr.physics.Update(Mgr);
     Mgr.spawner.Update(Mgr);
     Mgr.projectile.Update(Mgr.lasers);
 }
 
+std::vector<Text> StateGame::GetVecText()
+{
+    return game_text;
+}
+
 void StateGame::Draw(GameManager &Mgr)
 {
     Mgr.player.Draw(Mgr.gfx);
-    Mgr.enemy.Draw(Mgr.enemies,Mgr.gfx);
-    Mgr.laser.Draw(Mgr.lasers, Mgr.gfx);
-    Mgr.score.Draw(Mgr.player, Mgr.gfx, Mgr.score.i_score);
+    Mgr.ec.Draw();
     Mgr.debug.Draw(Mgr.gfx, Mgr);
 }

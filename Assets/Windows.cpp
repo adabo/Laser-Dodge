@@ -1,5 +1,5 @@
-/****************************************************************************************** 
- *  Chili DirectX Framework Version 12.04.24                                              * 
+/******************************************************************************************
+ *  Chili DirectX Framework Version 12.04.24                                              *
  *  Windows.cpp                                                                           *
  *  Copyright 2012 PlanetChili.net                                                        *
  *                                                                                        *
@@ -87,6 +87,9 @@ LRESULT WINAPI MsgProc( HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam )
                 break;
             case VK_OEM_3:
                 kServ.OnTildePressed();
+                break;
+            case VK_TAB:
+                kServ.OnTabPressed();
                 break;
             case VK_A:
                 kServ.OnAPressed();
@@ -191,6 +194,9 @@ LRESULT WINAPI MsgProc( HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam )
                 break;
             case VK_OEM_3:
                 kServ.OnTildeReleased();
+                break;
+            case VK_TAB:
+                kServ.OnTabReleased();
                 break;
             case VK_A:
                 kServ.OnAReleased();
@@ -338,9 +344,9 @@ int WINAPI wWinMain( HINSTANCE hInst,HINSTANCE,LPWSTR,INT )
     RegisterClassEx( &wc );
     
     RECT wr;
-    wr.left = 650;
+    wr.left = 8;
     wr.right = 800 + wr.left;
-    wr.top = 150;
+    wr.top = 30;
     wr.bottom = 600 + wr.top;
     AdjustWindowRect( &wr,WS_OVERLAPPEDWINDOW,FALSE );
     HWND hWnd = CreateWindowW( L"Chili DirectX Framework Window",L"Chili DirectX Framework",

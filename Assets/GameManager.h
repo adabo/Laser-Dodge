@@ -1,7 +1,6 @@
 #pragma once
 
 #include <time.h>
-// #include "Common.h"
 #include "ProjectileHandler.h"
 #include "Player.h"
 #include "Physics.h"
@@ -15,6 +14,8 @@
 #include "Score.h"
 #include "Debug.h"
 #include "ScreenState.h"
+#include "EntityController.h"
+#include "ScoreText.h"
 
 class GameManager
 {
@@ -25,7 +26,9 @@ class GameManager
     friend class StateGameOver;
     friend class StateGame;
     friend class StateGamePause;
+    friend class StateShop;
     friend class Spawner;
+    friend class ScoreText;
 public:
     GameManager(HWND hWnd, D3DGraphics &Gfx, const KeyboardServer& kServer, const MouseServer& mServer);
     void Update(float Dt);
@@ -40,14 +43,14 @@ private:
 
     Player             player;
     ProjectileHandler  projectile;
-    Enemy              enemy; // Create one object to handle the vector
+    EntityController   ec;
     std::vector<Enemy> enemies;
-    Laser              laser; // Create one object to handle the vector
     std::vector<Laser> lasers;
+    //int*               nlasers;
     Physics            physics;
     Spawner            spawner;
     Score              score;
+    ScoreText          score_text;
     Debug              debug;
     ScreenState        s_state;
-    // States             states;
 };
