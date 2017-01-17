@@ -4,6 +4,7 @@
 ## Get latest from https://github.com/github/gitignore/blob/master/VisualStudio.gitignore
 
 # User-specific files
+from_pcf_to_ttf.zip
 *.swp
 *.suo
 *.user
